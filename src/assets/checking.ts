@@ -1,0 +1,1 @@
+ export const GIRL_DEFAULT_PROFILEs = require('./assets/images/girl_default_profile.jpg');

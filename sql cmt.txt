@@ -1,0 +1,125 @@
+
+************* Get Coloum name ***********
+
+SELECT COLUMN_NAME AS Field
+FROM INFORMATION_SCHEMA.COLUMNS 
+WHERE TABLE_NAME = 'profile_files';
+
+INSERT INTO configurations ( 
+    config_key
+    ,config_value
+    ,description 
+) VALUES 
+( 'DisplayName', 'ROCK CITY AG CHURCH', 'Display the name of church' );
+
+
+INSERT INTO t_mas_lookup ( 
+    LookupMasterName,
+    ParentLookupMasterID,
+    Reserved,
+    IsActive
+) VALUES 
+( 'Sub Communitiy', NULL, NULL, 1 );
+
+INSERT INTO t_tran_lookup (
+    LookupMasterID,
+    LookupKey,
+    LookupValue,
+    LookupParentKey,
+    is_active,
+    CreatedBy,
+    CreatedDate,
+    UpdatedBy,
+    UpdatedDate
+) VALUES 
+    (13, 'Anglo Indian', 'Anglo Indian', NULL, 1, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP),
+    (13, 'Basel Mission', 'Basel Mission', NULL, 1, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP),
+
+**********************************************
+ALTER TABLE profiles_background 
+ADD CONSTRAINT profiles_background_fk1 
+FOREIGN KEY (profile_id) REFERENCES profiles(profile_id) 
+ON DELETE CASCADE ON UPDATE CASCADE;
+
+********************************************
+
+
+
+profile_files
+------------
+file_id
+profile_id
+userid
+file_name
+original_name
+extension
+file_size
+mime_type
+is_profile_pic
+is_verified
+created_at
+updated_
+
+
+payments_reciept
+----------------
+id
+profile_id
+razorpay_order_id
+razorpay_payment_id
+razorpay_signature
+amount
+status
+created_at
+
+staff_details
+-------------
+id
+staff_id
+userid
+firstName
+lastName
+designation
+church_Id
+mobileNo
+alrenativeMobileNo
+address
+state
+city
+joiningDate
+activeStatus
+created_at
+updated_at
+
+church_details
+-------------
+id
+church_id
+church_name
+denomination
+address
+city
+state
+country
+postal_code
+pastor_name
+pastor_phone
+church_phone
+church_email
+deleted_at
+active_status
+created_at
+updated_at
+
+
+TRUNCATE TABLE profiles_background;
+TRUNCATE TABLE profiles_blocks;
+TRUNCATE TABLE profiles_docs;
+TRUNCATE TABLE profiles_family;
+TRUNCATE TABLE profiles_interests;
+TRUNCATE TABLE profiles_physical;
+TRUNCATE TABLE profiles_professional;
+TRUNCATE TABLE profiles_reports;
+TRUNCATE TABLE profiles_views;
+TRUNCATE TABLE profile_files;
+TRUNCATE TABLE profile_likes;

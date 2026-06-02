@@ -1,0 +1,7 @@
+User - Password related
+Profile - one user can create multiple profiles
+
+---- update date 21-Jan-2026
+No need to add user details in the profile
+-- Profile creation is create a new profile with login credentials
+
