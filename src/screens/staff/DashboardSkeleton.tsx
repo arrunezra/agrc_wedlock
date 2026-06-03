@@ -1,8 +1,8 @@
 import { Box, HStack, VStack } from '@/src/components/common/GluestackUI';
 import React from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
-import { MotiView } from 'moti';
 import LinearGradient from 'react-native-linear-gradient';
+import AnimatedMotiView from '../component/AnimateView';
 const DashboardSkeleton = () => (
     <VStack space="md">
         {[1, 2, 3].map((i) => (
@@ -51,16 +51,11 @@ export const StaffSummarySkeleton = () => (
 );
 
 const Shimmer = () => (
-    <MotiView
-        from={{ translateX: -300 }}
-        animate={{ translateX: 300 }}
-        transition={{
-            loop: true,
-            type: 'timing',
-            duration: 1500,
-            delay: 200,
-        }}
-        style={{ width: '100%', height: '100%', position: 'absolute' }}
+    <AnimatedMotiView
+        preset="shimmer"
+        duration={1500} // Speed timeline duration map match: 1500ms
+        delay={200}     // Delays start offset on initial mount by 200ms
+        className="h-12 w-full rounded-xl bg-white/20"
     >
         <LinearGradient
             colors={['transparent', 'rgba(255, 255, 255, 0.5)', 'transparent']}
@@ -68,5 +63,5 @@ const Shimmer = () => (
             end={{ x: 1, y: 0 }}
             style={{ flex: 1 }}
         />
-    </MotiView>
+    </AnimatedMotiView>
 );

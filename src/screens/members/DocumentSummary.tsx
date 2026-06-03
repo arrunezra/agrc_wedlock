@@ -23,13 +23,13 @@ import { API_BASE_URL_DEV_DMS } from '@/src/utils/environment';
 import LoadingScreen from '../common/LoadingScreen';
 import { getFileIconConfig } from '@/src/utils/common';
 import { VStack } from '@/src/components/common/GluestackUI';
-import { MotiView } from 'moti';
 import LinearGradient from 'react-native-linear-gradient';
 import { AddIcon, Icon } from '@/src/components/common/IconUI';
 import { useAppToast } from '@/src/context/ToastContext';
 import { Screen } from 'react-native-screens';
 import { useAlert } from '@/src/context/AlertContext';
 import HeaderSession from '../common/HeaderSession';
+import AnimatedMotiView from '../component/AnimateView';
 
 const DocumentSummary = () => {
     const navigation = useNavigation<any>();
@@ -355,16 +355,15 @@ const DocumentSummary = () => {
                 refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
                 ListEmptyComponent={!loading ? <View className="mt-20 items-center"><Text className="text-slate-400">No documents found</Text></View> : null}
             />
-            {files.length < 5 && <MotiView
-                from={{ scale: 0, opacity: 0, translateY: 50 }}
-                animate={{ scale: 1, opacity: 1, translateY: 0 }}
-                transition={{
-                    type: 'spring',
-                    damping: 15,
-                    stiffness: 150,
-                    delay: 400
-                }}
+            {files.length < 5 && <AnimatedMotiView
+                preset="springUp"
+                stiffness={150}
+                damping={15}
+                initialTranslateY={50}
+                initialScale={0.9}
+                delay={400}
                 className="absolute bottom-8 right-8"
+
             >
                 <TouchableOpacity
                     activeOpacity={0.9}
@@ -385,7 +384,7 @@ const DocumentSummary = () => {
                         <Icon as={AddIcon} size="xl" className="text-cyan-400" style={{ width: 38, height: 38 }} />
                     </LinearGradient>
                 </TouchableOpacity>
-            </MotiView>}
+            </AnimatedMotiView>}
             {loading && page === 1 && !refreshing && (
                 <View style={StyleSheet.absoluteFill} className="bg-white/60 items-center justify-center z-50">
                     <ActivityIndicator size="large" color="#007AFF" />

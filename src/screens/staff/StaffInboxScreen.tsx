@@ -1,17 +1,16 @@
 import { View, Text, RefreshControl, TouchableOpacity, Pressable, Animated, FlatList, ActivityIndicator, StatusBar } from 'react-native'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { Box, Heading, HStack, Input, InputField, InputSlot, VStack } from '@/src/components/common/GluestackUI';
 import LinearGradient from 'react-native-linear-gradient';
-import { Icon, UserCheck, Users, CheckCircle } from '@/src/components/common/IconUI';
-import { AlertCircle, Check, ChevronRight, MapPin, Phone, UserX, XIcon } from 'lucide-react-native';
-import { MotiView } from 'moti';
+import { Icon, Users } from '@/src/components/common/IconUI';
+import { Check, ChevronRight, MapPin, Phone, UserX, XIcon } from 'lucide-react-native';
 import { getExtension } from '@/src/utils/common';
 import FastImage from '@d11/react-native-fast-image';
 import StaffService from '@/src/services/StaffService';
 import { SearchIcon } from '@/components/ui/icon';
 import NotFoundScreen from '../common/NotFoundScreen';
 import HeaderSession from '../common/HeaderSession';
+import AnimatedMotiView from '../component/AnimateView';
 
 const StaffInboxScreen = ({ navigation }: any) => {
     const [profiles, setProfiles] = useState<any[]>([]);
@@ -146,12 +145,19 @@ const StaffInboxScreen = ({ navigation }: any) => {
         const statusColor = getStatusColor(item.IsActive, item.IsVerified);
         return (
             <HStack className='pl-2'>
-                <MotiView
-                    key={item.userid}
-                    from={{ opacity: 0, translateY: 10 }}
-                    animate={{ opacity: 1, translateY: 0 }}
-                    transition={{ type: 'timing', delay: index * 50 }}
+                <AnimatedMotiView
+                    key={item.staff_id}
+                    preset="springUp"
+                    animationType="timing"
+                    stiffness={150}
+                    duration={450}
+                    damping={15}
+                    delay={index * 80}
+                    initialTranslateY={15}
+                    initialScale={0.9}
                 >
+
+
                     <Pressable
                         onPress={() => {
                             navigation.navigate("Main", {
@@ -250,7 +256,8 @@ const StaffInboxScreen = ({ navigation }: any) => {
                             </Box>
                         </VStack>
                     </Pressable>
-                </MotiView>
+                </AnimatedMotiView>
+
             </HStack>
         );
     };

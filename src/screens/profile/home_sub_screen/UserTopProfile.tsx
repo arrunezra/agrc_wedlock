@@ -5,7 +5,7 @@ import { AddIcon, CheckIcon, EditIcon, Icon, StarIcon } from '@/components/ui/ic
 import { API_BASE_URL_DEV_Profiles_Thumbs } from '@/src/utils/environment';
 import { getExtension } from '@/src/utils/common';
 import LinearGradient from 'react-native-linear-gradient';
-import { Briefcase, Camera, CheckCircle, CheckCircle2, ChevronRight, CreditCard, Edit3, Eye, GraduationCap, Heart, HeartHandshake, MapPin, Share2, Star, TrendingUp, Users, Zap } from 'lucide-react-native';
+import { Briefcase, Camera, CheckCircle, CheckCircle2, ChevronRight, Edit3, Eye, GraduationCap, Heart, HeartHandshake, MapPin, Share2, Star, TrendingUp, Users, Zap } from 'lucide-react-native';
 import profileService from '@/src/services/profileService';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { LookupContext } from '@/src/context/LookupContext';
@@ -148,7 +148,6 @@ const UserTopProfile = ({ user, onEdit, onAddPhoto, onContribution }: any) => {
                             end={{ x: 1, y: 0 }}
                             className="h-14 flex-row items-center justify-center px-4"
                         >
-                            {/* Change: Replaced CreditCard icon with Heart or Gift for donation theme */}
                             <Heart size={18} color="white" strokeWidth={2.5} />
 
                             <Text className="ml-2 text-white font-black text-sm tracking-wide uppercase">

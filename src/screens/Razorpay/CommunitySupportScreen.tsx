@@ -3,7 +3,7 @@ import { TouchableHighlight, Text, Alert, View, ActivityIndicator, TouchableOpac
 import RazorpayCheckout from 'react-native-razorpay';
 import LoadingScreen from '../common/SuccessScreen';
 import razorpayServices from '@/src/services/RazorpayServices';
-import { BarChart3, CheckCircle2, ChevronLeft, CreditCard, Crown, Heart, Info, MessageSquare, ShieldCheck, Zap } from 'lucide-react-native';
+import { BarChart3, CheckCircle2, ChevronLeft, Heart, Info, MessageSquare, ShieldCheck, Zap } from 'lucide-react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { SuccessOverlay } from '../common/SuccessOverlay';
@@ -223,7 +223,6 @@ const CommunitySupportScreen = ({ route, navigation }: any) => {
                                 onPress={handleContribution}
                                 disabled={!order_id || isProcessing}
                             >
-                                {/* Change: Replaced CreditCard icon with Heart for donation context */}
                                 <Heart size={20} color="white" style={{ marginRight: 10 }} />
                                 {/* Change: Replaced PAY SECURELY with DONATE SECURELY */}
                                 <Text style={styles.payButtonText}>DONATE SECURELY</Text>

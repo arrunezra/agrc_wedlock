@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { View, TouchableOpacity, ScrollView, StatusBar, Dimensions, Platform, Alert } from 'react-native';
 import { Box, VStack, HStack, Heading, Text, Avatar, AvatarImage, Center, useToast, Toast, ToastTitle, ToastDescription } from '@/src/components/common/GluestackUI';
 import LinearGradient from 'react-native-linear-gradient';
-import { MotiView } from 'moti';
 import { Camera, Upload, Check, Trash2, Image as ImageIcon, ArrowLeft } from 'lucide-react-native';
 import { Icon } from '@/src/components/common/IconUI';
 import api from '@/src/api/api';
@@ -16,6 +15,7 @@ import { User } from '@/src/utils/models';
 import { useFocusEffect } from '@react-navigation/native';
 import { getExtension } from '@/src/utils/common';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import AnimatedMotiView from '../component/AnimateView';
 const { width } = Dimensions.get('window');
 
 export const ProfileUploadScreen = ({ navigation, onUploadComplete }: any) => {
@@ -200,11 +200,14 @@ export const ProfileUploadScreen = ({ navigation, onUploadComplete }: any) => {
 
                     {/* Interactive Central Circular Display Frame */}
                     <Box className="items-center justify-center">
-                        <MotiView
-                            animate={{ scale: uploading ? 0.95 : 1 }}
-                            transition={{ type: 'spring', damping: 15 }}
+                        <AnimatedMotiView
+                            preset="springUp"
+                            damping={15}
+                            initialTranslateY={20}
+                            initialScale={0.9}
                             className="h-48 w-48 rounded-full bg-white shadow-2xl shadow-slate-300 border-4 border-white items-center justify-center relative overflow-hidden"
                         >
+
                             {imageUri ? (
                                 <Avatar className="w-full h-full rounded-full">
                                     <AvatarImage source={{ uri: imageUri }} className="w-full h-full" />
@@ -227,7 +230,7 @@ export const ProfileUploadScreen = ({ navigation, onUploadComplete }: any) => {
                                     </Box>
                                 </Box>
                             )}
-                        </MotiView>
+                        </AnimatedMotiView>
 
                         {/* Quick Trash Reset Action Button */}
                         {imageUri && !uploading && (

@@ -1,8 +1,7 @@
 import { Avatar, AvatarFallbackText, AvatarImage, Badge, Box, Button, ButtonText, Center, Heading, HStack, VStack } from '@/src/components/common/GluestackUI';
 import { Hash, Icon, Phone, User } from '@/src/components/common/IconUI';
 import StaffService from '@/src/services/StaffService';
-import { ArrowLeft, Briefcase, Calendar, ChevronRight, Church, Edit3, Edit3Icon, Hexagon, Home, Mail, MapPin, Navigation, Smartphone, UserCheck } from 'lucide-react-native';
-import { MotiView } from 'moti';
+import { ChevronRight, Church, Edit3, Edit3Icon, Hexagon, Home, Mail, MapPin, Navigation, Smartphone, UserCheck } from 'lucide-react-native';
 import React, { useCallback, useEffect, useState } from 'react'
 import { View, Text, TouchableOpacity, Linking, StatusBar } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
@@ -13,6 +12,7 @@ import { useAuth } from '@/src/context/AuthContext';
 import { useFocusEffect } from '@react-navigation/native';
 import { getExtension, getFullName } from '@/src/utils/common';
 import HeaderSession from '../common/HeaderSession';
+import AnimatedMotiView from '../component/AnimateView';
 const InfoRow = ({ label, value, icon: IconComponent, color = "#0891b2", isMultiline = false }: any) => (
     <HStack className="items-center gap-5 py-2">
         {/* Icon with soft tinted background */}
@@ -242,18 +242,17 @@ const ViewStaffinforamtion = ({ navigation, route }: any) => {
 
             {/* 5. Sleek Floating Action Button (FAB) */}
 
-
-            <MotiView
-                from={{ scale: 0, opacity: 0, translateY: 50 }}
-                animate={{ scale: 1, opacity: 1, translateY: 0 }}
-                transition={{
-                    type: 'spring',
-                    damping: 15,
-                    stiffness: 150,
-                    delay: 400
-                }}
+            <AnimatedMotiView
+                preset="springUp"
+                stiffness={150}
+                damping={15}
+                initialTranslateY={20}
+                initialScale={0.9}
+                delay={400}
                 className="absolute bottom-8 right-8"
+
             >
+
                 <TouchableOpacity
                     activeOpacity={0.9}
                     onPress={() => navigation.navigate("Main", {
@@ -272,7 +271,7 @@ const ViewStaffinforamtion = ({ navigation, route }: any) => {
                         <Icon as={Edit3} size="lg" className="text-cyan-400" />
                     </LinearGradient>
                 </TouchableOpacity>
-            </MotiView>
+            </AnimatedMotiView>
         </Box>
     );
 };

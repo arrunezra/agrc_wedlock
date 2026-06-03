@@ -12,7 +12,7 @@ import {
     StyleSheet,
     StatusBar,
 } from 'react-native';
-import { ChevronLeft, Search, SlidersHorizontal, Trash2, XCircle } from 'lucide-react-native';
+import { Trash2 } from 'lucide-react-native';
 import { pick, types, isErrorWithCode, errorCodes } from '@react-native-documents/picker';
 import ReactNativeBlobUtil from 'react-native-blob-util';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -22,9 +22,6 @@ import api from '@/src/api/api';
 import { API_BASE_URL_DEV_DMS } from '@/src/utils/environment';
 import { getFileIconConfig } from '@/src/utils/common';
 import { VStack } from '@/src/components/common/GluestackUI';
-import { MotiView } from 'moti';
-import LinearGradient from 'react-native-linear-gradient';
-import { AddIcon, Icon } from '@/src/components/common/IconUI';
 import { useAppToast } from '@/src/context/ToastContext';
 import LoadingScreen from '@/src/screens/common/LoadingScreen';
 import NotFoundScreen from '../common/NotFoundScreen';

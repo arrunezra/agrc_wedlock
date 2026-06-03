@@ -5,12 +5,12 @@ import { Box, Heading, HStack, Input, InputField, InputSlot, VStack } from '@/sr
 import LinearGradient from 'react-native-linear-gradient';
 import { Icon, UserCheck, Users, CheckCircle } from '@/src/components/common/IconUI';
 import { AlertCircle, Check, ChevronRight, MapPin, Phone, SearchIcon, Settings2, UserX, XIcon } from 'lucide-react-native';
-import { MotiView } from 'moti';
 import { getExtension } from '@/src/utils/common';
 import FastImage from '@d11/react-native-fast-image';
 import StaffService from '@/src/services/StaffService';
 import NotFoundScreen from '../common/NotFoundScreen';
 import HeaderSession from '../common/HeaderSession';
+import AnimatedMotiView from '../component/AnimateView';
 
 const BaptismScreen = ({ navigation }: any) => {
     const [profiles, setProfiles] = useState<any[]>([]);
@@ -148,12 +148,17 @@ const BaptismScreen = ({ navigation }: any) => {
         const statusColor = getStatusColor(item.IsActive, item.IsVerified);
         return (
             <HStack className='pl-2'>
-                <MotiView
-                    key={item.userid}
-                    from={{ opacity: 0, translateY: 10 }}
-                    animate={{ opacity: 1, translateY: 0 }}
-                    transition={{ type: 'timing', delay: index * 50 }}
+
+                <AnimatedMotiView
+                    key={item.userid} preset="springUp"
+                    animationType="timing"
+                    duration={450}
+                    damping={15}
+                    delay={index * 50}
+                    initialTranslateY={15}
+                    initialScale={0.9}
                 >
+
                     <Pressable
                         onPress={() => {
                             navigation.navigate("Main", {
@@ -247,7 +252,8 @@ const BaptismScreen = ({ navigation }: any) => {
                             </Box>
                         </VStack>
                     </Pressable>
-                </MotiView>
+                </AnimatedMotiView>
+
             </HStack>
         );
     };

@@ -5,20 +5,20 @@ import {
     Users,
     Church as ChurchIcon,
     UserCheck,
-    CreditCard,
     TrendingUp,
     ChevronRight,
     Menu,
     Bell,
-    ArrowUpRight
+    ArrowUpRight,
+    HeartIcon
 } from 'lucide-react-native';
 import { Icon } from '@/src/components/common/IconUI';
-import { MotiText, MotiView } from 'moti';
 import LinearGradient from 'react-native-linear-gradient';
 import HeaderSession from '../common/HeaderSession';
 import AdminServices from '@/src/services/AdminServices';
 import { CHURCH_COLORS, formatCurrency, getCurrentDate, getCurrentMonthYear, getCurrentYear, getDetailedFY, getFinancialYear } from '@/src/utils/common';
 import { useAuth } from '@/src/context/AuthContext';
+import AnimatedMotiView from '../component/AnimateView';
 
 const { width } = Dimensions.get('window');
 
@@ -72,7 +72,7 @@ const AdminDashboard = ({ navigation }: any) => {
                 screen: 'ChurchDashboard',
             },
             {
-                title: 'Profile Ops',
+                title: 'Profile',
                 count: data?.summary?.total_profiles || 0,
                 trend: '45 Alerts',
                 icon: UserCheck,
@@ -80,12 +80,12 @@ const AdminDashboard = ({ navigation }: any) => {
                 screen: 'Profile'
             },
             {
-                title: 'Contribution',
+                title: 'Donation',
                 count: data?.summary?.overall_revenue || 0,
                 trend: '+15% Trend',
-                icon: CreditCard,
+                icon: HeartIcon,
                 colors: ['#f83600', '#f9d423'],
-                screen: 'Contribute'
+                screen: 'Donation'
             }
         ];
 
@@ -138,10 +138,10 @@ const AdminDashboard = ({ navigation }: any) => {
                 }}
             >
                 {/* --- 1. OVERALL SUMMARY HEADER --- */}
-                <MotiView
-                    from={{ opacity: 0, translateY: 10 }}
-                    animate={{ opacity: 1, translateY: 0 }}
-                    transition={{ delay: 400 }}
+                <AnimatedMotiView
+                    preset="slideUp"
+                    duration={350}
+                    delay={400}
                 >
                     <Heading
                         size="sm"
@@ -149,7 +149,7 @@ const AdminDashboard = ({ navigation }: any) => {
                     >
                         Overall Summary
                     </Heading>
-                </MotiView>
+                </AnimatedMotiView>
 
                 {/* --- 2. INTERACTIVE GRADIENT GRID --- */}
                 <Box className="mb-6 px-4">
@@ -161,21 +161,21 @@ const AdminDashboard = ({ navigation }: any) => {
                             const cardWidth = isLastOddCard ? '100%' : '48%';
 
                             return (
-                                <MotiView
+                                <AnimatedMotiView
                                     key={item.title}
-                                    from={{ opacity: 0, scale: 0.9, translateY: 20 }}
-                                    animate={{ opacity: 1, scale: 1, translateY: 0 }}
-                                    transition={{
-                                        type: 'spring',
-                                        delay: index * 100,
-                                        damping: 15
-                                    }}
-                                    // Injected the dynamic calculation directly here
+                                    preset="springUp"
+                                    damping={15}             // Exactly matches Moti's damping: 15
+                                    initialTranslateY={20}   // Exactly matches Moti's translateY: 20
+                                    initialScale={0.9}       // Exactly matches Moti's scale: 0.9
+                                    delay={index * 100}      // Exactly matches Moti's staggered layout calculation
                                     style={{ width: cardWidth, marginBottom: 16 }}
                                 >
                                     <TouchableOpacity
                                         activeOpacity={0.9}
-                                        onPress={() => navigation.navigate(item.screen)}
+                                        onPress={() => {
+                                            let screen = item.screen == 'Donation' ? "ContributeHistory" : item.screen
+                                            navigation.navigate(screen)
+                                        }}
                                     >
                                         <LinearGradient
                                             colors={item.colors}
@@ -183,46 +183,59 @@ const AdminDashboard = ({ navigation }: any) => {
                                             end={{ x: 1, y: 1 }}
                                             style={{
                                                 borderRadius: 25,
-                                                padding: 20,
+                                                padding: 18,
                                                 elevation: 8,
                                                 shadowColor: item.colors[0],
                                                 shadowOpacity: 0.25,
                                                 shadowRadius: 10
                                             }}
                                         >
-                                            {/* Card Content Row */}
-                                            <HStack className="justify-between items-start mb-4">
-                                                <Box className="bg-white/20 p-2 rounded-xl">
-                                                    <Icon as={item.icon} size="md" color="white" />
-                                                </Box>
-                                                <Icon as={ArrowUpRight} size="sm" className="text-white/70" />
+                                            {/* TOP ROW: Icon and Title centered together, with Arrow on the right */}
+                                            <HStack className="justify-between items-center mb-6 w-full">
+                                                <HStack className="items-center gap-3 flex-1">
+                                                    {/* Left Side: Icon Container */}
+                                                    <Box className="bg-white/20 p-1 rounded-xl">
+                                                        <Icon as={item.icon} size="xl" color="white" />
+                                                    </Box>
+
+                                                    {/* Vertically Centered Title Text */}
+                                                    <Box className="flex-1">
+                                                        <Text
+                                                            className="text-white text-md font-bold   tracking-wider"
+                                                            numberOfLines={1}
+                                                        >
+                                                            {item.title}
+                                                        </Text>
+                                                    </Box>
+                                                </HStack>
+
+
                                             </HStack>
 
-                                            <HStack className="justify-between items-end mt-2 w-full">
-                                                {/* Left-aligned Title */}
-                                                <Text className="text-white/70 text-[10px] font-bold uppercase tracking-widest flex-1">
-                                                    {item.title}
-                                                </Text>
-
-                                                {/* Right-aligned Number/Amount Value */}
+                                            {/* BOTTOM ROW: Cleanly forced to the right hand side */}
+                                            <Box className="w-full items-end mt-2">
                                                 <Heading size="xl" className="text-white font-black text-right">
-                                                    {item.title === "Contribution" ? formatCurrency(item?.count || 0) : item?.count}
+                                                    {item.title === "Contribution" || item.title === "Donation"
+                                                        ? formatCurrency(item?.count || 0)
+                                                        : item?.count}
                                                 </Heading>
-                                            </HStack>
+                                            </Box>
                                         </LinearGradient>
                                     </TouchableOpacity>
-                                </MotiView>
+                                </AnimatedMotiView>
                             );
                         })}
                     </HStack>
                 </Box>
 
                 {/* --- 3. REVENUE & INSIGHTS SECTION --- */}
-                <MotiView
-                    from={{ opacity: 0, translateY: 30 }}
-                    animate={{ opacity: 1, translateY: 0 }}
-                    transition={{ delay: 800 }}
+
+                <AnimatedMotiView
+                    preset="slideUp"
+                    duration={350}
+                    delay={800}
                 >
+
                     {/* SECTION HEADER */}
                     <HStack className="justify-between items-end px-2 mb-4">
                         <VStack>
@@ -283,12 +296,12 @@ const AdminDashboard = ({ navigation }: any) => {
                             </Text>
                         </Box>
                     </Box>
-                </MotiView>
+                </AnimatedMotiView>
                 {/* --- 4. CHURCH-WISE BREAKDOWN --- */}
-                {user?.role !== 'admin' && <MotiView
-                    from={{ opacity: 0, translateY: 30 }}
-                    animate={{ opacity: 1, translateY: 0 }}
-                    transition={{ delay: 1000 }}
+                {user?.role !== 'admin' && <AnimatedMotiView
+                    preset="slideUp"
+                    duration={350}
+                    delay={1000}
                     className="px-5 mt-8 mb-10"
                 >
                     <HStack className="justify-between items-center px-1 mb-4">
@@ -345,7 +358,7 @@ const AdminDashboard = ({ navigation }: any) => {
                         })}
                     </VStack>
 
-                </MotiView>
+                </AnimatedMotiView>
                 }
             </ScrollView>
         </Box>

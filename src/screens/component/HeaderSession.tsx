@@ -4,7 +4,7 @@ import { Menu, Bell, ChevronLeft, Search, X } from 'lucide-react-native';
 import FastImage from '@d11/react-native-fast-image';
 import { Box, Heading, HStack, VStack } from './GluestackUI';
 import { Icon } from './IconUI';
-import AnimateView from './AnimateView';
+import AnimatedMotiView from './AnimateView';
 import GradientView from './GradientView';
 
 interface HeaderProps {
@@ -99,7 +99,7 @@ const HeaderSession = ({
   const shadowColor = isWhiteTheme ? '#64748B' : palettes[theme][0];
 
   return (
-    <AnimateView disableAnimation={true}>
+    <AnimatedMotiView disableAnimation={true}>
       <GradientView
         colors={palettes[theme]}
         horizontal={true} // 🌅 Replaces start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
@@ -172,7 +172,7 @@ const HeaderSession = ({
           </Box>
         </HStack>
       </GradientView>
-    </AnimateView>
+    </AnimatedMotiView>
   );
 };
 

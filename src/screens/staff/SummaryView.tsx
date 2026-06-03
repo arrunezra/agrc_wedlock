@@ -1,6 +1,4 @@
 import { RefreshControl, TouchableOpacity, Linking, Pressable, ScrollView, FlatList, ActivityIndicator, Animated, StatusBar } from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
-import { MotiView } from 'moti';
 import {
     VStack, HStack, Box, Text, Heading,
     Input,
@@ -10,11 +8,7 @@ import {
     AvatarFallbackText,
     AvatarImage,
 } from '@/src/components/common/GluestackUI';
-import {
-    Icon,
-    PhoneIcon, Users, CheckCircle2,
-    AddIcon
-} from '@/src/components/common/IconUI';
+import { Icon, PhoneIcon, AddIcon } from '@/src/components/common/IconUI';
 
 import LinearGradient from "react-native-linear-gradient";
 import FastImage from "@d11/react-native-fast-image";
@@ -25,17 +19,20 @@ import { StaffSummarySkeleton } from "./DashboardSkeleton";
 import HeaderSession from "../common/HeaderSession";
 import { getExtension } from "@/src/utils/common";
 import { useAuth } from "@/src/context/AuthContext";
+import AnimatedMotiView from "../component/AnimateView";
 const StaffItem = ({ item, index, navigation, user }: any) => {
     const [profile, setProfile] = useState<any>("");
     //console.log('item', item);
-    return <MotiView
-        from={{ opacity: 0, translateY: 20 }}
-        animate={{ opacity: 1, translateY: 0 }}
-        transition={{
-            type: 'timing',
-            duration: 400,
-            delay: index * 100
-        }}
+    return <AnimatedMotiView
+        key={item.staff_id}
+        preset="springUp"
+        animationType="timing"
+        stiffness={150}
+        duration={400}
+        damping={15}
+        delay={index * 100}
+        initialTranslateY={15}
+        initialScale={0.9}
     >
         <Pressable
             onPress={() => navigation.navigate("Main", { screen: "ViewStaffinforamtion", params: { id: item.id } })}
@@ -82,7 +79,7 @@ const StaffItem = ({ item, index, navigation, user }: any) => {
                 </HStack>
             </LinearGradient>
         </Pressable>
-    </MotiView>
+    </AnimatedMotiView>
 };
 const StaffSummaryView = ({ navigation }: any) => {
     const { user } = useAuth();
@@ -309,17 +306,19 @@ const StaffSummaryView = ({ navigation }: any) => {
                 showsVerticalScrollIndicator={false}
                 className="flex-1"
             />
-            <MotiView
-                from={{ scale: 0, opacity: 0, translateY: 50 }}
-                animate={{ scale: 1, opacity: 1, translateY: 0 }}
-                transition={{
-                    type: 'spring',
-                    damping: 15,
-                    stiffness: 150,
-                    delay: 400
-                }}
+
+            <AnimatedMotiView
+                preset="springUp"
+                stiffness={150}
+                damping={15}
+                initialTranslateY={20}
+                initialScale={0.9}
+                delay={400}
                 className="absolute bottom-8 right-8"
+
             >
+
+
                 <TouchableOpacity
                     activeOpacity={0.9}
                     onPress={() => navigation.navigate("Main", {
@@ -338,8 +337,8 @@ const StaffSummaryView = ({ navigation }: any) => {
                         <Icon as={AddIcon} size="xl" className="text-cyan-400" style={{ width: 38, height: 38 }} />
                     </LinearGradient>
                 </TouchableOpacity>
-            </MotiView>
-        </Box>
+            </AnimatedMotiView>
+        </Box >
 
     );
 };

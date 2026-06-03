@@ -40,7 +40,7 @@ import { HEIGHT_DATA } from '@/src/utils/utils';
 import { UploadProgressModal } from '../common/UploadProgressModal';
 import FuturisticDropdown from '@/src/components/common/FuturisticDropdown';
 import { LookupContext } from '@/src/context/LookupContext';
-import { CameraIcon, CheckCircleIcon, ChurchIcon, CreditCardIcon, Droplets, Flame, User2, UserIcon, Wind, ZapIcon } from 'lucide-react-native';
+import { CameraIcon, CheckCircleIcon, ChurchIcon, Droplets, Flame, User2, UserIcon, Wind, ZapIcon } from 'lucide-react-native';
 import ChruchService from '@/src/services/ChruchService';
 import { launchImageLibrary } from 'react-native-image-picker';
 

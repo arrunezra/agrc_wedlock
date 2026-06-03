@@ -5,3 +5,71 @@ Profile - one user can create multiple profiles
 No need to add user details in the profile
 -- Profile creation is create a new profile with login credentials
 
+----------------------------------------------------
+basic moti view - Moti replaced to AnimatedMotiView
+----------------------------------------------------
+<AnimatedMotiView
+    preset="slideUp"
+    duration={350}
+    delay={1000}
+    className="px-5 mt-8 mb-10"
+> 
+----------------------
+springUp with out timing
+--------------------
+<AnimatedMotiView
+    key={item.title}
+    preset="springUp"
+    stiffness={150}
+    damping={15}                                                // Exactly matches Moti's damping: 15
+    initialTranslateY={20}                                      // Exactly matches Moti's translateY: 20
+    initialScale={0.9}                                          // Exactly matches Moti's scale: 0.9
+    delay={index * 100}                                         // Exactly matches Moti's staggered layout calculation
+    style={{ width: cardWidth, marginBottom: 16 }}
+   
+> 
+<AnimatedMotiView
+    key={item.title}
+    preset="springUp"
+    stiffness={150}
+    damping={15}                                   
+    initialTranslateY={20}                         
+    initialScale={0.9}                             
+    delay={index * 100}                            
+    style={{ width: cardWidth, marginBottom: 16 }}
+   
+> 
+
+----------------------
+timing
+--------------------
+<AnimatedMotiView
+    key={item.staff_id}
+    preset="springUp"
+    animationType="timing"
+    stiffness={150}
+    duration={450}
+    damping={15}
+    delay={index * 80}
+    initialTranslateY={15}
+    initialScale={0.9}
+>
+
+Like:
+------------------------------------
+<AnimatedMotiView
+    preset="springUp"
+    initialBackgroundColor="rgba(0,0,0,0.5)"
+    animateBackgroundColor="#ef4444"
+    initialScale={0.9}
+    initialTranslateY={20}
+>
+--------------------
+SKELETON VIEW
+----------------
+<AnimatedMotiView
+        preset="shimmer"
+        duration={1500} // Speed timeline duration map match: 1500ms
+        delay={200}     // Delays start offset on initial mount by 200ms
+        className="h-12 w-full rounded-xl bg-white/20"
+    >

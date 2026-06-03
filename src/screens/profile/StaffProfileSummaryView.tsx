@@ -2,13 +2,13 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { FlatList, RefreshControl, Pressable, TextInput, TouchableOpacity, Animated, StatusBar } from 'react-native';
 import { Box, HStack, VStack, Text, Heading, Spinner, Center, Input, InputField, InputIcon, InputSlot } from '@/src/components/common/GluestackUI';
 import { useNavigation } from '@react-navigation/native';
-import { MotiView } from 'moti';
 import FastImage from '@d11/react-native-fast-image';
 import { ChevronRight, MapPin, Check, Search, X, Settings2, XIcon, SearchIcon } from 'lucide-react-native';
 import api from '@/src/api/api';
 import { Icon } from '@/src/components/common/IconUI';
 import { getExtension } from '@/src/utils/common';
 import HeaderSession from '../common/HeaderSession';
+import AnimatedMotiView from '../component/AnimateView';
 
 const StaffProfileSummaryView = () => {
     const navigation = useNavigation<any>();
@@ -73,10 +73,16 @@ const StaffProfileSummaryView = () => {
     const renderItem = ({ item, index }: { item: any, index: number }) => {
         const statusColor = getStatusColor(item.IsActive, item.IsVerified);
         return (
-            <MotiView
-                from={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ type: 'timing', duration: 300 }}
+            <AnimatedMotiView
+                key={item.staff_id}
+                preset="springUp"
+                animationType="timing"
+                stiffness={150}
+                duration={300}
+                damping={15}
+                delay={index * 80}
+                initialTranslateY={15}
+                initialScale={0.9}
             >
                 <Pressable
                     onPress={() => navigation.navigate("Main", { screen: "ProfileDetail", params: { profile_id: item.profile_id } })}
@@ -162,7 +168,7 @@ const StaffProfileSummaryView = () => {
                         </Box>
                     </VStack>
                 </Pressable>
-            </MotiView>
+            </AnimatedMotiView>
         );
     };
     const scaleAnim = useRef(new Animated.Value(0)).current;

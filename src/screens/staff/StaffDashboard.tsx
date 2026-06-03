@@ -7,9 +7,9 @@ import { Alert, Linking, Pressable, RefreshControl, StatusBar, Text, TouchableOp
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 import LinearGradient from "react-native-linear-gradient";
 import { StatusAlert } from "../common/StatusAlert";
-import { MotiView } from "moti";
 import DashboardSkeleton from "./DashboardSkeleton";
 import HeaderSession from "../common/HeaderSession";
+import AnimatedMotiView from "../component/AnimateView";
 
 const StaffDashboard = ({ navigation }: any) => {
     const [data, setData] = useState<any>(null);
@@ -122,16 +122,15 @@ const StaffDashboard = ({ navigation }: any) => {
                             <>
                                 {data?.recent_staff?.map((item: any, index: number) => {
 
-                                    return <MotiView
+                                    return <AnimatedMotiView
                                         key={item.staff_id}
-                                        from={{ opacity: 0, scale: 0.9, translateY: 15 }}
-                                        animate={{ opacity: 1, scale: 1, translateY: 0 }}
-
-                                        transition={{
-                                            type: 'timing',
-                                            duration: 450,
-                                            delay: index * 80, // Smooth staggered entrance
-                                        }}
+                                        preset="springUp"
+                                        animationType="timing"
+                                        duration={450}
+                                        damping={15}
+                                        delay={index * 80}
+                                        initialTranslateY={15}
+                                        initialScale={0.9}
                                     >
                                         <Pressable
                                             className="mb-3 "
@@ -200,7 +199,8 @@ const StaffDashboard = ({ navigation }: any) => {
                                                 </HStack>
                                             </LinearGradient>
                                         </Pressable>
-                                    </MotiView>
+                                    </AnimatedMotiView>
+
                                 })
                                 }
 
@@ -214,21 +214,19 @@ const StaffDashboard = ({ navigation }: any) => {
                         onClose={() => { setShowAlert(false) }} type={"error"} message={""} />
                     {/**/}
 
-                    {/* --- FIXED FLOATING BUTTON --- */}
+                    {/* --- FIXED FLOATING BUTTON   --- */}
                     {/* Positioned outside ScrollView to stay fixed on screen */}
 
                 </VStack>
             </KeyboardAwareScrollView>
 
-            <MotiView
-                from={{ scale: 0, opacity: 0, translateY: 50 }}
-                animate={{ scale: 1, opacity: 1, translateY: 0 }}
-                transition={{
-                    type: 'spring',
-                    damping: 15,
-                    stiffness: 150,
-                    delay: 400
-                }}
+            <AnimatedMotiView
+                preset="springUp"
+                damping={15}          // Lower damping = way more bouncy physics layout
+                stiffness={200}      // Higher stiffness = moves faster
+                initialTranslateY={120} // Drops lower down before entry lifting begins
+                initialScale={0.3}   // Pops out starting from 30% sizing instead of 0
+                delay={400}
                 className="absolute bottom-8 right-8"
             >
                 <TouchableOpacity
@@ -249,7 +247,7 @@ const StaffDashboard = ({ navigation }: any) => {
                         <Icon as={AddIcon} size="xl" className="text-cyan-400" style={{ width: 38, height: 38 }} />
                     </LinearGradient>
                 </TouchableOpacity>
-            </MotiView>
+            </AnimatedMotiView>
         </View>
     );
 }

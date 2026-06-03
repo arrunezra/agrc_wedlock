@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback, Activity, use } from 'react';
 import { View, TouchableOpacity, FlatList, ActivityIndicator, Platform, StatusBar as RNStatusBar, Pressable } from 'react-native';
 import { Box, VStack, HStack, Text, Heading, useToast, Toast, ToastTitle } from '@/src/components/common/GluestackUI'
-import { AnimatePresence, MotiView } from 'moti';
-import { Calendar, Filter, ChevronDown, CreditCard, Landmark, RefreshCw, ArrowRight, ChurchIcon, Search, X } from 'lucide-react-native';
+import { Calendar, Filter, ChevronDown, Landmark, RefreshCw, ArrowRight, ChurchIcon, Search, X, HeartIcon } from 'lucide-react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Icon } from '@/src/components/common/IconUI';
 import HeaderSession from '../common/HeaderSession';
@@ -11,6 +10,7 @@ import FuturisticDropdown from '@/src/components/common/FuturisticDropdown';
 import AdminServices from '@/src/services/AdminServices';
 import { useAuth } from '@/src/context/AuthContext';
 import ChruchService from '@/src/services/ChruchService';
+import AnimatedMotiView from '../component/AnimateView';
 // --- CONFIG PALETTE ---
 const REVENUE_PALETTE = ['#087a46ff', '#1b5945ff']; // Deep slate sleek theme
 const LIMIT = 20;
@@ -217,10 +217,15 @@ const ContributeHistoryScreen = ({ navigation }: any) => {
     const renderContributionDetailsItem = ({ item }: { item: contributionDetails }) => {
         const isCompleted = item.status.toLowerCase() === 'completed';
         return (
-            <MotiView from={{ opacity: 0, translateY: 15 }} animate={{ opacity: 1, translateY: 0 }} className="bg-white p-4 mx-4 mb-3 rounded-[24px] border border-slate-100 shadow-sm flex-row justify-between items-center">
+            <AnimatedMotiView
+                preset="slideUp"
+                duration={350}
+                delay={1000}
+                className="bg-white p-4 mx-4 mb-3 rounded-[24px] border border-slate-100 shadow-sm flex-row justify-between items-center"
+            >
                 <HStack space="md" className="items-center flex-1">
                     <Box className="w-12 h-12 rounded-2xl bg-slate-50 items-center justify-center border border-slate-100">
-                        <Icon as={item.contribute_method === 'UPI' ? Landmark : CreditCard} size="md" className="text-slate-600" />
+                        <Icon as={item.contribute_method === 'UPI' ? Landmark : HeartIcon} size="md" className="text-slate-600" />
                     </Box>
                     <VStack className="flex-1">
                         <Text className="text-slate-900 font-bold text-sm" numberOfLines={1}>{item.church_name}</Text>
@@ -233,7 +238,7 @@ const ContributeHistoryScreen = ({ navigation }: any) => {
                         <Text className={`text-[9px] font-black uppercase ${isCompleted ? 'text-emerald-600' : 'text-amber-600'}`}>{item.status}</Text>
                     </Box>
                 </VStack>
-            </MotiView>
+            </AnimatedMotiView>
         );
     };
 
@@ -253,18 +258,27 @@ const ContributeHistoryScreen = ({ navigation }: any) => {
             />
 
             {/* --- REVENUE HERO SUMMARY DISPLAY --- */}
-            <MotiView from={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="mx-4 mt-4">
+            <AnimatedMotiView
+                preset="slideUp"
+                duration={350}
+                delay={1000}
+                initialScale={0.95}
+                className="mx-4 mt-4"            >
                 <LinearGradient colors={REVENUE_PALETTE} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{ borderRadius: 28, padding: 24, elevation: 8 }}>
                     <Text className="text-slate-400 text-[10px] font-bold uppercase tracking-[2px]">Aggregated Statement</Text>
                     <Heading className="text-white font-black text-3xl mt-1">{formatCurrency(overallAmount)}</Heading>
                     <Text className="text-slate-400 text-[9px] mt-2 italic">* Summing active committed parameters filter ledger rules</Text>
                 </LinearGradient>
-            </MotiView>
-
+            </AnimatedMotiView>
             {/* --- DYNAMIC FILTER CHIPS PANEL SUMMARY --- */}
-            {isFilterApplied && (user?.role == 'super_admin' || user?.role == 'root_admin') && (<AnimatePresence>
+            {isFilterApplied && (user?.role == 'super_admin' || user?.role == 'root_admin') && (
+                <AnimatedMotiView
+                    preset="accordion"
+                    targetHeight={42}
+                    duration={300} // Speed up layout shift timeline slightly for quick responses
+                    className="px-4 mt-3 flex-row items-center overflow-hidden"
+                >
 
-                <MotiView from={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 42 }} exit={{ opacity: 0, height: 0 }} className="px-4 mt-3 flex-row items-center overflow-hidden">
                     <Box className="bg-slate-100 px-2.5 py-1.5 rounded-xl mr-2 flex-row items-center">
                         <Text className="text-slate-700 text-[10px] font-extrabold uppercase">{searchCriteria.status}</Text>
                     </Box>
@@ -275,9 +289,9 @@ const ContributeHistoryScreen = ({ navigation }: any) => {
                     <Box className="bg-slate-100 px-2.5 py-1.5 rounded-xl flex-row items-center">
                         <Text className="text-slate-700 text-[10px] font-extrabold uppercase">{searchCriteria.from_date} ➔ {searchCriteria.to_date}</Text>
                     </Box>
-                </MotiView>
+                </AnimatedMotiView>
 
-            </AnimatePresence>
+
             )}
             {/* --- INTERACTIVE CONTROL BOX FILTER INPUT FILTERS --- */}
             <VStack className="mt-3 px-4 pb-4 border-b border-slate-100 bg-white" space="md">

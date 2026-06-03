@@ -12,9 +12,9 @@ import { Check, CheckCircle2Icon, CheckCircleIcon, HeartIcon, UserPlus, UsersIco
 import { formatHeight } from '@/src/utils/common';
 import { useFocusEffect } from '@react-navigation/native';
 import _, { constant } from 'lodash';
-import { MotiView } from 'moti';
 import { useAlert } from '@/src/context/AlertContext';
 import { useIsFocused } from '@react-navigation/native'; // Add this import
+import AnimatedMotiView from '../component/AnimateView';
 export const ProfileCard = ({ profile, onPress, user, showToast, onActionComplete, comingFrom, reload }: any) => {
   const { showAlert, hideAlert } = useAlert();
   const isFocused = useIsFocused();
@@ -287,26 +287,25 @@ export const ProfileCard = ({ profile, onPress, user, showToast, onActionComplet
               className={`h-14 w-14 mt-2 rounded-full p-0 shadow-2xl border border-white/30 bg-error-500
               }`}
             >
-              <MotiView
-                animate={{
-                  scale: isLiked ? [1, 1.3, 1] : 1, // "Pop" effect when liked
-                  backgroundColor: isLiked ? '#ef4444' : 'rgba(0,0,0,0.5)',
-                }}
-                transition={{
-                  type: 'spring',
-                  damping: 15,
-                  stiffness: 150,
-                }}
+
+              <AnimatedMotiView
+                //  preset="springUp" // no neeed
+
+                isLiked={isLiked}
+                damping={15}
+                stiffness={150}
+                initialBackgroundColor="rgba(0,0,0,0.5)"
+                animateBackgroundColor="#ef4444"
                 className="p-4 rounded-full shadow-2xl mb-2 border border-white/20"
-                style={{ backgroundColor: isLiked ? '#ef4444' : 'rgba(0,0,0,0.5)' }}
               >
+
                 <Icon
                   as={HeartIcon}
                   color="white"
                   fill={isLiked ? "white" : "none"}
                   size="xl"
                 />
-              </MotiView>
+              </AnimatedMotiView>
 
             </Button>
 

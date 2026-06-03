@@ -6,12 +6,11 @@ import FastImage from "@d11/react-native-fast-image";
 import { CheckCircleIcon, ChevronDownIcon, LockIcon, MailIcon, PhoneIcon, CheckIcon, CloseIcon, ArrowUpIcon, AddIcon, ChevronUpIcon, ShareIcon, } from '@/components/ui/icon';
 import Gallery from 'react-native-awesome-gallery';
 import LinearGradient from 'react-native-linear-gradient';
-import { MotiView } from 'moti';
 import profileService from '@/src/services/profileService';
 import { ProfileSkeleton } from '@/src/components/common/ProfileSkeleton';
 import { API_BASE_URL_DEV_Profiles_Images } from '@/src/utils/environment';
 import NotFoundScreen from '../common/NotFoundScreen';
-import { BanknoteIcon, Briefcase, Calendar, Check, CreditCardIcon, MapPin, User, X, XIcon, ZapIcon } from 'lucide-react-native';
+import { BanknoteIcon, Briefcase, Calendar, Check, MapPin, User, X, XIcon, ZapIcon } from 'lucide-react-native';
 import { useAuth } from '@/src/context/AuthContext';
 import LoadingScreen from '../common/SuccessScreen';
 import { getExtension } from '@/src/utils/common';
@@ -23,6 +22,7 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import HeaderSession from '../common/HeaderSession';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { CaptureProtection } from 'react-native-capture-protection';
+import AnimatedMotiView from '../component/AnimateView';
 
 export default function ProfileDetailScreen({ route }: any) {
     const { user } = useAuth();
@@ -374,23 +374,18 @@ export default function ProfileDetailScreen({ route }: any) {
 
                         {/* Approve Button with Pulse */}
                         <Box className="items-center justify-center">
-                            <MotiView
-                                from={{ scale: 1, opacity: 1 }}
-                                animate={{ scale: 1.6, opacity: 0 }}
-                                transition={{
-                                    type: 'timing',
-                                    duration: 1800,
-                                    loop: true,
-                                    repeatReverse: false,
-                                }}
+                            <AnimatedMotiView
+                                preset="pulse"
+                                duration={1800} // Exactly matches your original 1800ms timeline loop
                                 className="absolute h-14 w-14 rounded-full bg-[#22c55e]/50"
-                            />
-                            <Pressable
-                                onPress={() => handleApproveOrReject(item.file_id, 'approve')}
-                                className="bg-[#22c55e] h-14 w-14 rounded-full items-center justify-center shadow-lg  "
                             >
-                                <Check color="white" size={28} strokeWidth={2.5} />
-                            </Pressable>
+                                <Pressable
+                                    onPress={() => handleApproveOrReject(item.file_id, 'approve')}
+                                    className="bg-[#22c55e] h-14 w-14 rounded-full items-center justify-center shadow-lg  "
+                                >
+                                    <Check color="white" size={28} strokeWidth={2.5} />
+                                </Pressable>
+                            </AnimatedMotiView>
                         </Box>
                     </HStack>
                 </Box>
@@ -523,24 +518,19 @@ export default function ProfileDetailScreen({ route }: any) {
                                 onPress={() => openGallery(activeIndex)}
                                 hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
                             >
-
-                                <MotiView
-                                    animate={{
-                                        scale: [1, 1.1, 1],
-                                    }}
-                                    transition={{
-                                        type: 'spring',
-                                        damping: 12,
-                                        stiffness: 150,
-                                    }}
-                                    key={activeIndex} // Key change forces re-animation
-                                    className="bg-black/50 px-3 py-1.5 rounded-lg flex-row items-center gap-2"
+                                <AnimatedMotiView
+                                    key={activeIndex}
+                                    preset="pulse"
+                                    duration={1800} // Exactly matches your original 1800ms timeline loop
+                                    className="absolute h-14 w-14 rounded-full bg-[#22c55e]/50"
                                 >
+
+
                                     <Icon as={CameraIcon} color="white" size="xs" />
                                     <Text className="text-white text-[10px] font-bold">
                                         {activeIndex + 1} / {data?.images.length}
                                     </Text>
-                                </MotiView>
+                                </AnimatedMotiView>
 
                             </Pressable>
 
@@ -618,18 +608,12 @@ export default function ProfileDetailScreen({ route }: any) {
 
                                     {/* Floating Like Button */}
                                     {user?.role === 'member' && <Pressable onPress={handleLike}>
-                                        <MotiView
-                                            animate={{
-                                                scale: isLiked ? [1, 1.3, 1] : 1, // "Pop" effect when liked
-                                                backgroundColor: isLiked ? '#ef4444' : 'rgba(0,0,0,0.5)',
-                                            }}
-                                            transition={{
-                                                type: 'spring',
-                                                damping: 15,
-                                                stiffness: 150,
-                                            }}
-                                            className="p-4 rounded-full shadow-2xl mb-2 border border-white/20"
-                                            style={{ backgroundColor: isLiked ? '#ef4444' : 'rgba(0,0,0,0.5)' }}
+                                        <AnimatedMotiView
+                                            preset="springUp"
+                                            initialBackgroundColor="rgba(0,0,0,0.5)"
+                                            animateBackgroundColor="#ef4444"
+                                            initialScale={0.9}
+                                            initialTranslateY={20}
                                         >
                                             <Icon
                                                 as={HeartIcon}
@@ -637,7 +621,7 @@ export default function ProfileDetailScreen({ route }: any) {
                                                 fill={isLiked ? "white" : "none"}
                                                 size="xl"
                                             />
-                                        </MotiView>
+                                        </AnimatedMotiView>
                                     </Pressable>
                                     }
                                 </HStack>

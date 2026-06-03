@@ -6,8 +6,8 @@ import {
   VStack
 } from '@/src/components/common/GluestackUI';
 import LottieView from 'lottie-react-native';
-import { MotiView } from 'moti';
 import { StyleSheet } from 'react-native';
+import AnimatedMotiView from '../component/AnimateView';
 
 
 export default function LoadingScreen() {
@@ -16,12 +16,15 @@ export default function LoadingScreen() {
     <Box className="absolute inset-0 z-[200] flex-1 bg-white">
       <Center className="flex-1">
 
-        {/* Animated Entrance for the Loader */}
-        <MotiView
-          from={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ type: 'timing', duration: 300 }}
+        <AnimatedMotiView
+          preset="springUp"
+          animationType="timing"
+          duration={300}
+          damping={15}
+          initialTranslateY={15}
+          initialScale={0.9}
         >
+
           <Box className="absolute inset-0 z-[200] flex-1 bg-white/10 backdrop-blur-md">
             <Center className="flex-1">
 
@@ -37,7 +40,7 @@ export default function LoadingScreen() {
 
             </Center>
           </Box>
-        </MotiView>
+        </AnimatedMotiView>
       </Center>
     </Box>
   );
