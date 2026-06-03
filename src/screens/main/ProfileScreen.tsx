@@ -1,5 +1,5 @@
-import   { useState } from 'react';
- 
+import { useState } from 'react';
+
 import { Alert } from 'react-native';
 import { useAuth } from '../../context/AuthContext';
 import { User } from '@/src/utils/models';
@@ -13,10 +13,10 @@ import { Heading } from '@/components/ui/heading';
 import { Avatar, AvatarFallbackText } from '@/components/ui/avatar';
 import { Button, ButtonText } from '@/components/ui/button';
 import { Input, InputField } from '@/components/ui/input';
-import { 
-  FormControl, 
-  FormControlLabel, 
-  FormControlLabelText 
+import {
+  FormControl,
+  FormControlLabel,
+  FormControlLabelText
 } from '@/components/ui/form-control';
 import { Card } from '@/components/ui/card';
 import { Divider } from '@/components/ui/divider';
@@ -63,7 +63,7 @@ export default function ProfileScreen() {
     },
   ];
 
- return (
+  return (
     <ScrollView className="flex-1 bg-background-0">
       <Box className="px-4 py-6">
         {/* Profile Header */}
@@ -73,7 +73,7 @@ export default function ProfileScreen() {
               {formData.name?.charAt(0) || 'U'}
             </AvatarFallbackText>
           </Avatar>
-          
+
           <VStack className="items-center gap-1">
             <Heading size="xl" className="text-typography-900">
               {formData.name}
@@ -146,16 +146,16 @@ export default function ProfileScreen() {
             <VStack className="gap-3 mt-4">
               <Pressable
                 onPress={() => Alert.alert('Change Password', 'Feature coming soon!')}
-                className="py-3 px-4 bg-background-0 rounded-md border border-outline-200 active:bg-background-50"
+                className="py-3 px-4 bg-background-0 rounded-md border border-outline-200  "
               >
                 <Text className="text-center font-medium">
                   Change Password
                 </Text>
               </Pressable>
-              
+
               <Pressable
                 onPress={() => Alert.alert('Notification Settings', 'Feature coming soon!')}
-                className="py-3 px-4 bg-background-0 rounded-md border border-outline-200 active:bg-background-50"
+                className="py-3 px-4 bg-background-0 rounded-md border border-outline-200 "
               >
                 <Text className="text-center font-medium">
                   Notification Settings

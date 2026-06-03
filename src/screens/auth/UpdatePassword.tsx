@@ -119,7 +119,7 @@ const UpdatePassword = ({ navigation, route }: any) => {
 
                             {/* Action Button */}
                             <Button
-                                className="h-14 rounded-2xl bg-blue-600 mt-4 shadow-lg shadow-blue-200 active:bg-blue-700"
+                                className="h-14 rounded-2xl bg-blue-600 mt-4 shadow-lg shadow-blue-200 "
                                 onPress={handleUpdate}
                             >
                                 <ButtonText className="font-bold text-white">Reset Password</ButtonText>

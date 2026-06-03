@@ -291,7 +291,7 @@ export default function ShowProfileGalleryScreen({ route, navigation }: any) {
                         <Pressable
                             onPress={() => { startUpload('gallery', user?.profilePic) }}
                             style={{ width: COLUMN_WIDTH, height: 200 }}
-                            className="border-2 border-dashed border-slate-200 rounded-[24px] items-center justify-center bg-slate-50 active:bg-slate-100"
+                            className="border-2 border-dashed border-slate-200 rounded-[24px] items-center justify-center bg-slate-50"
                         >
                             <VStack className="items-center" space="xs">
                                 <CameraIcon size={24} className="text-slate-400" />

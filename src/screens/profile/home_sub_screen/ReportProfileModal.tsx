@@ -72,7 +72,7 @@ const ReportProfileModal = ({ isOpen, onClose, onSubmit, targetMemberName }: Rep
             <ModalContent className="bg-white flex-1">
                 {/* Header */}
                 <ModalHeader className="px-6 pt-10 pb-0 justify-end border-0">
-                    <ModalCloseButton className="h-10 w-10 items-center justify-center rounded-full bg-slate-100 active:bg-slate-200">
+                    <ModalCloseButton className="h-10 w-10 items-center justify-center rounded-full bg-slate-100 ">
                         <Icon as={CloseIcon} size="md" className="text-typography-900" />
                     </ModalCloseButton>
                 </ModalHeader>
@@ -119,7 +119,7 @@ const ReportProfileModal = ({ isOpen, onClose, onSubmit, targetMemberName }: Rep
                             <VStack space="xs">
                                 <Text size="sm" className="font-semibold text-typography-800 ml-1">Additional Remarks</Text>
                                 <Box className="relative">
-                                    <Textarea size="lg" className="h-40 p-4 rounded-3xl border-2 transition-all bg-white border-outline-100">
+                                    <Textarea size="lg" className="h-40 p-4 rounded-3xl border-2 bg-white border-outline-100">
                                         <TextareaInput
                                             placeholder="Give us a bit more detail about the issue..."
                                             value={remarks}

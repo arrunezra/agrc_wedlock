@@ -29,7 +29,7 @@ $razorpayPaymentId = $input['razorpay_payment_id'] ?? null;
 $razorpaySignature = $input['razorpay_signature'] ?? null;
 
 if (!$razorpayOrderId || !$razorpayPaymentId || !$razorpaySignature) {
-    echo json_encode(["success" => false, "message" => "Missing payment details"]);
+    echo json_encode(["success" => false, "message" => "Missing Contribution details"]);
     exit;
 }
 
@@ -61,18 +61,18 @@ try {
 
     $db->commit();
 
-    echo json_encode(["success" => true, "message" => "Payment Verified"]);
+    echo json_encode(["success" => true, "message" => "Contribution Verified"]);
 
 } catch (Exception $e) {
     $db->rollBack();
-    error_log("Payment Verification Error: " . $e->getMessage());
+    error_log("Contribution Verification Error: " . $e->getMessage());
 // Log exactly why it failed
     PaymentLogger::log($razorpayOrderId, 'verification_failed', ["error" => $e->getMessage()]);
     // 4. Update status to failed
     // Ensure table name here matches 'payments_reciept' used above
     $stmt = $db->prepare("UPDATE payments_reciept SET status = 'failed' WHERE razorpay_order_id = ?");
     $stmt->execute([$razorpayOrderId]);
-           error_log("Payment Verification with razorpay_order_id Error: " . razorpay_order_id);
+           error_log("Contribution Verification with razorpay_order_id Error: " . razorpay_order_id);
 
     echo json_encode(["success" => false, "message" => "Signature Verification Failed: " . $e->getMessage()]);
 }

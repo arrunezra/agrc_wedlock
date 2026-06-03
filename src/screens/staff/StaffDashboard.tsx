@@ -134,7 +134,7 @@ const StaffDashboard = ({ navigation }: any) => {
                                         }}
                                     >
                                         <Pressable
-                                            className="mb-3 active:opacity-95"
+                                            className="mb-3 "
                                             onPress={() => navigation.navigate("Main", {
                                                 screen: "ViewStaffinforamtion",
                                                 params: { id: item.id, isEdit: true }
@@ -154,7 +154,7 @@ const StaffDashboard = ({ navigation }: any) => {
                                                         <AvatarFallbackText className="font-bold text-2xl">
                                                             {item?.full_name}
                                                         </AvatarFallbackText>
-                                                        <AvatarImage source={{ uri: "" }} className="h-full w-full" />
+                                                        {/* <AvatarImage source={{ uri: "" }} className="h-full w-full" /> */}
 
                                                     </Avatar>
                                                 </Box>
@@ -183,7 +183,7 @@ const StaffDashboard = ({ navigation }: any) => {
                                                             params: { id: item.id, isEdit: true }
                                                         })}
 
-                                                        className="h-10 w-10 bg-emerald-50 rounded-full items-center justify-center border border-emerald-100 shadow-sm active:bg-emerald-100"                                            >
+                                                        className="h-10 w-10 bg-emerald-50 rounded-full items-center justify-center border border-emerald-100 shadow-sm  "                                            >
                                                         <Icon as={Edit3Icon} size="sm" className="text-slate-600" />
                                                     </TouchableOpacity>
 
@@ -192,7 +192,7 @@ const StaffDashboard = ({ navigation }: any) => {
                                                         onPress={() => {
                                                             if (item.mobileNo) Linking.openURL(`tel:${item.mobileNo}`);
                                                         }}
-                                                        className="h-10 w-10 bg-cyan-600 rounded-full items-center justify-center shadow-md active:bg-cyan-700"
+                                                        className="h-10 w-10 bg-cyan-600 rounded-full items-center justify-center shadow-md  "
                                                     >
                                                         <Icon as={PhoneIcon} size="sm" className="text-white" />
                                                     </TouchableOpacity>

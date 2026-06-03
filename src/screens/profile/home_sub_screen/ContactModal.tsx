@@ -31,7 +31,7 @@ const ContactModal = ({
 
                 {/* Header - Simplified to hold the Close Button */}
                 <ModalHeader className="px-6 pt-10 pb-0 justify-end border-0">
-                    <ModalCloseButton className="h-10 w-10 items-center justify-center rounded-full bg-slate-100 active:bg-slate-200">
+                    <ModalCloseButton className="h-10 w-10 items-center justify-center rounded-full bg-slate-100 ">
                         <Icon as={CloseIcon} size="md" className="text-typography-900" />
                     </ModalCloseButton>
                 </ModalHeader>

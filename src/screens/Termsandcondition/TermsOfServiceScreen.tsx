@@ -186,7 +186,7 @@ export default function TermsOfServiceScreen({ navigation }: any) {
                 <Box className="p-5 border-t border-background-100 bg-background-0">
                     <Button
                         size="xl"
-                        className="h-14 rounded-xl bg-primary-700 active:bg-primary-800 shadow-sm"
+                        className="h-14 rounded-xl bg-primary-700  shadow-sm"
                         onPress={() => navigation.goBack()}
                     >
                         <ButtonText className="text-white font-semibold text-lg">

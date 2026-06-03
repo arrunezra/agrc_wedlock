@@ -367,7 +367,7 @@ export default function ProfileDetailScreen({ route }: any) {
                         {/* Reject Button */}
                         <Pressable
                             onPress={() => handleApproveOrReject(item.file_id, 'reject')}
-                            className="bg-[#ef4444] h-14 w-14 rounded-full items-center justify-center shadow-lg active:scale-90"
+                            className="bg-[#ef4444] h-14 w-14 rounded-full items-center justify-center shadow-lg  "
                         >
                             <X color="white" size={28} strokeWidth={2.5} />
                         </Pressable>
@@ -387,7 +387,7 @@ export default function ProfileDetailScreen({ route }: any) {
                             />
                             <Pressable
                                 onPress={() => handleApproveOrReject(item.file_id, 'approve')}
-                                className="bg-[#22c55e] h-14 w-14 rounded-full items-center justify-center shadow-lg active:scale-90 z-10"
+                                className="bg-[#22c55e] h-14 w-14 rounded-full items-center justify-center shadow-lg  "
                             >
                                 <Check color="white" size={28} strokeWidth={2.5} />
                             </Pressable>
@@ -522,7 +522,6 @@ export default function ProfileDetailScreen({ route }: any) {
                             <Pressable
                                 onPress={() => openGallery(activeIndex)}
                                 hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-                                className="active:opacity-70" // Gives visual feedback on tap
                             >
 
                                 <MotiView
@@ -616,10 +615,7 @@ export default function ProfileDetailScreen({ route }: any) {
 
                                     </VStack>
 
-                                    {/* Float Action Like Button */}
-                                    {/* <Pressable className="bg-red-500 p-4 rounded-full shadow-2xl active:scale-90 transition-all mb-2">
-                                <Icon as={HeartIcon} color="white" fill="white" size="xl" />
-                            </Pressable> */}
+
                                     {/* Floating Like Button */}
                                     {user?.role === 'member' && <Pressable onPress={handleLike}>
                                         <MotiView
@@ -674,7 +670,7 @@ export default function ProfileDetailScreen({ route }: any) {
                                             setActiveIndex(0);
                                         }}
                                         hitSlop={20}
-                                        className="bg-white/20 p-2.5 rounded-full active:scale-90"
+                                        className="bg-white/20 p-2.5 rounded-full "
                                     >
                                         <Icon as={CloseIcon} color="white" size="xl" />
                                     </Pressable>
@@ -1315,7 +1311,7 @@ export default function ProfileDetailScreen({ route }: any) {
                                     {/* Hide this profile */}
                                     <ActionsheetItem
                                         onPress={handleBlock}
-                                        className="flex-row items-center p-4 active:bg-background-50 rounded-2xl"
+                                        className="flex-row items-center p-4 rounded-2xl"
                                     >
                                         <ActionsheetIcon as={BanIcon} size="lg" className="text-typography-900 mr-4" />
                                         <ActionsheetItemText className="text-typography-800 text-lg font-medium">
@@ -1326,7 +1322,7 @@ export default function ProfileDetailScreen({ route }: any) {
                                     {/* Block Member */}
                                     <ActionsheetItem
                                         onPress={handleBlock}
-                                        className="flex-row items-center p-4 active:bg-background-50 rounded-2xl"
+                                        className="flex-row items-center p-4  rounded-2xl"
                                     >
                                         <ActionsheetIcon as={BanIcon} size="lg" className="text-typography-900 mr-4" />
                                         <ActionsheetItemText className="text-typography-800 text-lg font-medium">
@@ -1337,7 +1333,7 @@ export default function ProfileDetailScreen({ route }: any) {
                                     {/* Report Profile */}
                                     <ActionsheetItem
                                         onPress={() => setShowReportModal(true)}
-                                        className="flex-row items-center p-4 active:bg-red-50 rounded-2xl"
+                                        className="flex-row items-center p-4  rounded-2xl"
                                     >
                                         <ActionsheetIcon as={FlagIcon} size="lg" className="text-red-500 mr-4" />
                                         <ActionsheetItemText className="text-red-500 text-lg font-medium">
@@ -1351,7 +1347,7 @@ export default function ProfileDetailScreen({ route }: any) {
                                     <Box className="px-4">
                                         <Pressable
                                             onPress={handleClose}
-                                            className="bg-background-100 py-4 rounded-3xl items-center active:bg-background-200"
+                                            className="bg-background-100 py-4 rounded-3xl items-center  "
                                         >
                                             <Text className="text-typography-900 font-bold text-lg">Cancel</Text>
                                         </Pressable>
@@ -1422,12 +1418,12 @@ export default function ProfileDetailScreen({ route }: any) {
 
                                     </VStack>
 
-                                    {/* 2. Action Buttons: Photo & Payment */}
+                                    {/* 2. Action Buttons: Photo & Contribute */}
                                     <VStack space="sm" className="mt-2">
                                         <HStack space="sm">
                                             {/* Verify Photo Button */}
                                             <Button
-                                                className="flex-1 bg-indigo-500 rounded-2xl h-12 shadow-sm active:bg-indigo-600"
+                                                className="flex-1 bg-indigo-500 rounded-2xl h-12 shadow-sm  "
                                                 onPress={() => handleVerifyPhoto()}
                                             >
                                                 <HStack space="xs" className="items-center">
@@ -1435,19 +1431,6 @@ export default function ProfileDetailScreen({ route }: any) {
                                                     <ButtonText className="text-white font-bold text-sm">Verify Photo</ButtonText>
                                                 </HStack>
                                             </Button>
-
-                                            {/* Payment Button */}
-                                            {/* {data?.has_active_subscription == 0 && <Button
-                                            className="flex-1 bg-emerald-500 rounded-2xl h-12 shadow-sm active:bg-emerald-600"
-                                            onPress={() => handlePaymentUpdate()}
-                                        >
-                                            <HStack space="xs" className="items-center">
-
-                                                <CreditCardIcon size={16} color="white" />
-                                                <ButtonText className="text-white font-bold text-sm">Payment</ButtonText>
-                                            </HStack>
-                                        </Button>
-                                        } */}
                                         </HStack>
 
                                         {/* Main Add Details Button */}
@@ -1481,7 +1464,7 @@ export default function ProfileDetailScreen({ route }: any) {
                                             </VStack>
                                             <Pressable
                                                 onPress={() => setIsPhotoVerifyModalVisible(false)}
-                                                className="bg-slate-800 p-3 rounded-2xl active:bg-slate-700"
+                                                className="bg-slate-800 p-3 rounded-2xl "
                                             >
                                                 <Icon as={XIcon} color="white" size="sm" />
                                             </Pressable>

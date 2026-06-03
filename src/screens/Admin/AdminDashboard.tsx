@@ -80,12 +80,12 @@ const AdminDashboard = ({ navigation }: any) => {
                 screen: 'Profile'
             },
             {
-                title: 'Payment',
+                title: 'Contribution',
                 count: data?.summary?.overall_revenue || 0,
                 trend: '+15% Trend',
                 icon: CreditCard,
                 colors: ['#f83600', '#f9d423'],
-                screen: 'Payment'
+                screen: 'Contribute'
             }
         ];
 
@@ -206,7 +206,7 @@ const AdminDashboard = ({ navigation }: any) => {
 
                                                 {/* Right-aligned Number/Amount Value */}
                                                 <Heading size="xl" className="text-white font-black text-right">
-                                                    {item.title === "Payment" ? formatCurrency(item?.count || 0) : item?.count}
+                                                    {item.title === "Contribution" ? formatCurrency(item?.count || 0) : item?.count}
                                                 </Heading>
                                             </HStack>
                                         </LinearGradient>

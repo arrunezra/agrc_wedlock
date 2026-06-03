@@ -209,7 +209,7 @@ const UserDocumentUpload = () => {
                 <Pressable
                     onPress={onPick}
                     disabled={isLoading || isUploading}
-                    className={`active:scale-[0.98] transition-all ${isLoading || isUploading ? 'opacity-50' : 'opacity-100'}`}
+                    className={`  ${isLoading || isUploading ? 'opacity-50' : 'opacity-100'}`}
                 >
                     <VStack className="w-full h-48 bg-white rounded-[32px] border-2 border-dashed border-slate-200 items-center justify-center shadow-sm">
                         <Box className="w-16 h-16 bg-blue-50 rounded-full items-center justify-center mb-4">
@@ -281,7 +281,7 @@ const UserDocumentUpload = () => {
                     <Animated.View entering={FadeIn}>
                         <Pressable
                             onPress={uploadFiles}
-                            className="bg-blue-600 w-full py-4 rounded-2xl shadow-lg shadow-blue-200 items-center mb-10 active:bg-blue-700"
+                            className="bg-blue-600 w-full py-4 rounded-2xl shadow-lg shadow-blue-200 items-center mb-10  "
                         >
                             <HStack space="sm" className="items-center">
                                 <Text className="text-white font-bold text-lg">Upload to Cloud</Text>

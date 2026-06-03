@@ -121,7 +121,7 @@ const HeaderSession = ({
                             {showBackButton && (
                                 <TouchableOpacity
                                     onPress={onBackPress}
-                                    className={`p-3 ${iconBg} rounded-2xl active:scale-90 transition-all`}
+                                    className={`p-3 ${iconBg} rounded-2xl  `}
                                 >
                                     <Icon as={ChevronLeft} size="lg" color={iconColor} />
                                 </TouchableOpacity>
@@ -144,7 +144,7 @@ const HeaderSession = ({
                         {showRightIcon && (
                             <TouchableOpacity
                                 onPress={onRightPress}
-                                className={`p-3 ${iconBg} rounded-2xl active:scale-90 transition-all`}
+                                className={`p-3 ${iconBg} rounded-2xl   `}
                             >
                                 <Box className="relative">
                                     <Icon as={RightIcon} size="lg" color={iconColor} />

@@ -33,7 +33,7 @@ const MatchCard = memo(({ item, isPremium }: any) => {
 
                 {/* Action Button */}
                 <Pressable
-                    className="mt-2 border border-cyan-500 py-1.5 rounded-full active:bg-cyan-50"
+                    className="mt-2 border border-cyan-500 py-1.5 rounded-full "
                     onPress={() => console.log('Connect', item.id)}
                 >
                     <HStack className="justify-center items-center gap-1.5">

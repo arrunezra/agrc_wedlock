@@ -1,50 +1,36 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { FlatList, ActivityIndicator, ScrollView, Pressable, KeyboardAvoidingView, Platform, TouchableOpacity, View, StyleSheet, Dimensions, StatusBar } from 'react-native';
 import { Box, Spinner, Center, HStack, Text } from '@/src/components/common/GluestackUI';
-import api from '@/src/api/api';
 import { ProfileCard } from './ProfileCard';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { profileService } from '@/src/services/profileService';
-import LottieView from 'lottie-react-native';
 import NotFoundScreen from '../common/NotFoundScreen';
-import FailedScreen from '../common/FailedScreen';
 import { SkeletonItem } from '../common/SkeletonItem';
 import { SearchActionsheet } from './home_sub_screen/SearchActionsheet';
 import { ProfileCardSkeleton } from '../common/ProfileCardSkeleton';
 import { useAuth } from '@/src/context/AuthContext';
 import { useAppToast } from '@/src/context/ToastContext';
-import {
-    CaptureProtection,
-    useCaptureProtection,
-    CaptureEventType
-} from 'react-native-capture-protection';
+import { CaptureProtection } from 'react-native-capture-protection';
 import { useIsFocused } from '@react-navigation/native'; // Add this import
 import _ from 'lodash';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import LinearGradient from 'react-native-linear-gradient';
-import { ShieldCheck } from '@/src/components/common/IconUI';
-import { Crown } from 'lucide-react-native';
-import PremiumUnlockScreen from './PremiumUnlockScreen';
 import HeaderSession from '../common/HeaderSession';
+import ContributionScreen from '../Contribute/ContributionScreen';
 const MatchesScreen = () => {
 
     const { user } = useAuth();
     const { showToast } = useAppToast();
-    const isFocused = useIsFocused(); // This hook returns true/false when focus changes
-    const { width } = Dimensions.get('window');
     const abortControllerRef = useRef<AbortController | null>(null);
     const navigation = useNavigation<any>();
     const [profiles, setProfiles] = useState<any[]>([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(false);
-    const [subscriptionAmount, setSubscriptionAmount] = useState(0);
+    const [contributionAmount, setContributionAmount] = useState(0);
 
     const [refreshing, setRefreshing] = useState(false);
     const [selectedFilter, setSelectedFilter] = useState('New');
     const [showFilters, setShowFilters] = useState(false); // Fix for More Match click
-    const [isSubscribed, setisSubscribed] = useState(false);
+    const [isContributed, setIsContributed] = useState(false);
     const [filters, setFilters] = useState({
         gender: '',
         marital_status: '',
@@ -86,12 +72,13 @@ const MatchesScreen = () => {
                 if (shouldRefresh || response?.message === "Record not found") {
                     setProfiles([]);
                 }
-                // Even on failure, if the server tells us they aren't subscribed, update UI
+                // Even on failure, if the server tells us they aren'tcontributed, update UI
 
             }
+
             if (pageNumber === 1 && shouldRefresh) {
-                setisSubscribed(!!response?.is_subscribed);
-                setSubscriptionAmount(response?.subscription_amount ?? 0);
+                setIsContributed(!!response?.isContributed);
+                setContributionAmount(response?.contributionAmount ?? 0);
             }
 
         } catch (error: any) {
@@ -202,11 +189,11 @@ const MatchesScreen = () => {
                 onBackPress={() => navigation.goBack()}
                 showRightIcon={true}
                 rightIconType="menu"
-                onRightPress={() => navigation.openDrawer()} // If using React Navigation Drawer
+                onRightPress={() => navigation.openDrawer()}
                 showLogo={false}
             />
 
-            {isSubscribed ?
+            {isContributed ?
                 <Box className="flex-1 bg-background-50">
                     {/* 1. Header / Tabs (Height determined by content) */}
                     <Box className="pt-4 bg-white border-b border-outline-50">
@@ -243,20 +230,30 @@ const MatchesScreen = () => {
                         }}
                     />
                 </Box> :
-                /* Render the Premium Glass Card UI we built earlier here */
-                /* This way, the user stays on the 'Matches' tab but sees the 'Unlock' UI */
-                !loading && <PremiumUnlockScreen onPay={() => navigation.navigate('Checkout', {
-                    totalAmount: subscriptionAmount ?? 0,
-                    customerName: user?.firstName,
-                    email: user?.email,
-                    phoneNo: user?.phone
-                })}
-                    values={{
-                        totalAmount: subscriptionAmount ?? 0,
-                        customerName: user?.firstName
+                loading ? <Box className="px-4 py-2">
+                    <ProfileCardSkeleton />
+                </Box> :
+                    <ContributionScreen onPay={() => {
+                        let cont = contributionAmount ?? 0;
+                        if (cont == 0) {
+                            showToast("Service Unavailable", "Check your admin", "error");
+                        }
+                        else
+                            navigation.navigate('CommunitySupport', {
+                                totalAmount: cont,
+                                customerName: user?.firstName,
+                                email: user?.email,
+                                phoneNo: user?.phone,
+                                userid: user?.profile_id
+                            })
+                    }
+                    }
+                        values={{
+                            totalAmount: contributionAmount ?? 0,
+                            customerName: user?.firstName
 
-                    }}
-                />
+                        }}
+                    />
 
 
             }

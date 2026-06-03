@@ -419,7 +419,7 @@ const StaffRegistration = ({ navigation, route }: any) => {
                             {currentStep === 1 ? "Enter official credentials." : "Enter contact and location details."}
                         </Text>
                         <HStack className="h-2 w-full bg-slate-100 rounded-full mt-4 overflow-hidden">
-                            <VStack className={`h-full bg-cyan-600 rounded-full transition-all duration-300 ${currentStep === 1 ? 'w-1/2' : 'w-full'}`} />
+                            <VStack className={`h-full bg-cyan-600 rounded-full   duration-300 ${currentStep === 1 ? 'w-1/2' : 'w-full'}`} />
                         </HStack>
                     </VStack>
 
@@ -575,7 +575,7 @@ const StaffRegistration = ({ navigation, route }: any) => {
 
                                     <FormControl isInvalid={!!errors.joiningDate}>
                                         <Pressable onPress={openDatePicker}>
-                                            <HStack className={`h-14 px-4 items-center justify-between bg-slate-50/50 rounded-2xl border transition-all ${errors.joiningDate ? 'border-red-500' : 'border-slate-200'}`}>
+                                            <HStack className={`h-14 px-4 items-center justify-between bg-slate-50/50 rounded-2xl border ${errors.joiningDate ? 'border-red-500' : 'border-slate-200'}`}>
                                                 <HStack space="md" className="items-center">
                                                     <Icon as={Calendar} size="sm" className={formData.joiningDateLabel ? "text-cyan-600" : "text-slate-400"} />
                                                     <Text className={`text-base ${formData.joiningDateLabel ? "text-slate-900 font-medium" : "text-slate-400"}`}>
@@ -715,7 +715,7 @@ const StaffRegistration = ({ navigation, route }: any) => {
                                 variant="outline"
                                 action="secondary"
                                 onPress={prevStep}
-                                className="h-14 rounded-2xl border-slate-200 active:bg-slate-50"
+                                className="h-14 rounded-2xl border-slate-200 "
                             >
                                 <ButtonText className="text-slate-600 font-semibold">Back</ButtonText>
                             </Button>
@@ -724,7 +724,7 @@ const StaffRegistration = ({ navigation, route }: any) => {
                         <Button
                             disabled={churchBranches?.length === 0}
                             onPress={currentStep === 1 ? handleNext : handleFinalSubmit}
-                            className={`${currentStep === 1 ? 'w-full' : 'flex-1'} h-14 rounded-2xl bg-cyan-600 active:bg-cyan-700 disabled:opacity-50`}
+                            className={`${currentStep === 1 ? 'w-full' : 'flex-1'} h-14 rounded-2xl bg-cyan-600  disabled:opacity-50`}
                         >
                             <ButtonText className="font-bold">
                                 {currentStep === 1 ? "Next Step" : isEdit ? "Update Details" : "Submit Registration"}
@@ -767,7 +767,7 @@ const StaffRegistration = ({ navigation, route }: any) => {
                                 style={{ height: 180 }}
                             />
                         </Box>
-                        <Button onPress={handleIOSDateConfirm} className="h-14 rounded-2xl bg-cyan-600 active:bg-cyan-700">
+                        <Button onPress={handleIOSDateConfirm} className="h-14 rounded-2xl bg-cyan-600 ">
                             <ButtonText className="font-bold">Set Date</ButtonText>
                         </Button>
                     </VStack>

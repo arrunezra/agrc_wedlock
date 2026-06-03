@@ -283,7 +283,6 @@ export const FamilyDetailsModal = ({ isOpen, onClose, lookups, content, onRefres
                                     <FormControl isInvalid={validationTriggered && !formData.address}>
                                         <Textarea
                                             size="lg"
-                                            // REMOVED transition-all to prevent Reanimated interference
                                             className="h-32 p-4 rounded-3xl border-2 bg-white border-outline-100"
                                         >
                                             <TextareaInput

@@ -9,10 +9,12 @@ import { Briefcase, Camera, CheckCircle, CheckCircle2, ChevronRight, CreditCard,
 import profileService from '@/src/services/profileService';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { LookupContext } from '@/src/context/LookupContext';
+import { useAppToast } from '@/src/context/ToastContext';
 
-const UserTopProfile = ({ user, onEdit, onAddPhoto, onPayment }: any) => {
+const UserTopProfile = ({ user, onEdit, onAddPhoto, onContribution }: any) => {
     const navigation = useNavigation<any>();
     const { lookups } = useContext(LookupContext);
+    const { showToast } = useAppToast();
 
     const [profiles, setProfiles] = useState<string>('');
     // Initialize with safe default values so rendering doesn't crash or read undefined variables
@@ -21,8 +23,8 @@ const UserTopProfile = ({ user, onEdit, onAddPhoto, onPayment }: any) => {
         views: 0,
         accepted: 0,
         requests: 0,
-        is_subscribed: false,
-        subscription_amount: 0
+        isContributed: false,
+        contributionAmount: 0
     });
 
     // FIX 1: Move side effect out of useMemo and handle profile picture sync cleanly inside useEffect
@@ -49,8 +51,8 @@ const UserTopProfile = ({ user, onEdit, onAddPhoto, onPayment }: any) => {
                 //console.log('Summary response fetched successfully:', response);
                 let items = {
                     ...response.summary,
-                    is_subscribed: response?.is_subscribed,
-                    subscription_amount: response?.subscription_amount
+                    isContributed: response?.isContributed,
+                    contributionAmount: response?.contributionAmount
 
                 }
                 setSummary(items);
@@ -78,7 +80,7 @@ const UserTopProfile = ({ user, onEdit, onAddPhoto, onPayment }: any) => {
             {/* Profile Card Overlay */}
             <HStack space="lg" className="items-center bg-white p-3 rounded-[32px] shadow-sm border border-slate-100">
                 <Box className="relative">
-                    <Pressable onPress={onAddPhoto} className="active:scale-95 transition-transform">
+                    <Pressable onPress={onAddPhoto} className=" ">
                         <Box className="p-1 rounded-full bg-indigo-50 border border-indigo-100">
                             <Avatar size="2xl" className="rounded-full bg-slate-200">
                                 <AvatarFallbackText className="font-bold text-slate-600" >
@@ -133,10 +135,9 @@ const UserTopProfile = ({ user, onEdit, onAddPhoto, onPayment }: any) => {
                     </View>
                 </TouchableOpacity>
 
-                {/* Pay Securely - Checked with fallback safe values */}
-                {summary?.is_subscribed === false && (
+                {summary?.isContributed === false && (
                     <TouchableOpacity
-                        onPress={() => onPayment(summary?.subscription_amount ?? 0)}
+                        onPress={() => onContribution(summary?.contributionAmount ?? 0)}
                         activeOpacity={0.9}
                         style={{ elevation: 8 }}
                         className="flex-[1.5] overflow-hidden rounded-2xl shadow-lg shadow-emerald-500/40"
@@ -147,9 +148,11 @@ const UserTopProfile = ({ user, onEdit, onAddPhoto, onPayment }: any) => {
                             end={{ x: 1, y: 0 }}
                             className="h-14 flex-row items-center justify-center px-4"
                         >
-                            <CreditCard size={18} color="white" strokeWidth={2.5} />
+                            {/* Change: Replaced CreditCard icon with Heart or Gift for donation theme */}
+                            <Heart size={18} color="white" strokeWidth={2.5} />
+
                             <Text className="ml-2 text-white font-black text-sm tracking-wide uppercase">
-                                Pay Securely
+                                Donate Securely
                             </Text>
                         </LinearGradient>
                     </TouchableOpacity>
@@ -163,11 +166,11 @@ const UserTopProfile = ({ user, onEdit, onAddPhoto, onPayment }: any) => {
                         {/* Likes Card */}
                         <VStack className="flex-1 p-5 rounded-[32px] bg-indigo-50/50 border border-indigo-100 items-center relative">
                             <TouchableOpacity className='items-center ' onPress={() => {
-                                if (summary?.is_subscribed) {
+                                if (summary?.isContributed) {
                                     navigation.navigate('SummryListView', { filter: 'Likes' });
                                 } else {
 
-                                    onPayment(summary?.subscription_amount ?? 0);
+                                    onContribution(summary?.contributionAmount ?? 0);
                                 }
                             }}>
                                 <Center className="w-10 h-10 rounded-2xl bg-indigo-100 mb-2">
@@ -181,10 +184,10 @@ const UserTopProfile = ({ user, onEdit, onAddPhoto, onPayment }: any) => {
                         {/* Views Card */}
                         <VStack className="flex-1 p-5 rounded-[32px] bg-emerald-50/50 border border-emerald-100 items-center relative">
                             <TouchableOpacity className='items-center ' onPress={() => {
-                                if (summary?.is_subscribed) {
+                                if (summary?.isContributed) {
                                     navigation.navigate('SummryListView', { filter: 'Views' });
                                 } else {
-                                    onPayment(summary?.subscription_amount ?? 0);
+                                    onContribution(summary?.contributionAmount ?? 0);
                                 }
                             }}>
                                 <Center className="w-10 h-10 rounded-2xl bg-emerald-100 mb-2">
@@ -201,10 +204,10 @@ const UserTopProfile = ({ user, onEdit, onAddPhoto, onPayment }: any) => {
                         {/* Accepted Card */}
                         <VStack className="flex-1 p-5 rounded-[32px] bg-purple-50/50 border border-purple-100 items-center">
                             <TouchableOpacity className='items-center ' onPress={() => {
-                                if (summary?.is_subscribed) {
+                                if (summary?.isContributed) {
                                     navigation.navigate('SummryListView', { filter: 'Accepted' });
                                 } else {
-                                    onPayment(summary?.subscription_amount ?? 0);
+                                    onContribution(summary?.contributionAmount ?? 0);
                                 }
                             }}>
                                 <Center className="w-10 h-10 rounded-2xl bg-purple-100 mb-2 shadow-sm shadow-purple-200">
@@ -218,10 +221,15 @@ const UserTopProfile = ({ user, onEdit, onAddPhoto, onPayment }: any) => {
                         {/* Requests Card */}
                         <VStack className="flex-1 p-5 rounded-[32px] bg-rose-50/50 border border-rose-100 items-center relative">
                             <TouchableOpacity className='items-center ' onPress={() => {
-                                if (summary?.is_subscribed) {
+                                if (summary?.isContributed) {
                                     navigation.navigate('SummryListView', { filter: 'Requests' });
                                 } else {
-                                    onPayment(summary?.subscription_amount ?? 0);
+                                    let cont = summary?.contributionAmount ?? 0;
+                                    if (cont == 0) {
+                                        showToast("Service Unavailable", "Check your admin", "error");
+
+                                    }
+                                    else onContribution(summary?.contributionAmount ?? 0);
                                 }
                             }}>
                                 <Center className="w-10 h-10 rounded-2xl bg-rose-100 mb-2">

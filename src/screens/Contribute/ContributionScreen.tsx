@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { Crown, ShieldCheck } from 'lucide-react-native';
+import { Crown, HeartHandshake, ShieldCheck } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const { width } = Dimensions.get('window');
 
-const PremiumUnlockScreen = ({ navigation, onPay, values }: any) => {
+const ContributionScreen = ({ navigation, onPay, values }: any) => {
     const { totalAmount, customerName } = values; // Data passed from the list
 
     return (
@@ -28,16 +28,17 @@ const PremiumUnlockScreen = ({ navigation, onPay, values }: any) => {
                     {/* 2. GLASS CARD */}
                     <View style={styles.glassCard}>
 
-                        {/* Crown Icon Plate */}
+                        {/* Change: Replaced Crown with HeartHandshake or Users for community feel */}
                         <View style={styles.iconPlate}>
-                            <Crown size={38} color="#059669" strokeWidth={2.5} />
+                            <HeartHandshake size={38} color="#059669" strokeWidth={2.5} />
                         </View>
 
-                        <Text style={styles.title}>Unlock Matches</Text>
+                        {/* Change: Replaced "Unlock Matches" with Community Support */}
+                        <Text style={styles.title}>Community Support</Text>
 
-                        {/* Change: Added paddingHorizontal for cleaner right/left spacing */}
+                        {/* Change: Replaced commercial subscription wording with maintenance donation wording */}
                         <Text style={styles.description}>
-                            You need an active subscription to view your matches and detailed insights.
+                            Please contribute a voluntary maintenance donation to support our church platform's server costs and ongoing upkeep.
                         </Text>
 
                         {/* Button and Security footer grouped for easier spacing */}
@@ -53,13 +54,14 @@ const PremiumUnlockScreen = ({ navigation, onPay, values }: any) => {
                                     end={{ x: 1, y: 0 }}
                                     style={styles.gradientButton}
                                 >
-                                    <Text style={styles.buttonText}>ACTIVATE NOW</Text>
+                                    {/* Change: Replaced commercial "ACTIVATE NOW" with donation text */}
+                                    <Text style={styles.buttonText}>CONTRIBUTE NOW</Text>
                                 </LinearGradient>
                             </TouchableOpacity>
 
                             <View style={styles.securityFooter}>
                                 <ShieldCheck size={14} color="#64748b" />
-                                <Text style={styles.securityText}>SECURE 256-BIT PAYMENT</Text>
+                                <Text style={styles.securityText}>SECURE RAZORPAY GATEWAY</Text>
                             </View>
                         </View>
                     </View>
@@ -188,4 +190,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default PremiumUnlockScreen;
+export default ContributionScreen;

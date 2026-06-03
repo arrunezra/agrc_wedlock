@@ -3,7 +3,7 @@ import { TouchableHighlight, Text, Alert, View, ActivityIndicator, TouchableOpac
 import RazorpayCheckout from 'react-native-razorpay';
 import LoadingScreen from '../common/SuccessScreen';
 import razorpayServices from '@/src/services/RazorpayServices';
-import { BarChart3, CheckCircle2, ChevronLeft, CreditCard, Crown, Info, MessageSquare, ShieldCheck, Zap } from 'lucide-react-native';
+import { BarChart3, CheckCircle2, ChevronLeft, CreditCard, Crown, Heart, Info, MessageSquare, ShieldCheck, Zap } from 'lucide-react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { SuccessOverlay } from '../common/SuccessOverlay';
@@ -11,7 +11,9 @@ import { Screen } from 'react-native-screens';
 import { useAppToast } from '@/src/context/ToastContext';
 import { rezor_test_key } from '@/src/utils/environment';
 import { LookupContext } from '@/src/context/LookupContext';
-const CheckoutScreen = ({ route, navigation }: any) => {
+import { Box, Card, HStack, VStack } from '../component/GluestackUI';
+import { useAuth } from '@/src/context/AuthContext';
+const CommunitySupportScreen = ({ route, navigation }: any) => {
     const { totalAmount, customerName, userid, email, phoneNo } = route.params;
     const { showToast } = useAppToast();
     const { lookups } = useContext(LookupContext);
@@ -21,35 +23,46 @@ const CheckoutScreen = ({ route, navigation }: any) => {
     const [showSuccess, setShowSuccess] = useState(false);
     const isMounted = useRef(true);
 
+    const { logout } = useAuth();
+
     useEffect(() => {
         isMounted.current = true;
+
         const prepareOrder = async () => {
             try {
                 const response = await razorpayServices.getOrderId({
                     amount: totalAmount,
-                    user_id: userid // Always pass the ID for server-side verification - means profile id
+                    user_id: userid
                 });
-
+                console.log('response', response);
                 if (isMounted.current) {
                     if (response.success) {
                         setOrder_id(response.order_id);
                     } else {
-                        showToast("Connection Issue", `Could not initialize secure payment.`, "error");
+                        showToast("Connection Issue", `Could not initialize secure contribution.`, "error");
                         navigation.goBack();
                     }
                 }
-            } catch (err) {
+            } catch (err: any) {
+                console.log('response err', err);
+
                 if (isMounted.current) {
-                    showToast("Connection Issue", `Server is unreachable.`, "error");
-                    navigation.goBack();
+                    if (err.response?.status === 401) {
+                        showToast("Session Expired", "Your session has timed out. Logging out...", "error");
+                        await logout(); // Safe context fallback
+                    } else {
+                        showToast("Connection Issue", `Server is unreachable.`, "error");
+                        navigation.goBack();
+                    }
                 }
             }
         };
+
         prepareOrder();
         return () => { isMounted.current = false; };
     }, [totalAmount]);
 
-    const handlePayment = () => {
+    const handleContribution = () => {
         if (!order_id) return;
 
         setIsProcessing(true);
@@ -73,7 +86,7 @@ const CheckoutScreen = ({ route, navigation }: any) => {
         RazorpayCheckout.open(options)
             .then(async (data: any) => {
                 // Verify with backend
-                const verify = await razorpayServices.verifyPayment({
+                const verify = await razorpayServices.verifyContributtion({
                     razorpay_order_id: data.razorpay_order_id,
                     razorpay_payment_id: data.razorpay_payment_id,
                     razorpay_signature: data.razorpay_signature,
@@ -81,6 +94,12 @@ const CheckoutScreen = ({ route, navigation }: any) => {
                 });
 
                 if (verify.success) {
+                    console.log('verify', verify);
+                    navigation.navigate('CommunitySupport', {
+                        contribution: Math.round(totalAmount ?? 0),
+                        contributionId: order_id
+                    })
+
                     setShowSuccess(true);
                     setTimeout(() => {
                         setShowSuccess(false);
@@ -97,11 +116,11 @@ const CheckoutScreen = ({ route, navigation }: any) => {
                         });
                     }, 4000);
                 } else {
-                    showToast("Verification Failed", `Payment was made but could not be verified.`, "error");
+                    showToast("Verification Failed", `Contribution was made but could not be verified.`, "error");
                 }
             })
             .catch((error: any) => {
-                console.log('Payment Cancelled');
+                console.log('Contribution Cancelled');
             })
             .finally(() => setIsProcessing(false));
     };
@@ -119,7 +138,8 @@ const CheckoutScreen = ({ route, navigation }: any) => {
                             <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
                                 <ChevronLeft size={20} color="white" />
                             </TouchableOpacity>
-                            <Text style={styles.headerTitle}>Secure Checkout</Text>
+                            {/* Change: Safer Header title */}
+                            <Text style={styles.headerTitle}>Support Upkeep</Text>
                             <View style={{ width: 40 }} />
                         </View>
 
@@ -127,13 +147,13 @@ const CheckoutScreen = ({ route, navigation }: any) => {
                             {/* THE LAYERED GLASS CARD */}
                             <View style={styles.glassWrapper}>
                                 <View style={styles.mainGlassCard}>
-                                    <Text style={styles.premiumTitle}>Premium Access</Text>
-                                    <Text style={styles.premiumSubtitle}>Unlock & Secure Payment</Text>
+                                    <Text style={styles.premiumTitle}>Community Support</Text>
+                                    <Text style={styles.premiumSubtitle}>Voluntary Maintenance Donation</Text>
 
                                     {/* Amount Header */}
                                     <View style={styles.amountContainer}>
                                         <View style={styles.zapIcon}>
-                                            <Zap size={22} color="#2dd4bf" fill="#2dd4bf" />
+                                            <Heart size={20} color="#2dd4bf" fill="#2dd4bf" />
                                         </View>
                                         <View style={{ marginLeft: 12 }}>
                                             <Text style={styles.amountLabel}>AMOUNT</Text>
@@ -142,25 +162,49 @@ const CheckoutScreen = ({ route, navigation }: any) => {
                                     </View>
 
 
+                                    <Card className="p-5 rounded-2xl bg-white shadow-sm border border-background-100 m-4">
+                                        <VStack className="gap-4">
 
-                                    {/* Payment Summary Box (Inner White Card) */}
-                                    <View style={styles.summaryCard}>
-                                        <Text style={styles.summaryHeader}>Payment Summary</Text>
+                                            {/* Header */}
+                                            <Text className="text-lg font-bold text-typography-900 mb-1">
+                                                Contribution Summary
+                                            </Text>
 
-                                        <View style={styles.summaryRow}>
-                                            <Text style={styles.summaryLabel}>Premium Service</Text>
-                                            <Text style={styles.summaryValue}>: ₹{totalAmount}</Text>
-                                        </View>
-                                        <View style={styles.summaryRow}>
-                                            <Text style={styles.summaryLabel}>Platform Fee</Text>
-                                            <Text style={styles.summaryValue}>: ₹0.00</Text>
-                                        </View>
-                                        <View style={styles.summaryDivider} />
-                                        <View style={styles.summaryRow}>
-                                            <Text style={styles.totalLabel}>Total Amount:</Text>
-                                            <Text style={styles.totalValue}>₹{totalAmount}</Text>
-                                        </View>
-                                    </View>
+                                            {/* Table Row 1: App Maintenance */}
+                                            <HStack className="justify-between items-center">
+                                                <Text className="text-sm font-medium text-typography-600">
+                                                    App Maintenance
+                                                </Text>
+                                                <Text className="text-sm font-semibold text-typography-900">
+                                                    ₹{totalAmount}
+                                                </Text>
+                                            </HStack>
+
+                                            {/* Table Row 2: Platform Fee */}
+                                            <HStack className="justify-between items-center">
+                                                <Text className="text-sm font-medium text-typography-600">
+                                                    Platform Fee
+                                                </Text>
+                                                <Text className="text-sm font-semibold text-success-700">
+                                                    ₹0
+                                                </Text>
+                                            </HStack>
+
+                                            {/* Table Divider Line */}
+                                            <Box className="h-[1px] bg-background-200 w-full my-1" />
+
+                                            {/* Table Row 3: Total Footer */}
+                                            <HStack className="justify-between items-center">
+                                                <Text className="text-base font-bold text-typography-900">
+                                                    Total Amount:
+                                                </Text>
+                                                <Text className="text-lg font-bold text-primary-700">
+                                                    ₹{totalAmount}
+                                                </Text>
+                                            </HStack>
+
+                                        </VStack>
+                                    </Card>
                                 </View>
                             </View>
                         </ScrollView>
@@ -169,18 +213,20 @@ const CheckoutScreen = ({ route, navigation }: any) => {
                         <View style={styles.bottomSection}>
                             <View style={styles.securityInfo}>
                                 <ShieldCheck size={16} color="#10b981" />
-                                <Text style={styles.securityText}>verified transaction</Text>
+                                <Text style={styles.securityText}>verified gateway</Text>
                                 <View style={styles.badge100}><Text style={styles.badgeText}>100% SECURE</Text></View>
                             </View>
 
                             <TouchableOpacity
                                 style={styles.payButton}
                                 activeOpacity={0.8}
-                                onPress={handlePayment}
+                                onPress={handleContribution}
                                 disabled={!order_id || isProcessing}
                             >
-                                <CreditCard size={20} color="white" style={{ marginRight: 10 }} />
-                                <Text style={styles.payButtonText}>PAY SECURELY</Text>
+                                {/* Change: Replaced CreditCard icon with Heart for donation context */}
+                                <Heart size={20} color="white" style={{ marginRight: 10 }} />
+                                {/* Change: Replaced PAY SECURELY with DONATE SECURELY */}
+                                <Text style={styles.payButtonText}>DONATE SECURELY</Text>
                             </TouchableOpacity>
                         </View>
                     </SafeAreaView>
@@ -188,8 +234,8 @@ const CheckoutScreen = ({ route, navigation }: any) => {
             )}
             <SuccessOverlay
                 isVisible={showSuccess}
-                message={"You’re good to go!"}
-                redirectMessage={`Thanks, ${customerName}! Your payment was successful. We’re starting on your request right away.`}
+                message={"Thank You!"} // Change: Replaced commercial confirmation phrasing
+                redirectMessage={`Thanks, ${customerName}! Your maintenance contribution was successfully recorded. We appreciate your support for the community.`}
             />
 
         </View>
@@ -259,4 +305,4 @@ const styles = StyleSheet.create({
     payButtonText: { color: 'white', fontSize: 16, fontWeight: '900', letterSpacing: 1 }
 });
 
-export default CheckoutScreen;
+export default CommunitySupportScreen;

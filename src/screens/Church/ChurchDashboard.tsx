@@ -167,7 +167,7 @@ export default function ChurchDashboard({ navigation }: any) {
                         })
                     }
                     }
-                    className="bg-primary-50 px-4 py-2 rounded-full border border-primary-100 active:scale-95"
+                    className="bg-primary-50 px-4 py-2 rounded-full border border-primary-100 "
                 >
                     <HStack space="xs" className="items-center">
                         <Text size="xs" className="text-primary-700 font-black ">View All</Text>
@@ -278,7 +278,7 @@ export default function ChurchDashboard({ navigation }: any) {
                                                 {/* 3. QUICK UTILITY ICONS */}
                                                 <HStack space="xs">
                                                     <TouchableOpacity
-                                                        className="w-10 h-10 rounded-full bg-cyan-50 items-center justify-center border border-cyan-100 active:bg-cyan-100"
+                                                        className="w-10 h-10 rounded-full bg-cyan-50 items-center justify-center border border-cyan-100  "
                                                         onPress={() => Linking.openURL(`tel:${item.church_phone}`)}
                                                     >
                                                         <Icon as={Phone} size="sm" className="text-cyan-600" />
@@ -312,7 +312,7 @@ export default function ChurchDashboard({ navigation }: any) {
                                                 {/* The New Action Button */}
                                                 <Button
                                                     onPress={() => { navigation.navigate("Main", { screen: 'ChurchRegistration', params: { profile: item } }); }}
-                                                    className="h-11 px-6 rounded-2xl bg-primary-600 shadow-lg shadow-primary-200 active:scale-95 transition-all"
+                                                    className="h-11 px-6 rounded-2xl bg-primary-600 shadow-lg shadow-primary-200  "
                                                     style={{
                                                         elevation: 8,
                                                         shadowColor: '#1c916aff',

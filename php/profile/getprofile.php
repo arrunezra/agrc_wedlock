@@ -161,8 +161,7 @@ try {
     $is_valid = false;
     if ($subDetails && $subDetails['has_active_subscription'] == 1) {
         // Don't delete the code
-        // // 2026 Logic: Check if the payment was made in the last 30 days
-        // $last_pay = new DateTime($subDetails['last_payment_date']);
+         // $last_pay = new DateTime($subDetails['last_payment_date']);
         // $now = new DateTime();
         // $interval = $last_pay->diff($now);
         

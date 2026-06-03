@@ -103,7 +103,7 @@ export default function CustomDrawerContent(props: any) {
                                             </Box>
                                             <Pressable
                                                 onPress={() => navigation.navigate('Main', { screen: user?.role === 'member' ? 'ShowProfileGallery' : 'ProfileUpload' })}
-                                                className="absolute -bottom-1 -right-1 bg-green-100 p-2 rounded-2xl shadow-lg border border-slate-100 active:bg-slate-50"
+                                                className="absolute -bottom-1 -right-1 bg-green-100 p-2 rounded-2xl shadow-lg border border-slate-100  "
                                             >
                                                 <Icon as={Camera} size="sm" className="text-slate-600" />
                                             </Pressable>
@@ -151,7 +151,7 @@ export default function CustomDrawerContent(props: any) {
 
                         {user?.role === 'member' && (
                             <Pressable
-                                className="mx-2 p-3 rounded-2xl active:bg-white/10"
+                                className="mx-2 p-3 rounded-2xl   "
                                 onPress={() => navigation.navigate('Main', { screen: 'MemberSettings' })}
                             >
                                 <HStack className="items-center justify-between">
@@ -170,7 +170,7 @@ export default function CustomDrawerContent(props: any) {
                     {/* BOTTOM SECTION: Branding Card with Logout Below It */}
                     <Box className="pb-10 mt-auto">
                         <Pressable
-                            className="mx-8 mt-2 p-3 mb-4 rounded-2xl active:bg-red-500/20 bg-white/5 border border-white/10"
+                            className="mx-8 mt-2 p-3 mb-4 rounded-2xl   bg-white/5 border border-white/10"
                             onPress={() => logout()}
                         >
                             <HStack className="items-center justify-between">

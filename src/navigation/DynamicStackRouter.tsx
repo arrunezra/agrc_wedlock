@@ -4,7 +4,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { HeartIcon, HomeIcon, Icon, LockIcon, MessageCircleIcon } from "../components/common/IconUI";
 import AdminDashboard from "../screens/Admin/AdminDashboard";
 import ProfileSummary from "../screens/profile/ProfileSummary";
-import InboxScreen from "../screens/profile/InboxScreen";
 import StaffDashboard from "../screens/staff/StaffDashboard";
 import StaffRegistration from "../screens/staff/StaffRegistration";
 import StaffDetailsScreen from "../screens/staff/StaffDetailScreen";
@@ -15,9 +14,6 @@ import MatchesScreen from "../screens/profile/MatchesScreen";
 import ViewStaffinforamtion from "../screens/staff/ViewStaffinforamtion";
 import StaffSummaryView from "../screens/staff/SummaryView";
 import PartnerPreferences from "../screens/profile/PartnerPreferences";
-import MyPhotos from "../screens/profile/MyPhotos";
-import AcceptedScreen from "../screens/profile/AcceptedScreen";
-import ReceivedScreen from "../screens/profile/ReceivedScreen";
 import ChurchDashboard from "../screens/Church/ChurchDashboard";
 import ChurchSummary from "../screens/Church/ChurchSummary";
 import BaptismScreen from "../screens/Document/BaptismScreen";
@@ -29,7 +25,7 @@ import UserDocumentUpload from "../screens/members/UserDocumentUpload";
 import ShowProfileGalleryScreen from "../screens/profile/ShowProfileGalleryScreen";
 import FavoritesScreen from "../screens/favorites/FavoritesScreen";
 import { useFocusEffect } from "@react-navigation/native";
-import { Alert, BackHandler, Platform, ToastAndroid } from "react-native";
+import { BackHandler, Platform, ToastAndroid } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import BlockedUsersScreen from "../screens/profile/BlockedUsersScreen";
 import SettingsScreen from "../screens/settings/SettingsScreen";
@@ -39,13 +35,13 @@ import DocumentSummary from "../screens/members/DocumentSummary";
 import DocumentViewer from "../screens/common/DocumentViewer";
 import StaffInboxScreen from "../screens/staff/StaffInboxScreen";
 import StaffDocumentSummary from "../screens/staff/StaffDocumentSummary";
-import CheckoutScreen from "../screens/Razorpay/CheckoutScreen";
-import PremiumUnlockScreen from "../screens/profile/PremiumUnlockScreen";
 import StaffProfileSummaryView from "../screens/profile/StaffProfileSummaryView";
-import PaymentScreen from "../screens/profile/InboxScreen";
-import PaymentHistoryScreen from "../screens/payment/PaymentHistoryScreen";
-import { CreditCard } from "lucide-react-native";
+import { HistoryIcon, UserIcon } from "lucide-react-native";
 import ProfileUploadScreen from "../screens/Admin/ProfileUploadScreen";
+import ContributeHistoryScreen from "../screens/Contribute/ContributeHistoryScreen";
+import ContributionScreen from "../screens/Contribute/ContributionScreen";
+import CommunitySupportScreen from "../screens/Razorpay/CommunitySupportScreen";
+import ContributionSuccessScreen from "../screens/Contribute/ContributionSuccessScreen";
 
 
 const Stack = createNativeStackNavigator();
@@ -79,18 +75,18 @@ export const ROLE_DRAWER_CONFIG: Record<string, any[]> = {
 const TAB_CONFIG = {
   admin: [
     { name: "Dashboard", component: AdminDashboard, icon: HomeIcon, title: "Home" },
-    { name: "Profile", component: ProfileSummary, icon: HeartIcon, title: "Profile" },
-    { name: "Payment", component: PaymentHistoryScreen, icon: CreditCard, title: "Payment Details" },
+    { name: "Profile", component: ProfileSummary, icon: UserIcon, title: "Profile" },
+    { name: "ContributeHistory", component: ContributeHistoryScreen, icon: HistoryIcon, title: "Contribute Details" },
   ],
   super_admin: [
     { name: "Dashboard", component: AdminDashboard, icon: HomeIcon, title: "Admin Home" },
-    { name: "Profile", component: ProfileSummary, icon: HeartIcon, title: "Profile" },
-    { name: "Payment", component: PaymentHistoryScreen, icon: CreditCard, title: "Payment Details" },
+    { name: "Profile", component: ProfileSummary, icon: UserIcon, title: "Profile" },
+    { name: "ContributeHistory", component: ContributeHistoryScreen, icon: HistoryIcon, title: "Contribute Details" },
   ],
   root_admin: [
     { name: "Dashboard", component: AdminDashboard, icon: HomeIcon, title: "Admin Home" },
-    { name: "Profile", component: ProfileSummary, icon: HeartIcon, title: "Profile" },
-    { name: "Payment", component: PaymentHistoryScreen, icon: CreditCard, title: "Payment Details" },
+    { name: "Profile", component: ProfileSummary, icon: UserIcon, title: "Profile" },
+    { name: "ContributeHistory", component: ContributeHistoryScreen, icon: HistoryIcon, title: "Contribute Details" },
   ],
   staff: [
     { name: "Home", component: StaffDashboard, icon: HomeIcon, options: { title: "Home" } },
@@ -152,9 +148,10 @@ const SHARED_STACKS = (role: string) => (
       component={DocumentViewer}
       options={{ headerShown: false }}
     />
-    <Stack.Screen name="Checkout" component={CheckoutScreen} options={{ title: 'Payment' }} />
-    <Stack.Screen name="PremiumUnlock" component={PremiumUnlockScreen} options={{ title: 'Payment' }} />
+    <Stack.Screen name="Contribute" component={ContributionScreen} options={{ title: 'Church Contribution' }} />
     <Stack.Screen name="ProfileUpload" component={ProfileUploadScreen} options={{ title: 'Profile Upload' }} />
+    <Stack.Screen name="CommunitySupport" component={CommunitySupportScreen} options={{ title: 'Community Support' }} />
+    <Stack.Screen name="Contributionsuccess" component={ContributionSuccessScreen} options={{ title: 'Contribution Details' }} />
 
 
   </Stack.Group>

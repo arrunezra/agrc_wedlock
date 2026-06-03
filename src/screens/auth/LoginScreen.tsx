@@ -4,7 +4,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useKeyboardAnimation } from 'react-native-keyboard-controller';
 
 // New Imports (Points to your local UI components) 
-
 import { Image, Link, LinkText, ButtonSpinner, Center, ScrollView, Box, VStack, Input, InputField, Button, ButtonText, Text, FormControl, FormControlError, FormControlErrorText, FormControlLabel, FormControlLabelText, HStack, Checkbox, CheckboxIndicator, CheckboxIcon, CheckboxLabel, InputSlot, InputIcon } from '@/src/components/common/GluestackUI';
 
 import authService from '@/src/services/authService';
@@ -23,6 +22,7 @@ export default function LoginScreen({ navigation }: any) {
   const [loading, setLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
   const validateForm = () => {
     const newErrors: any = {};
 
@@ -52,30 +52,25 @@ export default function LoginScreen({ navigation }: any) {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-  // 
+
   const handleLogin = async () => {
     if (!validateForm()) return;
     setLoading(true);
     try {
-      // Ensure key names match your PHP (PhoneNumber vs email)
       const response = await login({
         phoneNumber: email,
         password: password,
         rememberMe: rememberMe
       });
 
-      // Based on our optimized PHP code, we check for access_token
       if (response.success) {
-        // Save both tokens to AsyncStorage
         console.log("Login successful");
-
         // navigation.replace('Home');
       } else {
         setErrors((pre: any) => ({
           ...pre,
           password: "Invalid phone number password"
         }));
-
       }
     } catch (error: any) {
       console.log(error);
@@ -85,23 +80,24 @@ export default function LoginScreen({ navigation }: any) {
       setLoading(false);
     }
   };
+
   const handleState = () => {
     setShowPassword((showState) => !showState);
   };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       style={{ flex: 1 }}
     >
       <LinearGradient
-        colors={['#defbf1ff', '#ffffffff', '#1e473aff']} // Soft white down to light brand-green tint
+        colors={['#defbf1ff', '#ffffffff', '#1e473aff']}
         style={{ flex: 1 }}
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 1 }}
       >
-        {/* contentContainerStyle="flex-grow" allows us to push the footer to the bottom */}
         <ScrollView
-          className="flex-1 bg-transparent" // Set to transparent so gradient shows through
+          className="flex-1 bg-transparent"
           keyboardShouldPersistTaps="handled"
           contentContainerStyle={{ flexGrow: 1 }}
         >
@@ -142,9 +138,14 @@ export default function LoginScreen({ navigation }: any) {
                         value={email}
                         onChangeText={setEmail}
                         autoCapitalize="none"
-                        // "default" ensures they can switch back and forth between numbers & letters easily
                         keyboardType="default"
                         className="text-typography-900 text-base px-3"
+                        // FIX: Safeguards the focus cycle handler dynamically inside core.ts
+                        onFocus={(e: any) => {
+                          if (e && typeof e.persist === 'function') {
+                            e.persist();
+                          }
+                        }}
                       />
                     </Input>
                     <AnimateError isVisible={errors.email}>{errors.email}</AnimateError>
@@ -165,6 +166,12 @@ export default function LoginScreen({ navigation }: any) {
                         onChangeText={setPassword}
                         autoCapitalize="none"
                         className="flex-1 text-typography-900 text-base px-3"
+                        // FIX: Safeguards the focus cycle handler dynamically inside core.ts
+                        onFocus={(e: any) => {
+                          if (e && typeof e.persist === 'function') {
+                            e.persist();
+                          }
+                        }}
                       />
                       <InputSlot className="pr-4" onPress={handleState}>
                         <InputIcon as={showPassword ? Eye : EyeOff} className="text-typography-400" size="xl" />
@@ -200,7 +207,7 @@ export default function LoginScreen({ navigation }: any) {
                   {/* Sign In Button */}
                   <Button
                     size='xl'
-                    className="mt-6 h-14 rounded-xl bg-primary-700 active:bg-primary-800 shadow-sm"
+                    className="mt-6 h-14 rounded-xl bg-primary-700  shadow-sm"
                     onPress={handleLogin}
                     isDisabled={loading}
                   >
@@ -242,7 +249,6 @@ export default function LoginScreen({ navigation }: any) {
                       Privacy Policy
                     </LinkText>
                   </Link>
-
                 </Pressable>
               </HStack>
             </VStack>
@@ -253,5 +259,4 @@ export default function LoginScreen({ navigation }: any) {
       </LinearGradient>
     </KeyboardAvoidingView>
   );
-
 }

@@ -23,19 +23,19 @@ const getDefaultFromDate = () => {
 };
 const getDefaultToDate = () => new Date();
 
-interface Transaction {
+interface contributionDetails {
     id: string;
     church_name: string;
     amount: number;
     status: string;
-    payment_method: string;
+    contribute_method: string;
     created_at: string;
 }
 
-const PaymentHistoryScreen = ({ navigation }: any) => {
+const ContributeHistoryScreen = ({ navigation }: any) => {
     const { user } = useAuth();
 
-    const [transactions, setTransactions] = useState<Transaction[]>([]);
+    const [contributionDetails, setContributionDetails] = useState<contributionDetails[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isRefreshing, setIsRefreshing] = useState(false);
     const [churches, setChurches] = useState<any>([]);
@@ -108,14 +108,14 @@ const PaymentHistoryScreen = ({ navigation }: any) => {
                 limit: LIMIT
             };
             //console.log('bodyPayload', bodyPayload);
-            const response = await AdminServices.getPaymentsHistory(bodyPayload);
+            const response = await AdminServices.getContributtionHistory(bodyPayload);
 
             if (response.success) {
                 setTotalRecords(response.total_records || 0);
                 if (resetData) {
                     setOverallAmount(Number(response.total_amount) || 0);
                 }
-                setTransactions(prev => resetData ? response.data : [...prev, ...response.data]);
+                setContributionDetails(prev => resetData ? response.data : [...prev, ...response.data]);
                 setPage(targetPage);
             } else {
                 throw new Error(response.message || "Failed data verification validation");
@@ -184,7 +184,7 @@ const PaymentHistoryScreen = ({ navigation }: any) => {
     };
 
     const handleLoadMore = () => {
-        if (!isLoadingMore && transactions.length < totalRecords) {
+        if (!isLoadingMore && contributionDetails.length < totalRecords) {
             fetchFilteredLedger(page + 1, false);
         }
     };
@@ -214,13 +214,13 @@ const PaymentHistoryScreen = ({ navigation }: any) => {
             </Box>
         );
     };
-    const renderTransactionItem = ({ item }: { item: Transaction }) => {
+    const renderContributionDetailsItem = ({ item }: { item: contributionDetails }) => {
         const isCompleted = item.status.toLowerCase() === 'completed';
         return (
             <MotiView from={{ opacity: 0, translateY: 15 }} animate={{ opacity: 1, translateY: 0 }} className="bg-white p-4 mx-4 mb-3 rounded-[24px] border border-slate-100 shadow-sm flex-row justify-between items-center">
                 <HStack space="md" className="items-center flex-1">
                     <Box className="w-12 h-12 rounded-2xl bg-slate-50 items-center justify-center border border-slate-100">
-                        <Icon as={item.payment_method === 'UPI' ? Landmark : CreditCard} size="md" className="text-slate-600" />
+                        <Icon as={item.contribute_method === 'UPI' ? Landmark : CreditCard} size="md" className="text-slate-600" />
                     </Box>
                     <VStack className="flex-1">
                         <Text className="text-slate-900 font-bold text-sm" numberOfLines={1}>{item.church_name}</Text>
@@ -240,10 +240,9 @@ const PaymentHistoryScreen = ({ navigation }: any) => {
     return (
         <VStack className="flex-1 bg-white">
             <RNStatusBar barStyle="light-content" translucent backgroundColor="transparent" />
-            {/* <HeaderSession title="Payment Ledger" theme="midnight" leftIconType="back" /> */}
 
             <HeaderSession
-                title="Payment summary"
+                title="Contribution Summary"
                 theme="emerald"
                 showBackButton={false}
                 onBackPress={() => navigation.goBack()}
@@ -349,9 +348,9 @@ const PaymentHistoryScreen = ({ navigation }: any) => {
                 <View className="flex-1 justify-center items-center"><ActivityIndicator size="large" color="#0f172a" /></View>
             ) : (
                 <FlatList
-                    data={transactions}
+                    data={contributionDetails}
                     keyExtractor={(item, index) => `${item.id}-${index}`}
-                    renderItem={renderTransactionItem}
+                    renderItem={renderContributionDetailsItem}
                     contentContainerStyle={{ paddingTop: 15, paddingBottom: 40 }}
                     showsVerticalScrollIndicator={false}
                     onRefresh={handleRefresh}
@@ -361,7 +360,7 @@ const PaymentHistoryScreen = ({ navigation }: any) => {
                     ListFooterComponent={renderFooter}
                     ListEmptyComponent={
                         <VStack className="items-center justify-center py-20 px-10">
-                            <Text className="text-slate-400 font-bold text-sm text-center">No transactions verified within this selection range.</Text>
+                            <Text className="text-slate-400 font-bold text-sm text-center">No contribution verified within this selection range.</Text>
                         </VStack>
                     }
                 />
@@ -369,4 +368,4 @@ const PaymentHistoryScreen = ({ navigation }: any) => {
         </VStack>
     );
 };
-export default PaymentHistoryScreen;
+export default ContributeHistoryScreen;

@@ -19,17 +19,14 @@ const ProfileHomeScreen = () => {
                         user={user}
                         onAddPhoto={() => navigation.navigate('ShowProfileGallery')}
                         onEdit={() => navigation.navigate('ProfileEdit')}
-                        onPayment={(sub_amt: any) => {
-
-                            //console.log('sub_amt', sub_amt)
-
-
-                            // navigation.navigate('Checkout', {
-                            //     totalAmount: sub_amt, // ₹50.00 in paise 
-                            //     customerName: user?.firstName,
-                            //     email: user?.email,
-                            //     phoneNo: user?.phone
-                            // });
+                        onContribution={(sub_amt: any) => {
+                            navigation.navigate('CommunitySupport', {
+                                totalAmount: sub_amt ?? 0,
+                                customerName: user?.firstName,
+                                email: user?.email,
+                                phoneNo: user?.phone,
+                                userid: user?.profile_id
+                            })
                         }}
                     />
                 );

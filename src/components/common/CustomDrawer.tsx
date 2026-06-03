@@ -73,7 +73,8 @@ const CustomDrawer = (props: any) => {
             <Pressable
               key={item.route}
               onPress={() => navigation.navigate(item.route)}
-              className="py-3 px-3 rounded-xl active:bg-primary-50 transition-all"
+
+              className="py-3 px-3 rounded-xl "
             >
               <HStack className="items-center gap-4">
                 <Icon as={item.icon} className="text-typography-500" size="md" />
@@ -91,7 +92,7 @@ const CustomDrawer = (props: any) => {
         <VStack className="px-4">
           <Pressable
             onPress={() => { }}
-            className="py-3 px-3 rounded-xl active:bg-primary-50"
+            className="py-3 px-3 rounded-xl  "
           >
             <HStack className="items-center gap-4">
               <Icon as={HelpCircleIcon} className="text-typography-500" size="md" />
@@ -107,7 +108,7 @@ const CustomDrawer = (props: any) => {
       <Box className="border-t border-outline-100 p-4">
         <Pressable
           onPress={handleLogout}
-          className="py-4 px-4 rounded-xl active:bg-error-50"
+          className="py-4 px-4 rounded-xl "
         >
           <HStack className="items-center gap-4">
             <Icon as={LogOutIcon} className="text-error-600" size="md" />

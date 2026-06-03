@@ -9,6 +9,6 @@ export const GIRL_DEFAULT_PROFILE = require('../assets/images/girl_default_profi
 
 export const API_BASE_URL_DEV_Profiles_assets_Images = 'https://agrcdev.jeasuns.com/agrcdev/php/uploads/assets';
 
-export const rezor_test_key = 'rzp_test_SmqwhjEZRAizAi'
+export const rezor_test_key = 'rzp_test_SvHNiiOWWsBX0P'
 
 

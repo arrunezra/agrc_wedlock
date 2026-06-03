@@ -291,9 +291,6 @@ export default function ChurchSummary({ route, navigation }: any) {
     return (
         <Box className="flex-1 bg-background-50">
             <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
-            {/* <HeaderSession title="Payment Ledger" theme="midnight" leftIconType="back" /> */}
-
-
             <HeaderSession
                 title="Church Summary"
                 theme="emerald"
@@ -310,7 +307,7 @@ export default function ChurchSummary({ route, navigation }: any) {
                     <HStack space="sm" className="items-center">
                         <Input
                             variant="rounded"
-                            className="flex-1 h-12 bg-slate- border-0 shadow-sm focus:border-cyan-500 transition-all"
+                            className="flex-1 h-12 bg-slate- border-0 shadow-sm focus:border-cyan-500"
                         >
                             <InputSlot className="pl-4">
                                 <Icon as={SearchIcon} className="text-cyan-600" size="sm" />
@@ -364,7 +361,7 @@ export default function ChurchSummary({ route, navigation }: any) {
                                                 active_status: filter // Overwrites previous status
                                             });
                                         }}
-                                        className={`px-5 py-2.5 rounded-2xl border transition-all active:scale-95 ${isActive
+                                        className={`px-5 py-2.5 rounded-2xl border  ${isActive
                                             ? 'bg-slate-900 border-slate-900 shadow-md shadow-slate-400'
                                             : 'bg-white border-slate-200 shadow-sm'
                                             }`}
@@ -435,14 +432,14 @@ export default function ChurchSummary({ route, navigation }: any) {
                                             {/* 3. QUICK UTILITY ICONS */}
                                             <HStack space="xs">
                                                 <TouchableOpacity
-                                                    className="w-10 h-10 rounded-full bg-cyan-50 items-center justify-center border border-cyan-100 active:bg-cyan-100"
+                                                    className="w-10 h-10 rounded-full bg-cyan-50 items-center justify-center border border-cyan-100  "
                                                     onPress={() => Linking.openURL(`tel:${item.church_phone}`)}
                                                 >
                                                     <Icon as={Phone} size="sm" className="text-cyan-600" />
                                                 </TouchableOpacity>
 
                                                 {item?.active_status === "Active" && <TouchableOpacity
-                                                    className="w-10 h-10 rounded-full bg-red-50 items-center justify-center border border-red-100 active:bg-red-100"
+                                                    className="w-10 h-10 rounded-full bg-red-50 items-center justify-center border border-red-100  "
                                                     onPress={() => handleDelete(item.id)}
                                                 >
                                                     <Icon as={Trash2} size="sm" className="text-red-500" />
@@ -475,7 +472,7 @@ export default function ChurchSummary({ route, navigation }: any) {
                                             {/* The New Action Button */}
                                             <Button
                                                 onPress={() => { setForm(item); navigation.navigate('ChurchRegistration', { profile: item }); }}
-                                                className="h-11 px-6 rounded-2xl bg-primary-600 shadow-lg shadow-primary-200 active:scale-95 transition-all"
+                                                className="h-11 px-6 rounded-2xl bg-primary-600 shadow-lg shadow-primary-200  "
                                                 style={{
                                                     elevation: 8,
                                                     shadowColor: '#1c916aff',
@@ -509,7 +506,7 @@ export default function ChurchSummary({ route, navigation }: any) {
 
             {/* 3. FLOATING ACTION BUTTON (Modern Pulse) */}
             {currentTab === "Active" && <Fab
-                className="bg-primary-900 bottom-8 right-8 w-16 h-16 rounded-[22px] shadow-2xl active:scale-90 transition-all"
+                className="bg-primary-900 bottom-8 right-8 w-16 h-16 rounded-[22px] shadow-2xl  "
                 style={{
                     shadowColor: "#4F46E5",
                     shadowOffset: { width: 0, height: 10 },

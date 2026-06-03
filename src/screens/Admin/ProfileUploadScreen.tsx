@@ -249,7 +249,7 @@ export const ProfileUploadScreen = ({ navigation, onUploadComplete }: any) => {
                         <HStack space="md" className="w-full px-2">
                             <TouchableOpacity
                                 onPress={handleSelectImage}
-                                className="flex-1 flex-row h-14 bg-white border border-slate-200 rounded-2xl items-center justify-center shadow-sm shadow-slate-100 active:bg-slate-50"
+                                className="flex-1 flex-row h-14 bg-white border border-slate-200 rounded-2xl items-center justify-center shadow-sm shadow-slate-100  "
                             >
                                 <Icon as={Upload} size="sm" className="text-cyan-600 mr-2" />
                                 <Text className="font-bold text-slate-700 text-sm">Gallery</Text>
@@ -257,7 +257,7 @@ export const ProfileUploadScreen = ({ navigation, onUploadComplete }: any) => {
 
                             <TouchableOpacity
                                 onPress={handleCameraCapture}
-                                className="flex-1 flex-row h-14 bg-white border border-slate-200 rounded-2xl items-center justify-center shadow-sm shadow-slate-100 active:bg-slate-50"
+                                className="flex-1 flex-row h-14 bg-white border border-slate-200 rounded-2xl items-center justify-center shadow-sm shadow-slate-100 "
                             >
                                 <Icon as={Camera} size="sm" className="text-cyan-600 mr-2" />
                                 <Text className="font-bold text-slate-700 text-sm">Take Photo</Text>

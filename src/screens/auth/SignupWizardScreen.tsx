@@ -1568,7 +1568,7 @@ export default function SignupWizardScreen() {
 
                   {/* Water Baptism Section */}
                   <VStack
-                    className={`rounded-[32px] transition-all duration-300 border ${formData.baptized ? 'bg-blue-50/30 border-blue-100 p-2' : 'bg-transparent border-transparent'
+                    className={`rounded-[32px] duration-300 border ${formData.baptized ? 'bg-blue-50/30 border-blue-100 p-2' : 'bg-transparent border-transparent'
                       }`}
                   >
                     <StatusToggle
@@ -1741,7 +1741,7 @@ export default function SignupWizardScreen() {
                   <Box className="relative">
                     <Textarea
                       size="lg"
-                      className={`h-64 p-4 rounded-3xl border-2 transition-all bg-white ${aboutText.length >= MIN_CHARS
+                      className={`h-64 p-4 rounded-3xl border-2 bg-white ${aboutText.length >= MIN_CHARS
                         ? 'border-outline-100'
                         : 'border-error-100'
                         }`}
@@ -1861,7 +1861,7 @@ const InfoItem = ({ icon: IconComp, label, value }: any) => (
 // 2026 Modern Toggle
 const StatusToggle = ({ icon: IconComp, value, iconBg, iconColor, title, desc, onToggle }: any) => (
   <HStack
-    className={`items-center justify-between p-4 rounded-[28px] border mb-3 transition-all bg-white border-emerald-100 shadow-md shadow-emerald-50 '
+    className={`items-center justify-between p-4 rounded-[28px] border mb-3   bg-white border-emerald-100 shadow-md shadow-emerald-50 '
       }`}
   >
     <HStack space="md" className="items-center">

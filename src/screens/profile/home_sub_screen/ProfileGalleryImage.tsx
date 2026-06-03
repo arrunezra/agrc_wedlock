@@ -67,7 +67,7 @@ const ProfileGalleryImage = ({ item, index, COLUMN_WIDTH, onDefault, onDelete, o
                     <>{!item.isDefault && item.isVerified ? (
                         <Pressable
                             onPress={() => handleAction('default')}
-                            className="bg-white px-3 py-1.5 rounded-full shadow-md active:bg-slate-100"
+                            className="bg-white px-3 py-1.5 rounded-full shadow-md "
                         >
                             <Text className="text-emerald-600 text-[10px] font-bold uppercase">Set Profile</Text>
                         </Pressable>
@@ -78,7 +78,7 @@ const ProfileGalleryImage = ({ item, index, COLUMN_WIDTH, onDefault, onDelete, o
                 )}
                 <Pressable
                     onPress={() => handleAction('delete')}
-                    className="bg-red-500 p-2 rounded-full shadow-md active:bg-red-600"
+                    className="bg-red-500 p-2 rounded-full shadow-md "
                 >
                     <TrashIcon size={14} color="white" />
                 </Pressable>

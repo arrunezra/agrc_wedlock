@@ -39,7 +39,7 @@ const StaffItem = ({ item, index, navigation, user }: any) => {
     >
         <Pressable
             onPress={() => navigation.navigate("Main", { screen: "ViewStaffinforamtion", params: { id: item.id } })}
-            className="mb-3 mx-4 active:scale-[0.98] transition-transform"
+            className="mb-3 mx-4 "
         >
             <LinearGradient
                 colors={['#ffffff', '#f8fafc']}
@@ -262,7 +262,7 @@ const StaffSummaryView = ({ navigation }: any) => {
                     <TouchableOpacity
                         activeOpacity={0.7}
                         onPress={() => {/* Open Filters */ }}
-                        className="w-16 h-16 bg-slate-600 rounded-3xl items-center justify-center shadow-xl active:scale-95 transition-transform"
+                        className="w-16 h-16 bg-slate-600 rounded-3xl items-center justify-center shadow-xl"
                     >
                         <Icon as={Settings2} className="text-cyan-400" size="md" />
                     </TouchableOpacity>

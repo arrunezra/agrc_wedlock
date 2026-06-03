@@ -5,7 +5,7 @@ import { BellIcon, Icon } from '@/components/ui/icon';
 
 export const HeaderNotification = ({ count, onPress }: { count: number; onPress: () => void }) => {
     return (
-        <Pressable onPress={onPress} className="mr-4 active:opacity-70">
+        <Pressable onPress={onPress} className="mr-4  ">
             <Box className="relative p-1">
                 <Icon as={BellIcon} size="xl" className="text-typography-50 " />
 

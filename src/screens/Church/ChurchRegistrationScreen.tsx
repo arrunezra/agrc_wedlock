@@ -664,7 +664,7 @@ const ChurchRegistrationScreen = ({ navigation, route }: any) => {// Mock State 
                     <Button
                         variant="outline"
                         onPress={() => navigation.goBack()}
-                        className="flex-1 h-16 rounded-2xl border-slate-200 active:bg-slate-50"
+                        className="flex-1 h-16 rounded-2xl border-slate-200 "
                     >
                         <ButtonText className="text-slate-600 font-bold uppercase tracking-tight">Cancel</ButtonText>
                     </Button>
@@ -673,7 +673,7 @@ const ChurchRegistrationScreen = ({ navigation, route }: any) => {// Mock State 
                     <Button
                         onPress={handleSave}
                         isDisabled={isSubmitting || !form?.church_name}
-                        className={`flex-[1.5] h-16 rounded-2xl border-0 shadow-lg transition-all  }`}
+                        className={`flex-[1.5] h-16 rounded-2xl border-0 shadow-lg  }`}
                     >
                         <HStack space="sm" className="items-center justify-center">
                             {isSubmitting ? (
