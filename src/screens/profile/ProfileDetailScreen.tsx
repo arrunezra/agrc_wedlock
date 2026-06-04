@@ -1,16 +1,14 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollView, Pressable, LayoutAnimation, Dimensions, FlatList, Modal, Alert, View, StyleSheet, Share, StatusBar } from 'react-native';
 import { Box, VStack, HStack, Heading, Modal as ModalGUI, Text, BadgeText, Divider, Button, ButtonText, Avatar, AvatarFallbackText, AvatarImage, Actionsheet, ActionsheetBackdrop, ActionsheetDragIndicatorWrapper, ActionsheetDragIndicator, ActionsheetContent, ActionsheetItem, ActionsheetIcon, ActionsheetItemText, Switch, ModalContent, ModalBackdrop, } from '@/src/components/common/GluestackUI';
 import { ArrowLeftRightIcon, Badge, BanIcon, BriefcaseIcon, BuildingIcon, CameraIcon, CrownIcon, FlagIcon, GraduationCapIcon, HeartIcon, HomeIcon, Icon, MapPinIcon, MoreVerticalIcon, SchoolIcon, UserIcon, UsersIcon, UtensilsIcon } from '@/src/components/common/IconUI';
 import FastImage from "@d11/react-native-fast-image";
 import { CheckCircleIcon, ChevronDownIcon, LockIcon, MailIcon, PhoneIcon, CheckIcon, CloseIcon, ArrowUpIcon, AddIcon, ChevronUpIcon, ShareIcon, } from '@/components/ui/icon';
 import Gallery from 'react-native-awesome-gallery';
-import LinearGradient from 'react-native-linear-gradient';
 import profileService from '@/src/services/profileService';
 import { ProfileSkeleton } from '@/src/components/common/ProfileSkeleton';
-import { API_BASE_URL_DEV_Profiles_Images } from '@/src/utils/environment';
 import NotFoundScreen from '../common/NotFoundScreen';
-import { BanknoteIcon, Briefcase, Calendar, Check, MapPin, User, X, XIcon, ZapIcon } from 'lucide-react-native';
+import { BanknoteIcon, Calendar, Check, MapPin, User, X, XIcon, ZapIcon } from 'lucide-react-native';
 import { useAuth } from '@/src/context/AuthContext';
 import LoadingScreen from '../common/SuccessScreen';
 import { getExtension } from '@/src/utils/common';
@@ -18,11 +16,12 @@ import { useAppToast } from '@/src/context/ToastContext';
 import { useAlert } from '@/src/context/AlertContext';
 import LottieView from 'lottie-react-native';
 import ReportProfileModal from './home_sub_screen/ReportProfileModal';
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import HeaderSession from '../common/HeaderSession';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { CaptureProtection } from 'react-native-capture-protection';
 import AnimatedMotiView from '../component/AnimateView';
+import GradientView from '../component/GradientView';
 
 export default function ProfileDetailScreen({ route }: any) {
     const { user } = useAuth();
@@ -335,11 +334,14 @@ export default function ProfileDetailScreen({ route }: any) {
                 />
 
                 {/* 2. Linear Gradient Overlay */}
-                <LinearGradient
-                    colors={['rgba(0,0,0,0.5)', 'transparent', 'rgba(0,0,0,0.7)']}
+
+                <GradientView
                     locations={[0, 0.4, 1]}
+                    colors={['rgba(0,0,0,0.5)', 'transparent', 'rgba(0,0,0,0.7)']}
+                    horizontal={true}
                     style={StyleSheet.absoluteFill}
-                />
+
+                ></GradientView>
 
                 {/* NEW: Status Highlight Tag (Top Left) */}
                 <Box className={`absolute top-4 left-4 ${status.color} px-3 py-1 rounded-md shadow-md`}>
@@ -544,7 +546,7 @@ export default function ProfileDetailScreen({ route }: any) {
                         }
                         {/* 3. GRADIENT OVERLAY (The Shadow) */}
                         {/* We use 4 stops to make the transition from image to text seamless */}
-                        <LinearGradient
+                        <GradientView
                             colors={['transparent', 'rgba(0,0,0,0.2)', 'rgba(0,0,0,0.6)', 'rgba(0,0,0,0.9)']}
                             locations={[0, 0.4, 0.7, 1]}
                             style={{
@@ -555,6 +557,7 @@ export default function ProfileDetailScreen({ route }: any) {
                                 height: 280, // High enough to cover all text fields
                             }}
                         />
+
 
                         {/* 4. BOTTOM CONTENT OVERLAY */}
                         <Box className="absolute bottom-0 left-0 right-0 p-5 pb-8 z-10">
@@ -702,7 +705,7 @@ export default function ProfileDetailScreen({ route }: any) {
                             {/* 1. The Gradient Fade-out */}
                             {/* Only show the fade when the text is NOT expanded */}
                             {!isExpanded && (
-                                <LinearGradient
+                                <GradientView
                                     colors={['rgba(255,255,255,0)', 'rgba(255,255,255,0.8)', 'white']}
                                     style={{
                                         position: 'absolute',
@@ -739,11 +742,10 @@ export default function ProfileDetailScreen({ route }: any) {
                         <HStack className="flex-wrap gap-3">
                             {data?.hobbies_name.split(',').map((item: any) => item.trim()).map((items: any, index: number) => (
                                 <Box key={index} className="rounded-full overflow-hidden border border-outline-100 shadow-sm">
-                                    <LinearGradient
+                                    <GradientView
                                         // Subtle transition from a very light gray to a slightly darker tint
                                         colors={['#ffffff', '#f8fafc', '#f1f5f9']}
-                                        start={{ x: 0, y: 0 }}
-                                        end={{ x: 1, y: 1 }}
+
                                     >
                                         <Box className="flex-row items-center gap-2 px-5 py-2.5">
                                             {/* You can add small icons here later for each hobby */}
@@ -751,7 +753,7 @@ export default function ProfileDetailScreen({ route }: any) {
                                                 {items}
                                             </Text>
                                         </Box>
-                                    </LinearGradient>
+                                    </GradientView>
                                 </Box>
                             ))}
                         </HStack>
@@ -762,10 +764,9 @@ export default function ProfileDetailScreen({ route }: any) {
 
                     <Box className="mx-4 my-2 rounded-3xl overflow-hidden shadow-sm border border-cyan-100">
                         {/* 1. The Signature Cyan Gradient */}
-                        <LinearGradient
+                        <GradientView
                             colors={['#f0fdfa', '#ecfeff', '#e0f2fe']}
-                            start={{ x: 0, y: 0 }}
-                            end={{ x: 1, y: 1 }}
+
                             style={{ padding: 24 }}
                         >
                             {/* Header */}
@@ -870,7 +871,7 @@ export default function ProfileDetailScreen({ route }: any) {
                             </LinearGradient>
                         </Pressable>
                     </VStack> */}
-                        </LinearGradient>
+                        </GradientView>
                     </Box>
 
                     {/*  #region  Basic Details Card other desing*/}
@@ -896,10 +897,8 @@ export default function ProfileDetailScreen({ route }: any) {
 
                     <Box className="mx-4 my-4 rounded-3xl overflow-hidden shadow-lg border border-red-100">
                         {/* 1. Multi-stop Background Gradient */}
-                        <LinearGradient
+                        <GradientView
                             colors={['#fff5f5', '#ffffff', '#fffafa']}
-                            start={{ x: 0, y: 0 }}
-                            end={{ x: 1, y: 1 }}
                             style={{ padding: 20 }}
                         >
                             {/* Top Accent Line */}
@@ -917,12 +916,12 @@ export default function ProfileDetailScreen({ route }: any) {
                             <VStack space="xl">
                                 {/* Phone Row */}
                                 <HStack className="items-center gap-4">
-                                    <LinearGradient
+                                    <GradientView
                                         colors={['#ef4444', '#dc2626']}
                                         className="p-3 rounded-2xl shadow-sm"
                                     >
                                         <Icon as={PhoneIcon} size="sm" color="white" />
-                                    </LinearGradient>
+                                    </GradientView>
                                     <VStack className="flex-1">
                                         <Text size="xs" className="text-typography-500 font-medium">Contact No.</Text>
                                         <HStack className="items-center gap-2">
@@ -934,12 +933,12 @@ export default function ProfileDetailScreen({ route }: any) {
 
                                 {/* Email Row */}
                                 <HStack className="items-center gap-4">
-                                    <LinearGradient
+                                    <GradientView
                                         colors={['#ef4444', '#dc2626']}
                                         className="p-3 rounded-2xl shadow-sm"
                                     >
                                         <Icon as={MailIcon} size="sm" color="white" />
-                                    </LinearGradient>
+                                    </GradientView>
                                     <VStack className="flex-1">
                                         <Text size="xs" className="text-typography-500 font-medium">Email ID</Text>
                                         <HStack className="items-center gap-2">
@@ -978,7 +977,7 @@ export default function ProfileDetailScreen({ route }: any) {
                         </Button>
                     </VStack> */}
 
-                        </LinearGradient>
+                        </GradientView>
                     </Box>
 
                     {/* 6. Family Details Card */}
@@ -1039,10 +1038,9 @@ export default function ProfileDetailScreen({ route }: any) {
 
                     <Box className="mx-4 my-4 rounded-3xl overflow-hidden shadow-sm border border-orange-100 bg-white">
                         {/* 1. Premium Orange Gradient Header */}
-                        <LinearGradient
+                        <GradientView
                             colors={['#94d693', '#75d373ff', '#52d14fff']} // Orange-400 to Orange-600
-                            start={{ x: 0, y: 0 }}
-                            end={{ x: 1, y: 0 }}
+
                         >
                             <HStack className="p-4 items-center justify-center gap-3">
                                 <Icon as={HomeIcon} color="white" size="lg" />
@@ -1050,13 +1048,12 @@ export default function ProfileDetailScreen({ route }: any) {
                                     Add your details to see {data?.full_name}'s family
                                 </Text>
                             </HStack>
-                        </LinearGradient>
+                        </GradientView>
 
                         {/* 2. Content Area with Gradient Background (Matching Basic Details) */}
-                        <LinearGradient
+                        <GradientView
                             colors={['#fffaf5', '#ffffff', '#fff7ed']} // Very subtle orange/white tint
-                            start={{ x: 0, y: 0 }}
-                            end={{ x: 1, y: 1 }}
+
                             style={{ padding: 20 }}
                         >
                             <Heading size="md" className="mb-4 text-typography-900">Family Background</Heading>
@@ -1093,7 +1090,7 @@ export default function ProfileDetailScreen({ route }: any) {
                                 </LinearGradient>
                             </Pressable>
                         </VStack> */}
-                        </LinearGradient>
+                        </GradientView>
                     </Box>
 
 
@@ -1108,10 +1105,9 @@ export default function ProfileDetailScreen({ route }: any) {
                         }}
                     >
                         {/* 1. Indigo Multi-Stop Gradient Header */}
-                        <LinearGradient
+                        <GradientView
                             colors={['#6366f1', '#4f46e5', '#4338ca']}
-                            start={{ x: 0, y: 0 }}
-                            end={{ x: 1, y: 0 }}
+
                         >
                             <HStack className="p-4 items-center justify-center gap-3">
                                 <Box className="bg-white/20 p-1.5 rounded-lg">
@@ -1121,7 +1117,7 @@ export default function ProfileDetailScreen({ route }: any) {
                                     Education & Professional
                                 </Text>
                             </HStack>
-                        </LinearGradient>
+                        </GradientView>
 
                         {/* 2. Content Area */}
                         <VStack className="p-6" space="xl">
@@ -1182,10 +1178,9 @@ export default function ProfileDetailScreen({ route }: any) {
                             style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', borderWidth: 1, borderColor: 'rgba(0,0,0,0.05)' }}
                         >
                             {/* 1. Dynamic Match Header */}
-                            <LinearGradient
+                            <GradientView
                                 colors={['#ecfeff', '#fdf2f8']} // Light Cyan to Light Pink Mesh
-                                start={{ x: 0, y: 0 }}
-                                end={{ x: 1, y: 1 }}
+
                             >
                                 <VStack className="p-8 items-center">
                                     <Text className="text-primary-700 font-bold text-2xl mb-6">You and {data.gender == "Female" ? 'Her' : 'Him'}</Text>
@@ -1228,7 +1223,7 @@ export default function ProfileDetailScreen({ route }: any) {
                                     </LinearGradient>
                                 </Box> */}
                                 </VStack>
-                            </LinearGradient>
+                            </GradientView>
 
                             {/* 2. Preference List  Dont delete */}
                             {/* <VStack className="p-6" space="xl">

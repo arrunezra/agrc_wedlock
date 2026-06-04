@@ -1,22 +1,19 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { View, TouchableOpacity, ScrollView, StatusBar, Dimensions, Platform, Alert } from 'react-native';
-import { Box, VStack, HStack, Heading, Text, Avatar, AvatarImage, Center, useToast, Toast, ToastTitle, ToastDescription } from '@/src/components/common/GluestackUI';
-import LinearGradient from 'react-native-linear-gradient';
-import { Camera, Upload, Check, Trash2, Image as ImageIcon, ArrowLeft } from 'lucide-react-native';
+import React, { useEffect, useState } from 'react';
+import { TouchableOpacity, ScrollView, StatusBar, Dimensions, Platform, Alert } from 'react-native';
+import { Box, VStack, HStack, Text, Avatar, AvatarImage, Center } from '@/src/components/common/GluestackUI';
+import { Camera, Upload, Check, Trash2, Image as ImageIcon } from 'lucide-react-native';
 import { Icon } from '@/src/components/common/IconUI';
 import api from '@/src/api/api';
 import { cleanupImage, handleImageCompression } from '@/src/utils/ImageService';
 import { useAuth } from '@/src/context/AuthContext';
 import { useAlert } from '@/src/context/AlertContext';
-import * as ImagePicker from 'react-native-image-picker'; // Standard library usage
 import { useAppToast } from '@/src/context/ToastContext';
 import HeaderSession from '../common/HeaderSession';
 import { User } from '@/src/utils/models';
-import { useFocusEffect } from '@react-navigation/native';
 import { getExtension } from '@/src/utils/common';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import AnimatedMotiView from '../component/AnimateView';
-const { width } = Dimensions.get('window');
+import GradientView from '../component/GradientView';
 
 export const ProfileUploadScreen = ({ navigation, onUploadComplete }: any) => {
     const { user, updateUser } = useAuth();
@@ -279,15 +276,14 @@ export const ProfileUploadScreen = ({ navigation, onUploadComplete }: any) => {
                         className="w-full rounded-2xl overflow-hidden shadow-lg shadow-cyan-600/30"
                         style={{ elevation: 6 }}
                     >
-                        <LinearGradient
+                        <GradientView
                             colors={['#0097b2', '#00bcd4']}
-                            start={{ x: 0, y: 0 }}
-                            end={{ x: 1, y: 0 }}
+
                             className="h-14 items-center justify-center flex-row"
                         >
                             <Icon as={Check} size="sm" color="white" className="mr-2" />
                             <Text className="text-white font-black text-sm tracking-wide uppercase">Save Profile Picture</Text>
-                        </LinearGradient>
+                        </GradientView>
                     </TouchableOpacity>
                 </Box>
             )}

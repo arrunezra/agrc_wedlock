@@ -1,18 +1,15 @@
 import React, { useRef, useState } from 'react';
-import { ScrollView, StyleSheet, Image, TouchableOpacity, Animated, KeyboardAvoidingView, Platform } from 'react-native';
+import { ScrollView, Image, Animated, KeyboardAvoidingView, Platform } from 'react-native';
 import {
   Center, Box, VStack, Text,
   FormControl, FormControlLabel, FormControlLabelText,
   Input, InputField,
-  Button, ButtonText, ButtonSpinner,
-  Link, LinkText, FormControlError, FormControlErrorText,
+  Button, ButtonText, FormControlError, FormControlErrorText,
   InputSlot,
   HStack
 } from '@/src/components/common/GluestackUI';
 import { Mail, Phone, Lock, Eye, EyeOff, CheckCircle2, Icon, ShieldCheck, Check } from '@/src/components/common/IconUI';
 import { CommonActions } from '@react-navigation/native';
-import LottieView from 'lottie-react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import { SuccessOverlay } from '../common/SuccessOverlay';
 import { useAuth } from '@/src/context/AuthContext';
 

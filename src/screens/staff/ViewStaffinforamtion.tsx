@@ -5,7 +5,6 @@ import { ChevronRight, Church, Edit3, Edit3Icon, Hexagon, Home, Mail, MapPin, Na
 import React, { useCallback, useEffect, useState } from 'react'
 import { View, Text, TouchableOpacity, Linking, StatusBar } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
-import LinearGradient from 'react-native-linear-gradient';
 import LoadingScreen from '../common/LoadingScreen';
 import NotFoundScreen from '../common/NotFoundScreen';
 import { useAuth } from '@/src/context/AuthContext';
@@ -13,6 +12,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { getExtension, getFullName } from '@/src/utils/common';
 import HeaderSession from '../common/HeaderSession';
 import AnimatedMotiView from '../component/AnimateView';
+import GradientView from '../component/GradientView';
 const InfoRow = ({ label, value, icon: IconComponent, color = "#0891b2", isMultiline = false }: any) => (
     <HStack className="items-center gap-5 py-2">
         {/* Icon with soft tinted background */}
@@ -136,11 +136,9 @@ const ViewStaffinforamtion = ({ navigation, route }: any) => {
             >
                 {/* 3. Hero Avatar Section with Gradient Background */}
                 <Box className="relative pt-8 pb-20 items-center justify-center">
-                    <LinearGradient
+                    <GradientView
                         colors={['#0097b2', '#00bcd4', '#f8fafc']}
                         className="absolute inset-0"
-                        start={{ x: 0, y: 0 }}
-                        end={{ x: 0, y: 1 }}
                     />
 
                     <VStack className="items-center z-10">
@@ -263,13 +261,13 @@ const ViewStaffinforamtion = ({ navigation, route }: any) => {
                     className="h-16 w-16 rounded-full overflow-hidden shadow-2xl shadow-cyan-500/50"
                     style={{ elevation: 10 }}
                 >
-                    <LinearGradient
+                    <GradientView
                         colors={['#0891b2', '#0b5a70ff']}
                         // Ensure the gradient also has rounded-full
                         className="h-full w-full rounded-full items-center justify-center"
                     >
                         <Icon as={Edit3} size="lg" className="text-cyan-400" />
-                    </LinearGradient>
+                    </GradientView>
                 </TouchableOpacity>
             </AnimatedMotiView>
         </Box>

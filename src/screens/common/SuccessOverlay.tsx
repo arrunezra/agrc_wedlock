@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Animated } from 'react-native';
 import { Box, Center, VStack, Text } from '@/src/components/common/GluestackUI';
 import LottieView from 'lottie-react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import GradientView from '../component/GradientView';
 
 interface SuccessOverlayProps {
     isVisible: boolean;
@@ -37,7 +37,7 @@ export const SuccessOverlay = ({
 
     return (
         <Box className="absolute inset-0 z-[100] bg-white/50">
-            <LinearGradient
+            <GradientView
                 colors={['#10b981', '#065f46', '#022c22']}
                 locations={[0, 0.6, 1]}
                 style={{ flex: 1 }}
@@ -70,7 +70,7 @@ export const SuccessOverlay = ({
                         </VStack>
                     </Animated.View>
                 </Center>
-            </LinearGradient>
+            </GradientView>
         </Box>
     );
 };

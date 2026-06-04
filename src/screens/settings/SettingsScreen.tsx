@@ -4,12 +4,12 @@ import { Pressable, ScrollView, StatusBar, TouchableOpacity } from 'react-native
 import { User, Lock, Bell, Shield, Trash2, Eye, Calendar, Ban, Heart, Sparkles, LogOut, Info } from 'lucide-react-native';
 import { Box, VStack, HStack, Text, Divider, Heading } from '@/src/components/common/GluestackUI';
 import { ChevronRightIcon, Icon } from '@/src/components/common/IconUI';
-import LinearGradient from 'react-native-linear-gradient';
 import { useAuth } from '@/src/context/AuthContext';
 import profileService from '@/src/services/profileService';
 import { useAppToast } from '@/src/context/ToastContext';
 import { useAlert } from '@/src/context/AlertContext';
 import HeaderSession from '../common/HeaderSession';
+import GradientView from '../component/GradientView';
 
 export default function SettingsScreen({ navigation }: any) {
 
@@ -50,7 +50,7 @@ export default function SettingsScreen({ navigation }: any) {
 
   const SettingsGradientCard = ({ title, icon, children, gradientColors }: any) => (
     <Box className="mb-6 px-5">
-      <LinearGradient
+      <GradientView
         colors={gradientColors || ['#f0f9ff', '#ffffff']}
         style={{ borderRadius: 32, padding: 20, borderWidth: 1, borderColor: '#e0f2fe' }}
       >
@@ -61,7 +61,7 @@ export default function SettingsScreen({ navigation }: any) {
           <Heading size="md" className="text-typography-900">{title}</Heading>
         </HStack>
         {children}
-      </LinearGradient>
+      </GradientView>
     </Box >
   );
   return (

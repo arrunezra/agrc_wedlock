@@ -9,9 +9,9 @@ import {
     ViewStyle,
     TextStyle
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import Toast from 'react-native-toast-message';
 import { CheckCircle2, AlertTriangle, XCircle, X, LucideIcon } from 'lucide-react-native';
+import GradientView from '../component/GradientView';
 
 // --- Types ---
 interface CustomToastProps {
@@ -51,10 +51,8 @@ const CustomToast = ({ text1, text2, colors, Icon }: CustomToastProps) => {
     });
 
     return (
-        <LinearGradient
+        <GradientView
             colors={colors}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
             style={styles.commonToastStyle}
         >
             <Icon color="white" size={26} strokeWidth={2.5} style={{ marginRight: 12 }} />
@@ -74,7 +72,7 @@ const CustomToast = ({ text1, text2, colors, Icon }: CustomToastProps) => {
             <View style={styles.progressBarContainer}>
                 <Animated.View style={[styles.progressBar, { width: progressWidth }]} />
             </View>
-        </LinearGradient>
+        </GradientView>
     );
 };
 

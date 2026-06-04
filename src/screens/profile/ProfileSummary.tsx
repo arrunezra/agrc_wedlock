@@ -2,16 +2,15 @@ import { View, Text, RefreshControl, TouchableOpacity, Pressable, StatusBar } fr
 import React, { useCallback, useEffect, useState } from 'react'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { Box, Heading, HStack, Image, VStack } from '@/src/components/common/GluestackUI';
-import LinearGradient from 'react-native-linear-gradient';
 import { Icon, UserCheck, Users, CheckCircle } from '@/src/components/common/IconUI';
 import { AlertCircle, ArrowUpRight, Check, ChevronRight, MapPin, Phone, UserX } from 'lucide-react-native';
 import DashboardSkeleton from '../staff/DashboardSkeleton';
 import profileService from '@/src/services/profileService';
-import { API_BASE_URL_DEV_Profiles_Thumbs } from '@/src/utils/environment';
 import { getExtension } from '@/src/utils/common';
 import FastImage from '@d11/react-native-fast-image';
 import HeaderSession from '../common/HeaderSession';
 import AnimatedMotiView from '../component/AnimateView';
+import GradientView from '../component/GradientView';
 
 const ProfileSummary = ({ navigation }: any) => {
     const [data, setData] = useState<any>(null);
@@ -76,11 +75,11 @@ const ProfileSummary = ({ navigation }: any) => {
                 <VStack space="xl" className="pb-10">
 
                     {/* --- HEADER: Total Users --- */}
-                    <LinearGradient
-                        colors={['#05492bff', '#3cba92']} start={{ x: 0, y: 0 }}
-                        end={{ x: 1, y: 1 }}
-                        style={{ borderRadius: 32, padding: 24, shadowColor: '#4f46e5', shadowOpacity: 0.3, shadowRadius: 10 }}
-                    >
+
+                    <GradientView
+                        colors={['#05492bff', '#3cba92']}
+                        horizontal={true}
+                        style={{ borderRadius: 32, padding: 24, shadowColor: '#4f46e5', shadowOpacity: 0.3, shadowRadius: 10 }}>
                         <HStack className="justify-between items-center">
                             <VStack>
                                 <Text className="text-indigo-100 text-xs font-bold uppercase tracking-widest">Global Profiles</Text>
@@ -91,7 +90,7 @@ const ProfileSummary = ({ navigation }: any) => {
                                 <Icon as={Users} className="text-white" size="xl" />
                             </Box>
                         </HStack>
-                    </LinearGradient>
+                    </GradientView>
 
                     {/* --- STATS GRID: Active/Inactive & Verified/Unverified --- */}
 
@@ -117,10 +116,9 @@ const ProfileSummary = ({ navigation }: any) => {
                                 >
 
                                     <Box>
-                                        <LinearGradient
+                                        <GradientView
                                             colors={item.colors}
-                                            start={{ x: 0, y: 0 }}
-                                            end={{ x: 1, y: 1 }}
+                                            horizontal={true}
                                             style={{
                                                 borderRadius: 25,
                                                 padding: 20,
@@ -130,6 +128,7 @@ const ProfileSummary = ({ navigation }: any) => {
                                                 shadowRadius: 10
                                             }}
                                         >
+
                                             {/* Upper Content Row */}
                                             <HStack className="justify-between items-start mb-4">
                                                 <Box className="bg-white/20 p-2 rounded-xl">
@@ -150,7 +149,7 @@ const ProfileSummary = ({ navigation }: any) => {
                                                     {item.count}
                                                 </Heading>
                                             </HStack>
-                                        </LinearGradient>
+                                        </GradientView>
                                     </Box>
                                 </AnimatedMotiView>
                             ))}
@@ -209,10 +208,11 @@ const ProfileSummary = ({ navigation }: any) => {
                                             style={{ borderLeftWidth: 8, borderLeftColor: statusColor }}
                                         >
                                             {/* INJECTED THE GRADIENT BACKDROP CARRIER LAYER HERE */}
-                                            <LinearGradient
-                                                colors={['#e6f4f1', '#ffffff']} // Clean premium light mint color blend shift
-                                                start={{ x: 0, y: 0 }}
-                                                end={{ x: 1, y: 1 }}
+
+                                            <GradientView
+                                                colors={['#e6f4f1', '#ffffff']}
+                                                horizontal={true}
+
                                             >
                                                 {/* Balanced the padding bounds across the content component */}
                                                 <VStack className="p-4">
@@ -294,7 +294,7 @@ const ProfileSummary = ({ navigation }: any) => {
                                                         </HStack>
                                                     </Box>
                                                 </VStack>
-                                            </LinearGradient>
+                                            </GradientView>
                                         </Pressable>
                                     </AnimatedMotiView>
                                 );

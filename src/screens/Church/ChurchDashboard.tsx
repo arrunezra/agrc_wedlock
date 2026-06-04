@@ -1,11 +1,9 @@
-import React, { Activity, useCallback, useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, Animated, Easing, FlatList, Linking, Pressable, RefreshControl, ScrollView, StatusBar, TouchableOpacity } from 'react-native';
-import { Box, VStack, HStack, Text, Heading, Spinner, Divider, Center, Link, LinkText, ButtonText, Button, Avatar, AvatarFallbackText, AvatarImage } from '@/src/components/common/GluestackUI';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Animated, FlatList, Linking, RefreshControl, StatusBar, TouchableOpacity } from 'react-native';
+import { Box, VStack, HStack, Text, Heading, Spinner, Divider, Center, ButtonText, Button, Avatar, AvatarFallbackText, AvatarImage } from '@/src/components/common/GluestackUI';
 import api from '@/src/api/api';
-import { Icon, Globe, MapPin, ChevronLeft } from '@/src/components/common/IconUI';
+import { Icon, Globe, MapPin } from '@/src/components/common/IconUI';
 import { ChevronRight, Church, Edit3, Phone, ShieldCheck, User2Icon } from 'lucide-react-native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { AdminStackParamList } from '@/src/types/navigation';
 import AnimatedListItem, { ChurchSkeleton } from './AnimattedSummary';
 import HeaderSession from '../common/HeaderSession';
 import { dateFormat } from '@/src/utils/validators';

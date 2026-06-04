@@ -13,12 +13,12 @@ import {
     HeartIcon
 } from 'lucide-react-native';
 import { Icon } from '@/src/components/common/IconUI';
-import LinearGradient from 'react-native-linear-gradient';
 import HeaderSession from '../common/HeaderSession';
 import AdminServices from '@/src/services/AdminServices';
 import { CHURCH_COLORS, formatCurrency, getCurrentDate, getCurrentMonthYear, getCurrentYear, getDetailedFY, getFinancialYear } from '@/src/utils/common';
 import { useAuth } from '@/src/context/AuthContext';
 import AnimatedMotiView from '../component/AnimateView';
+import GradientView from '../component/GradientView';
 
 const { width } = Dimensions.get('window');
 
@@ -176,20 +176,20 @@ const AdminDashboard = ({ navigation }: any) => {
                                             let screen = item.screen == 'Donation' ? "ContributeHistory" : item.screen
                                             navigation.navigate(screen)
                                         }}
+                                    ><GradientView
+                                        colors={item.colors}
+                                        horizontal={true}
+                                        style={{
+                                            borderRadius: 25,
+                                            padding: 18,
+                                            elevation: 8,
+                                            shadowColor: item.colors[0],
+                                            shadowOpacity: 0.25,
+                                            shadowRadius: 10
+                                        }}
                                     >
-                                        <LinearGradient
-                                            colors={item.colors}
-                                            start={{ x: 0, y: 0 }}
-                                            end={{ x: 1, y: 1 }}
-                                            style={{
-                                                borderRadius: 25,
-                                                padding: 18,
-                                                elevation: 8,
-                                                shadowColor: item.colors[0],
-                                                shadowOpacity: 0.25,
-                                                shadowRadius: 10
-                                            }}
-                                        >
+
+
                                             {/* TOP ROW: Icon and Title centered together, with Arrow on the right */}
                                             <HStack className="justify-between items-center mb-6 w-full">
                                                 <HStack className="items-center gap-3 flex-1">
@@ -220,7 +220,7 @@ const AdminDashboard = ({ navigation }: any) => {
                                                         : item?.count}
                                                 </Heading>
                                             </Box>
-                                        </LinearGradient>
+                                        </GradientView>
                                     </TouchableOpacity>
                                 </AnimatedMotiView>
                             );
@@ -251,12 +251,14 @@ const AdminDashboard = ({ navigation }: any) => {
 
                     {/* MAIN REVENUE CARD */}
                     <Box className="bg-white rounded-[30px] border border-slate-100 shadow-xl overflow-hidden mx-4">
-                        <LinearGradient
-                            colors={['#e6f4f1', '#ffffff']} // Smooth transition from an ultra-light mint tint to crisp white
-                            start={{ x: 0, y: 0 }}
-                            end={{ x: 1, y: 1 }}
+
+                        <GradientView
+                            colors={['#e6f4f1', '#ffffff']}
+                            horizontal={true}
                             style={{ padding: 24 }}
                         >
+
+
                             <VStack space="xl">
                                 {/* OVERALL AMOUNT */}
                                 <VStack>
@@ -287,7 +289,7 @@ const AdminDashboard = ({ navigation }: any) => {
                                     </VStack>
                                 </HStack>
                             </VStack>
-                        </LinearGradient>
+                        </GradientView>
 
                         {/* FOOTER */}
                         <Box className="bg-slate-50 p-3 items-center border-t border-slate-100">

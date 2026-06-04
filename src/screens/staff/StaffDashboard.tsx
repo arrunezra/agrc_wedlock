@@ -5,11 +5,11 @@ import { Activity, ChevronRight, Edit2, Edit3Icon, Phone, PhoneIcon, Plus, PlusI
 import { useCallback, useEffect, useState } from "react";
 import { Alert, Linking, Pressable, RefreshControl, StatusBar, Text, TouchableOpacity, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
-import LinearGradient from "react-native-linear-gradient";
 import { StatusAlert } from "../common/StatusAlert";
 import DashboardSkeleton from "./DashboardSkeleton";
 import HeaderSession from "../common/HeaderSession";
 import AnimatedMotiView from "../component/AnimateView";
+import GradientView from "../component/GradientView";
 
 const StaffDashboard = ({ navigation }: any) => {
     const [data, setData] = useState<any>(null);
@@ -54,10 +54,11 @@ const StaffDashboard = ({ navigation }: any) => {
                 <VStack space="xl" className=" pb-10">
 
                     {/* --- Main Total Card --- */}
-                    <LinearGradient
+
+                    <GradientView
                         colors={['#0891b2', '#0e7490', '#155e75']}
-                        start={{ x: 0, y: 0 }}
-                        end={{ x: 1, y: 1 }}
+
+                        horizontal={true}
                         style={{ borderRadius: 24, padding: 24, position: 'relative', overflow: 'hidden' }}
                     >
                         <Icon as={Users} size={'lg'} className="absolute -right-6 -bottom-6 text-white opacity-20" />
@@ -73,13 +74,15 @@ const StaffDashboard = ({ navigation }: any) => {
                                 <Icon as={Activity} className="text-white" size="lg" />
                             </Box>
                         </HStack>
-                    </LinearGradient>
+                    </GradientView>
 
                     {/* --- Split Summary Cards --- */}
                     <HStack space="md">
                         {/* Active Gradient Card */}
-                        <LinearGradient
+
+                        <GradientView
                             colors={['#ffffff', '#f0fdf4']}
+                            horizontal={true}
                             className="flex-1 rounded-3xl border border-emerald-100 p-5 relative overflow-hidden"
                         >
                             <Icon as={UserCheck} size={'xl'} className="absolute -right-4 -bottom-4 text-emerald-200 opacity-40" />
@@ -90,13 +93,17 @@ const StaffDashboard = ({ navigation }: any) => {
                                 <Text className="text-slate-500 text-[10px] font-bold uppercase mt-2">Active</Text>
                                 <Heading size="lg" className="text-emerald-700">{data?.summary?.active_count || 0}</Heading>
                             </VStack>
-                        </LinearGradient>
+                        </GradientView>
 
                         {/* Inactive Gradient Card */}
-                        <LinearGradient
+
+                        <GradientView
+                            horizontal={true}
                             colors={['#ffffff', '#fef2f2']}
                             className="flex-1 rounded-3xl border border-red-100 p-5 relative overflow-hidden"
+
                         >
+
                             <Icon as={UserX} size={'xl'} className="absolute -right-4 -bottom-4 text-red-200 opacity-40" />
                             <VStack space="xs">
                                 <Box className="bg-red-500 self-start p-1.5 rounded-lg">
@@ -105,7 +112,7 @@ const StaffDashboard = ({ navigation }: any) => {
                                 <Text className="text-slate-500 text-[10px] font-bold uppercase mt-2">Inactive</Text>
                                 <Heading size="lg" className="text-red-700">{data?.summary?.inactive_count || 0}</Heading>
                             </VStack>
-                        </LinearGradient>
+                        </GradientView>
                     </HStack>
                     {/* --- Recent Records --- */}
                     <VStack space="md" className="mt-2">
@@ -138,14 +145,17 @@ const StaffDashboard = ({ navigation }: any) => {
                                                 screen: "ViewStaffinforamtion",
                                                 params: { id: item.id, isEdit: true }
                                             })} >
-                                            <LinearGradient
+
+                                            <GradientView
                                                 colors={['#ffffff', '#f8fafc']}
+                                                horizontal={true}
                                                 style={{
                                                     borderLeftWidth: 6,
                                                     borderLeftColor: item.activeStatus === 'Active' ? '#1b5e32' : '#dc2626'
 
                                                 }}
                                                 className="p-4 rounded-[28px] border border-slate-100 flex-row items-center shadow-sm"
+
                                             >
                                                 {/* Avatar Section */}
                                                 <Box className="h-14 w-14 rounded-full bg-slate-100 border-2 border-white shadow-sm items-center justify-center overflow-hidden">
@@ -197,7 +207,7 @@ const StaffDashboard = ({ navigation }: any) => {
                                                     </TouchableOpacity>
 
                                                 </HStack>
-                                            </LinearGradient>
+                                            </GradientView>
                                         </Pressable>
                                     </AnimatedMotiView>
 
@@ -239,13 +249,14 @@ const StaffDashboard = ({ navigation }: any) => {
                     className="h-20 w-20 rounded-full overflow-hidden shadow-2xl shadow-cyan-500/50"
                     style={{ elevation: 10 }}
                 >
-                    <LinearGradient
+
+                    <GradientView
                         colors={['#0891b2', '#0e7490']}
-                        // Ensure the gradient also has rounded-full
+                        horizontal={true}
                         className="h-full w-full rounded-full items-center justify-center"
                     >
                         <Icon as={AddIcon} size="xl" className="text-cyan-400" style={{ width: 38, height: 38 }} />
-                    </LinearGradient>
+                    </GradientView>
                 </TouchableOpacity>
             </AnimatedMotiView>
         </View>

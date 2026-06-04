@@ -2,7 +2,6 @@ import { View, Text, RefreshControl, TouchableOpacity, Pressable, FlatList, Acti
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { Box, Heading, HStack, Input, InputField, InputSlot, VStack } from '@/src/components/common/GluestackUI';
-import LinearGradient from 'react-native-linear-gradient';
 import { Icon, UserCheck, Users, CheckCircle } from '@/src/components/common/IconUI';
 import { AlertCircle, Check, ChevronRight, MapPin, Phone, SearchIcon, Settings2, UserX, XIcon } from 'lucide-react-native';
 import { getExtension } from '@/src/utils/common';

@@ -1,7 +1,6 @@
 import { View, Text, RefreshControl, TouchableOpacity, Pressable, Animated, FlatList, ActivityIndicator, StatusBar } from 'react-native'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Box, Heading, HStack, Input, InputField, InputSlot, VStack } from '@/src/components/common/GluestackUI';
-import LinearGradient from 'react-native-linear-gradient';
 import { Icon, Users } from '@/src/components/common/IconUI';
 import { Check, ChevronRight, MapPin, Phone, UserX, XIcon } from 'lucide-react-native';
 import { getExtension } from '@/src/utils/common';
@@ -11,6 +10,7 @@ import { SearchIcon } from '@/components/ui/icon';
 import NotFoundScreen from '../common/NotFoundScreen';
 import HeaderSession from '../common/HeaderSession';
 import AnimatedMotiView from '../component/AnimateView';
+import GradientView from '../component/GradientView';
 
 const StaffInboxScreen = ({ navigation }: any) => {
     const [profiles, setProfiles] = useState<any[]>([]);
@@ -277,7 +277,7 @@ const StaffInboxScreen = ({ navigation }: any) => {
             />
 
 
-            <LinearGradient
+            <GradientView
                 colors={['#4f46e5', '#7c3aed']}
                 style={{ borderRadius: 32, padding: 24, marginTop: 8, marginHorizontal: 10 }}
             >
@@ -290,7 +290,7 @@ const StaffInboxScreen = ({ navigation }: any) => {
                         <Icon as={Users} className="text-white" size="xl" />
                     </Box>
                 </HStack>
-            </LinearGradient>
+            </GradientView>
             {/* Header outside FlatList */}
             {renderHeader()}
 

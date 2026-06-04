@@ -7,7 +7,6 @@ import { ChevronRight, User, UserMinus } from "lucide-react-native";
 import { Alert, FlatList, Pressable, RefreshControl, ScrollView, StatusBar } from 'react-native';
 import profileService from '@/src/services/profileService';
 import { useAuth } from '@/src/context/AuthContext';
-import LinearGradient from 'react-native-linear-gradient';
 import { getExtension, getFilterConfig } from '@/src/utils/common';
 import { useAlert } from '@/src/context/AlertContext';
 import { useAppToast } from '@/src/context/ToastContext';
@@ -15,6 +14,7 @@ import NotFoundScreen from '../../common/NotFoundScreen';
 import { Icon } from '@/components/ui/icon';
 import { useNavigation } from '@react-navigation/native';
 import HeaderSession from '../../common/HeaderSession';
+import GradientView from '../../component/GradientView';
 
 const SummryListViewScreen = (props: any) => {
     const { filter, mode } = props?.route?.params;
@@ -194,10 +194,9 @@ const SummryListViewScreen = (props: any) => {
                                 onEndReachedThreshold={0.5}
                                 renderItem={({ item }) => (
 
-                                    <LinearGradient
+                                    <GradientView
                                         colors={['#ffffff', '#f4faf8', '#defbf1']} // Clean transition from pure white to soft mint green
-                                        start={{ x: 0, y: 0 }}
-                                        end={{ x: 1, y: 0 }} // Horizontal gradient across the card layout
+
                                         style={{ borderBottomWidth: 1, borderBottomColor: '#e2e8f0' }} // Native border style execution
                                     >
                                         {/* Internal row arrangement framework container */}
@@ -251,7 +250,7 @@ const SummryListViewScreen = (props: any) => {
                                             {config?.title != 'Profile Visitors' && (
                                                 <Box className="ml-2 shadow-sm shadow-emerald-900/10">
                                                     <Pressable onPress={() => handleProfileAction(item.profile_id, item.full_name)}>
-                                                        <LinearGradient
+                                                        <GradientView
                                                             colors={config.buttonColors || ['#047857', '#065f46']}
                                                             style={{
                                                                 borderRadius: 12,
@@ -265,12 +264,12 @@ const SummryListViewScreen = (props: any) => {
                                                             <Text className="text-white font-bold text-xs tracking-wide">
                                                                 {config.buttonText}
                                                             </Text>
-                                                        </LinearGradient>
+                                                        </GradientView>
                                                     </Pressable>
                                                 </Box>
                                             )}
                                         </HStack>
-                                    </LinearGradient>
+                                    </GradientView>
                                 )
 
 

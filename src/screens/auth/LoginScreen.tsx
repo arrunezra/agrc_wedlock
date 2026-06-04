@@ -6,11 +6,10 @@ import { useKeyboardAnimation } from 'react-native-keyboard-controller';
 // New Imports (Points to your local UI components) 
 import { Image, Link, LinkText, ButtonSpinner, Center, ScrollView, Box, VStack, Input, InputField, Button, ButtonText, Text, FormControl, FormControlError, FormControlErrorText, FormControlLabel, FormControlLabelText, HStack, Checkbox, CheckboxIndicator, CheckboxIcon, CheckboxLabel, InputSlot, InputIcon } from '@/src/components/common/GluestackUI';
 
-import authService from '@/src/services/authService';
 import { useAuth } from '@/src/context/AuthContext';
 import { CheckIcon, Eye, EyeOff } from '@/src/components/common/IconUI';
 import { AnimateError } from '../common/AnimateError';
-import { LinearGradient } from 'react-native-linear-gradient';
+import GradientView from '../component/GradientView';
 
 export default function LoginScreen({ navigation }: any) {
   const { progress } = useKeyboardAnimation();
@@ -90,11 +89,11 @@ export default function LoginScreen({ navigation }: any) {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       style={{ flex: 1 }}
     >
-      <LinearGradient
+
+      <GradientView
         colors={['#defbf1ff', '#ffffffff', '#1e473aff']}
+        horizontal={false}
         style={{ flex: 1 }}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 0, y: 1 }}
       >
         <ScrollView
           className="flex-1 bg-transparent"
@@ -256,7 +255,7 @@ export default function LoginScreen({ navigation }: any) {
 
           </Box>
         </ScrollView>
-      </LinearGradient>
+      </GradientView>
     </KeyboardAvoidingView>
   );
 }

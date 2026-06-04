@@ -5,12 +5,12 @@ import { Calendar, Filter, ChevronDown, Landmark, RefreshCw, ArrowRight, ChurchI
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Icon } from '@/src/components/common/IconUI';
 import HeaderSession from '../common/HeaderSession';
-import LinearGradient from 'react-native-linear-gradient';
 import FuturisticDropdown from '@/src/components/common/FuturisticDropdown';
 import AdminServices from '@/src/services/AdminServices';
 import { useAuth } from '@/src/context/AuthContext';
 import ChruchService from '@/src/services/ChruchService';
 import AnimatedMotiView from '../component/AnimateView';
+import GradientView from '../component/GradientView';
 // --- CONFIG PALETTE ---
 const REVENUE_PALETTE = ['#087a46ff', '#1b5945ff']; // Deep slate sleek theme
 const LIMIT = 20;
@@ -264,11 +264,16 @@ const ContributeHistoryScreen = ({ navigation }: any) => {
                 delay={1000}
                 initialScale={0.95}
                 className="mx-4 mt-4"            >
-                <LinearGradient colors={REVENUE_PALETTE} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{ borderRadius: 28, padding: 24, elevation: 8 }}>
+                <GradientView
+                    colors={REVENUE_PALETTE}
+                    horizontal={true}
+                    style={{ borderRadius: 28, padding: 24, elevation: 8 }}
+                >
+
                     <Text className="text-slate-400 text-[10px] font-bold uppercase tracking-[2px]">Aggregated Statement</Text>
                     <Heading className="text-white font-black text-3xl mt-1">{formatCurrency(overallAmount)}</Heading>
                     <Text className="text-slate-400 text-[9px] mt-2 italic">* Summing active committed parameters filter ledger rules</Text>
-                </LinearGradient>
+                </GradientView>
             </AnimatedMotiView>
             {/* --- DYNAMIC FILTER CHIPS PANEL SUMMARY --- */}
             {isFilterApplied && (user?.role == 'super_admin' || user?.role == 'root_admin') && (

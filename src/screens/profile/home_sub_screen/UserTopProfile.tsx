@@ -2,14 +2,13 @@ import React, { useCallback, useContext, useEffect, useMemo, useState } from 're
 import { Box, VStack, HStack, Text, Heading, Avatar, AvatarImage, AvatarFallbackText, Center } from '@/src/components/common/GluestackUI';
 import { Pressable, TouchableOpacity, View } from 'react-native';
 import { AddIcon, CheckIcon, EditIcon, Icon, StarIcon } from '@/components/ui/icon';
-import { API_BASE_URL_DEV_Profiles_Thumbs } from '@/src/utils/environment';
 import { getExtension } from '@/src/utils/common';
-import LinearGradient from 'react-native-linear-gradient';
 import { Briefcase, Camera, CheckCircle, CheckCircle2, ChevronRight, Edit3, Eye, GraduationCap, Heart, HeartHandshake, MapPin, Share2, Star, TrendingUp, Users, Zap } from 'lucide-react-native';
 import profileService from '@/src/services/profileService';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { LookupContext } from '@/src/context/LookupContext';
 import { useAppToast } from '@/src/context/ToastContext';
+import GradientView from '../../component/GradientView';
 
 const UserTopProfile = ({ user, onEdit, onAddPhoto, onContribution }: any) => {
     const navigation = useNavigation<any>();
@@ -142,10 +141,8 @@ const UserTopProfile = ({ user, onEdit, onAddPhoto, onContribution }: any) => {
                         style={{ elevation: 8 }}
                         className="flex-[1.5] overflow-hidden rounded-2xl shadow-lg shadow-emerald-500/40"
                     >
-                        <LinearGradient
+                        <GradientView
                             colors={['#10b981', '#059669']}
-                            start={{ x: 0, y: 0 }}
-                            end={{ x: 1, y: 0 }}
                             className="h-14 flex-row items-center justify-center px-4"
                         >
                             <Heart size={18} color="white" strokeWidth={2.5} />
@@ -153,7 +150,7 @@ const UserTopProfile = ({ user, onEdit, onAddPhoto, onContribution }: any) => {
                             <Text className="ml-2 text-white font-black text-sm tracking-wide uppercase">
                                 Donate Securely
                             </Text>
-                        </LinearGradient>
+                        </GradientView>
                     </TouchableOpacity>
                 )}
             </HStack>
@@ -243,10 +240,8 @@ const UserTopProfile = ({ user, onEdit, onAddPhoto, onContribution }: any) => {
 
                 {/* Footer Section */}
                 <Box className="mt-auto mb-10 relative">
-                    <LinearGradient
+                    <GradientView
                         colors={['#10b981', '#3b82f6', '#6366f1']}
-                        start={{ x: 0, y: 0 }}
-                        end={{ x: 1, y: 1 }}
                         style={{
                             position: 'absolute',
                             inset: -1,

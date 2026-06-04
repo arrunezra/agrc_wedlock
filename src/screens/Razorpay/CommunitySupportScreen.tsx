@@ -4,7 +4,7 @@ import RazorpayCheckout from 'react-native-razorpay';
 import LoadingScreen from '../common/SuccessScreen';
 import razorpayServices from '@/src/services/RazorpayServices';
 import { BarChart3, CheckCircle2, ChevronLeft, Heart, Info, MessageSquare, ShieldCheck, Zap } from 'lucide-react-native';
-import LinearGradient from 'react-native-linear-gradient';
+
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { SuccessOverlay } from '../common/SuccessOverlay';
 import { Screen } from 'react-native-screens';
@@ -13,6 +13,7 @@ import { rezor_test_key } from '@/src/utils/environment';
 import { LookupContext } from '@/src/context/LookupContext';
 import { Box, Card, HStack, VStack } from '../component/GluestackUI';
 import { useAuth } from '@/src/context/AuthContext';
+import GradientView from '../component/GradientView';
 const CommunitySupportScreen = ({ route, navigation }: any) => {
     const { totalAmount, customerName, userid, email, phoneNo } = route.params;
     const { showToast } = useAppToast();
@@ -130,7 +131,7 @@ const CommunitySupportScreen = ({ route, navigation }: any) => {
             {!showSuccess && !isProcessing && (
                 <View style={styles.mainContainer}>
                     {/* Background Mesh */}
-                    <LinearGradient colors={['#134e4a', '#0f172a']} style={StyleSheet.absoluteFill} />
+                    <GradientView colors={['#134e4a', '#0f172a']} style={StyleSheet.absoluteFill} />
 
                     <SafeAreaView style={styles.flex1}>
                         {/* Header */}

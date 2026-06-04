@@ -5,9 +5,8 @@ import FastImage from "@d11/react-native-fast-image";
 import { Box, VStack, HStack, Heading, Text, Button, ButtonIcon } from '@/src/components/common/GluestackUI';
 import { Briefcase, Heart, Icon, MapPin } from '@/src/components/common/IconUI';
 import profileService from '@/src/services/profileService';
-import { API_BASE_URL_DEV_Profiles_Images, API_BASE_URL_DEV_Profiles_Thumbs } from '@/src/utils/environment';
+import { API_BASE_URL_DEV_Profiles_Images, } from '@/src/utils/environment';
 import LottieView from 'lottie-react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import { Check, CheckCircle2Icon, CheckCircleIcon, HeartIcon, UserPlus, UsersIcon, X, XCircleIcon } from 'lucide-react-native';
 import { formatHeight } from '@/src/utils/common';
 import { useFocusEffect } from '@react-navigation/native';
@@ -15,6 +14,7 @@ import _, { constant } from 'lodash';
 import { useAlert } from '@/src/context/AlertContext';
 import { useIsFocused } from '@react-navigation/native'; // Add this import
 import AnimatedMotiView from '../component/AnimateView';
+import GradientView from '../component/GradientView';
 export const ProfileCard = ({ profile, onPress, user, showToast, onActionComplete, comingFrom, reload }: any) => {
   const { showAlert, hideAlert } = useAlert();
   const isFocused = useIsFocused();
@@ -328,7 +328,7 @@ export const ProfileCard = ({ profile, onPress, user, showToast, onActionComplet
           : null}
 
         {/* 3. Information Scrim */}
-        <LinearGradient
+        <GradientView
           // Deepened the gradient stops to compensate for the lack of blur
           colors={['transparent', 'rgba(0,0,0,0.1)', 'rgba(0,0,0,0.7)', 'rgba(0,0,0,0.98)']}
           locations={[0, 0.3, 0.6, 1]}
@@ -385,7 +385,7 @@ export const ProfileCard = ({ profile, onPress, user, showToast, onActionComplet
               )} */}
             </HStack>
           </VStack>
-        </LinearGradient>
+        </GradientView>
       </Box>
     </TouchableOpacity>
   );

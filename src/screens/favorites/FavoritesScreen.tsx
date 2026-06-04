@@ -5,7 +5,6 @@ import { Box, HStack, Text, Center, Spinner, VStack, Button, ButtonText, Avatar,
 import profileService from '@/src/services/profileService';
 import { ProfileCard } from '../profile/ProfileCard';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import LinearGradient from 'react-native-linear-gradient';
 import { Icon } from '@/src/components/common/IconUI';
 import { Heart, HeartIcon, Star } from 'lucide-react-native';
 import { StarIcon } from '@/components/ui/icon';
@@ -14,6 +13,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { getExtension } from '@/src/utils/common';
 import HeaderSession from '../common/HeaderSession';
 import { CaptureProtection } from 'react-native-capture-protection';
+import GradientView from '../component/GradientView';
 
 const FavoritesScreen = () => {
     // 1. Add a safety check for navigation
@@ -96,11 +96,9 @@ const FavoritesScreen = () => {
                             onPress={() => handleTabChange('liked')}
                         >
                             {activeTab === 'liked' ? (
-                                <LinearGradient
+                                <GradientView
                                     // Using your specific green palette
                                     colors={['#10b981', '#059669', '#047857']}
-                                    start={{ x: 0, y: 0 }}
-                                    end={{ x: 1, y: 0 }}
                                     className="rounded-full"
                                     style={{
                                         borderRadius: 999, // High number ensures it's always "full"
@@ -116,7 +114,7 @@ const FavoritesScreen = () => {
                                             {"Liked"}
                                         </Text>
                                     </HStack>
-                                </LinearGradient>
+                                </GradientView>
                             ) : (
                                 // Inactive State for Liked
                                 <HStack className="py-2.5 items-center justify-center gap-2 rounded-full">
@@ -140,10 +138,8 @@ const FavoritesScreen = () => {
                             onPress={() => handleTabChange('accepted')}
                         >
                             {activeTab === 'accepted' ? (
-                                <LinearGradient
+                                <GradientView
                                     colors={['#be123c', '#9f1239', '#881337']}
-                                    start={{ x: 0, y: 0 }}
-                                    end={{ x: 1, y: 0 }}
                                     // 1. Use className for layout
                                     className="rounded-full items-center justify-center"
                                     // 2. Use style for the actual rounding to ensure clipping
@@ -165,7 +161,7 @@ const FavoritesScreen = () => {
                                             {"Connected"}
                                         </Text>
                                     </HStack>
-                                </LinearGradient>
+                                </GradientView>
                             ) : (
                                 // Inactive State for Matches
                                 <HStack className="py-2.5 items-center justify-center gap-2 rounded-full">

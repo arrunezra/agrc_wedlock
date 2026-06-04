@@ -73,3 +73,12 @@ SKELETON VIEW
         delay={200}     // Delays start offset on initial mount by 200ms
         className="h-12 w-full rounded-xl bg-white/20"
     >
+
+
+<GradientView
+    colors={['#e6f4f1', '#ffffff']}
+    horizontal={true}
+    style={{ padding: 24 }}
+>
+
+</GradientView>

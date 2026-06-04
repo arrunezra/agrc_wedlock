@@ -76,17 +76,17 @@ const TAB_CONFIG = {
   admin: [
     { name: "Dashboard", component: AdminDashboard, icon: HomeIcon, title: "Home" },
     { name: "Profile", component: ProfileSummary, icon: UserIcon, title: "Profile" },
-    { name: "ContributeHistory", component: ContributeHistoryScreen, icon: HistoryIcon, title: "Contribute Details" },
+    { name: "ContributeHistory", component: ContributeHistoryScreen, icon: HistoryIcon, title: "Contribute" },
   ],
   super_admin: [
-    { name: "Dashboard", component: AdminDashboard, icon: HomeIcon, title: "Admin Home" },
+    { name: "Dashboard", component: AdminDashboard, icon: HomeIcon, title: "Home" },
     { name: "Profile", component: ProfileSummary, icon: UserIcon, title: "Profile" },
-    { name: "ContributeHistory", component: ContributeHistoryScreen, icon: HistoryIcon, title: "Contribute Details" },
+    { name: "ContributeHistory", component: ContributeHistoryScreen, icon: HistoryIcon, title: "Contribute" },
   ],
   root_admin: [
-    { name: "Dashboard", component: AdminDashboard, icon: HomeIcon, title: "Admin Home" },
+    { name: "Dashboard", component: AdminDashboard, icon: HomeIcon, title: "Home" },
     { name: "Profile", component: ProfileSummary, icon: UserIcon, title: "Profile" },
-    { name: "ContributeHistory", component: ContributeHistoryScreen, icon: HistoryIcon, title: "Contribute Details" },
+    { name: "ContributeHistory", component: ContributeHistoryScreen, icon: HistoryIcon, title: "Contribute" },
   ],
   staff: [
     { name: "Home", component: StaffDashboard, icon: HomeIcon, options: { title: "Home" } },

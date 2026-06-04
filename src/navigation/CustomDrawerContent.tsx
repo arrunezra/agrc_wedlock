@@ -6,10 +6,9 @@ import { Camera, CheckIcon, ChevronRight, LogOut, Settings } from 'lucide-react-
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { getCurrentYear, getExtension } from '../utils/common';
-import LinearGradient from 'react-native-linear-gradient';
 import { LookupContext } from '../context/LookupContext';
 import { useAuth } from '../context/AuthContext';
-import FastImage from '@d11/react-native-fast-image';
+import GradientView from '../screens/component/GradientView';
 
 export default function CustomDrawerContent(props: any) {
     const { state, userRole, navigation, logout } = props;
@@ -49,10 +48,9 @@ export default function CustomDrawerContent(props: any) {
             contentContainerStyle={{ flexGrow: 1, backgroundColor: 'transparent' }} // Keeps container transparent and fully scrollable
             style={{ backgroundColor: '#033729' }} // Prevents flashing white on load by matching your gradient's base color
         >
-            <LinearGradient
+            <GradientView
+                horizontal={false}
                 colors={['#ffffffff', '#e0f5f0ff', '#04231bff']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 0, y: 1 }}
                 style={{ flex: 1, minHeight: '100%', paddingBottom: 24 }}
             >
                 <VStack className="justify-between h-full flex-1">
@@ -73,10 +71,8 @@ export default function CustomDrawerContent(props: any) {
                         </ImageBackground>
 
                         {/* Floating User Profile Card */}
-                        <LinearGradient
+                        <GradientView
                             colors={['#ffffff', '#ecfaf5ff']} // Soft, ultra-clean premium vertical white gradient cascade
-                            start={{ x: 0, y: 0 }}
-                            end={{ x: 0, y: 1 }}
                             style={{
                                 marginTop: -55,
                                 borderRadius: 40,      // ✅ Explicitly handles component radius clipping on Android & iOS
@@ -140,7 +136,7 @@ export default function CustomDrawerContent(props: any) {
                                     </HStack>
                                 </Box>
                             </VStack>
-                        </LinearGradient>
+                        </GradientView>
                     </Box>
 
                     {/* MIDDLE SECTION: Menu Items Navigation Links */}
@@ -202,7 +198,7 @@ export default function CustomDrawerContent(props: any) {
                     </Box>
 
                 </VStack>
-            </LinearGradient>
+            </GradientView>
         </DrawerContentScrollView>
     );
 }

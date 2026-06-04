@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import LottieView from 'lottie-react-native';
 import { Box, VStack, Heading, Text, Button, ButtonText, Center } from '@/src/components/common/GluestackUI';
 import { Animated, TouchableOpacity } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import { RefreshCw, X } from 'lucide-react-native';
+import GradientView from '../component/GradientView';
 
 interface FailedScreenProps {
     title?: string;
@@ -62,7 +62,7 @@ export default function FailedScreen({
 
     return (
         <Box className="flex-1 absolute inset-0 z-[100]">
-            <LinearGradient
+            <GradientView
                 colors={['#ef4444', '#7f1d1d', '#000000']}
                 locations={[0, 0.4, 1]}
                 style={{ flex: 1 }}
@@ -144,7 +144,7 @@ export default function FailedScreen({
                         </VStack>
                     </Animated.View>
                 </Center>
-            </LinearGradient>
+            </GradientView>
         </Box>
     );
 }

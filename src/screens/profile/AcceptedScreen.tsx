@@ -7,11 +7,11 @@ import { User, UserMinus } from "lucide-react-native";
 import { Alert, FlatList, Pressable, RefreshControl, ScrollView } from 'react-native';
 import profileService from '@/src/services/profileService';
 import { useAuth } from '@/src/context/AuthContext';
-import LinearGradient from 'react-native-linear-gradient';
 import { getExtension } from '@/src/utils/common';
 import { useAlert } from '@/src/context/AlertContext';
 import { useAppToast } from '@/src/context/ToastContext';
 import NotFoundScreen from '../common/NotFoundScreen';
+import GradientView from '../component/GradientView';
 
 const AcceptedScreen = () => {
     const { showAlert, hideAlert } = useAlert();
@@ -116,10 +116,8 @@ const AcceptedScreen = () => {
                                     </HStack>
                                 </Pressable>
                                 <Pressable onPress={() => handleUnblock(item.profile_id, item.full_name)}>
-                                    <LinearGradient
+                                    <GradientView
                                         colors={['#10b981', '#059669', '#047857']}
-                                        start={{ x: 0, y: 0 }}
-                                        end={{ x: 1, y: 0 }}
                                         style={{
                                             borderRadius: 12,
                                             paddingHorizontal: 16,
@@ -131,7 +129,7 @@ const AcceptedScreen = () => {
                                         <Text className="text-white font-bold text-xs tracking-wide">
                                             Unblock
                                         </Text>
-                                    </LinearGradient>
+                                    </GradientView>
                                 </Pressable>
                             </HStack>
                         )}

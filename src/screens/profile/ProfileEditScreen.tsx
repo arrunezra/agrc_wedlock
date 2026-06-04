@@ -5,7 +5,6 @@ import api from '@/src/api/api';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { Accessibility, Activity, Baby, Banknote, Briefcase, Calendar, CameraIcon, Check, CheckCircle2, CheckIcon, ChevronDown, ChevronDownIcon, ChevronLeftIcon, ChevronUp, ChevronUpIcon, Coffee, Droplets, EditIcon, Globe, GraduationCap, Heart, Icon, Info, Languages, Mail, MapPin, MessageSquareQuote, MoonStar, Network, Phone, Ruler, Scale, School, ShieldCheck, Sparkles, User, UserRound, Users, Users2, UserSquare } from '@/src/components/common/IconUI';
 import FastImage from '@d11/react-native-fast-image';
-import LinearGradient from 'react-native-linear-gradient';
 import { useAuth } from '@/src/context/AuthContext';
 import LottieView from 'lottie-react-native';
 import EditBasicsModalScreen from './home_sub_screen/EditBasicsModalScreen';
@@ -28,6 +27,7 @@ import NoDataScreen from '../common/NoDataScreen';
 import { Plus } from 'lucide-react-native';
 import { getExtension } from '@/src/utils/common';
 import HeaderSession from '../common/HeaderSession';
+import GradientView from '../component/GradientView';
 
 
 export default function ProfileEditScreen({ navigation, route }: any) {
@@ -320,10 +320,8 @@ export default function ProfileEditScreen({ navigation, route }: any) {
         {/* Background Track */}
         <Box className="h-2.5 w-full bg-gray-100 rounded-full overflow-hidden">
           {/* Dynamic Gradient Progress */}
-          <LinearGradient
+          <GradientView
             colors={colors}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
             style={{ width: `${percentage}%`, height: '100%', borderRadius: 10 }}
           />
         </Box>
@@ -392,10 +390,8 @@ export default function ProfileEditScreen({ navigation, route }: any) {
   // Reusable Gradient Card Component
   const GradientCard = ({ children, title, onEdit }: any) => (
     <Box className="mx-4 mt-4 rounded-[24px] overflow-hidden border border-outline-50 shadow-sm">
-      <LinearGradient
-        colors={['#ffffff', '#fcfcfc', '#f7f9fc']} // Soft professional gradient
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
+      <GradientView
+        colors={['#ffffff', '#fcfcfc', '#f7f9fc']}
       >
         <VStack className="p-5">
           <HStack className="justify-between items-center mb-3">
@@ -408,7 +404,7 @@ export default function ProfileEditScreen({ navigation, route }: any) {
           </HStack>
           {children}
         </VStack>
-      </LinearGradient>
+      </GradientView>
     </Box>
   );
   const updateForm = (key: string, value: any) => {
@@ -504,7 +500,7 @@ export default function ProfileEditScreen({ navigation, route }: any) {
                 </TouchableOpacity> */}
 
                 {/* Bottom Gradient - Deeper and smoother for 2026 aesthetics */}
-                <LinearGradient
+                <GradientView
                   colors={['transparent', 'rgba(0,0,0,0.1)', 'rgba(0,0,0,0.8)', '#000']}
                   style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 140 }}
                 />
@@ -541,7 +537,7 @@ export default function ProfileEditScreen({ navigation, route }: any) {
                     {profileData?.aboutus || getAboutUs()}
                   </Text>
                   {!isExpanded && (
-                    <LinearGradient
+                    <GradientView
                       colors={['rgba(255,255,255,0)', 'rgba(247,249,252,0.9)', '#f7f9fc']}
                       style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 30 }}
                     />

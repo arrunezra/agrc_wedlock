@@ -2,9 +2,9 @@ import React from 'react';
 import { Platform, StatusBar, TouchableOpacity } from 'react-native';
 import { Box, VStack, HStack, Heading, Text } from '@/src/components/common/GluestackUI';
 import { Menu, Bell, ChevronLeft, Search, X } from 'lucide-react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import { Icon } from '@/src/components/common/IconUI';
 import FastImage from '@d11/react-native-fast-image';
+import GradientView from '../component/GradientView';
 
 interface HeaderProps {
     title: string;
@@ -81,10 +81,8 @@ const HeaderSession = ({
 
     return (
 
-        <LinearGradient
+        <GradientView
             colors={palettes[theme]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
             style={{
                 paddingTop: STATUS_BAR_HEIGHT + 10,
                 paddingBottom: 20,
@@ -154,7 +152,7 @@ const HeaderSession = ({
                     )}
                 </Box>
             </HStack>
-        </LinearGradient>
+        </GradientView>
 
     );
 };

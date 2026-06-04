@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import { Crown, HeartHandshake, ShieldCheck } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import GradientView from '../component/GradientView';
 
 const { width } = Dimensions.get('window');
 
@@ -13,7 +13,7 @@ const ContributionScreen = ({ navigation, onPay, values }: any) => {
         <View style={styles.mainContainer}>
             {/* 1. BACKGROUND LAYER */}
             <View style={StyleSheet.absoluteFill}>
-                <LinearGradient colors={['#e6fcf5', '#f8fafc']} style={StyleSheet.absoluteFill} />
+                <GradientView colors={['#e6fcf5', '#f8fafc']} style={StyleSheet.absoluteFill} />
                 <View style={[{
                     width: width * 0.8,
                     height: width * 0.8,
@@ -48,15 +48,13 @@ const ContributionScreen = ({ navigation, onPay, values }: any) => {
                                 onPress={onPay}
                                 style={styles.buttonWrapper}
                             >
-                                <LinearGradient
+                                <GradientView
                                     colors={['#10b981', '#059669']}
-                                    start={{ x: 0, y: 0 }}
-                                    end={{ x: 1, y: 0 }}
                                     style={styles.gradientButton}
                                 >
                                     {/* Change: Replaced commercial "ACTIVATE NOW" with donation text */}
                                     <Text style={styles.buttonText}>CONTRIBUTE NOW</Text>
-                                </LinearGradient>
+                                </GradientView>
                             </TouchableOpacity>
 
                             <View style={styles.securityFooter}>

@@ -4,13 +4,13 @@ import {
     Box, VStack, HStack, Text, Heading, Switch, Divider
 } from '@/src/components/common/GluestackUI';
 import { Eye, Calendar, ShieldCheck, Lock, Fingerprint, Info, Icon } from '@/src/components/common/IconUI';
-import LinearGradient from 'react-native-linear-gradient';
 import profileService from '@/src/services/profileService';
 import { useAppToast } from '@/src/context/ToastContext';
 import { useAlert } from '@/src/context/AlertContext';
 import { useAuth } from '@/src/context/AuthContext';
 import { User } from '@/src/utils/models';
 import HeaderSession from '../../common/HeaderSession';
+import GradientView from '../../component/GradientView';
 
 export default function ContactPrivacyScreen({ navigation }: any) {
     const { showToast } = useAppToast();
@@ -171,7 +171,7 @@ export default function ContactPrivacyScreen({ navigation }: any) {
 
 const SettingsGradientCard = ({ title, icon, children, gradientColors }: any) => (
     <Box className="mb-6 px-5">
-        <LinearGradient
+        <GradientView
             colors={gradientColors || ['#f5f3ff', '#ffffff']}
             style={{
                 borderRadius: 32,
@@ -192,6 +192,6 @@ const SettingsGradientCard = ({ title, icon, children, gradientColors }: any) =>
                 <Heading size="md" className="text-typography-900">{title}</Heading>
             </HStack>
             {children}
-        </LinearGradient>
+        </GradientView>
     </Box>
 );

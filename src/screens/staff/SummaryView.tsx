@@ -10,7 +10,6 @@ import {
 } from '@/src/components/common/GluestackUI';
 import { Icon, PhoneIcon, AddIcon } from '@/src/components/common/IconUI';
 
-import LinearGradient from "react-native-linear-gradient";
 import FastImage from "@d11/react-native-fast-image";
 import { Edit3Icon, SearchIcon, Settings2, XCircle, XIcon } from "lucide-react-native";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -20,6 +19,7 @@ import HeaderSession from "../common/HeaderSession";
 import { getExtension } from "@/src/utils/common";
 import { useAuth } from "@/src/context/AuthContext";
 import AnimatedMotiView from "../component/AnimateView";
+import GradientView from "../component/GradientView";
 const StaffItem = ({ item, index, navigation, user }: any) => {
     const [profile, setProfile] = useState<any>("");
     //console.log('item', item);
@@ -38,7 +38,7 @@ const StaffItem = ({ item, index, navigation, user }: any) => {
             onPress={() => navigation.navigate("Main", { screen: "ViewStaffinforamtion", params: { id: item.id } })}
             className="mb-3 mx-4 "
         >
-            <LinearGradient
+            <GradientView
                 colors={['#ffffff', '#f8fafc']}
                 style={{
                     borderLeftWidth: 6,
@@ -77,7 +77,7 @@ const StaffItem = ({ item, index, navigation, user }: any) => {
                         <Icon as={PhoneIcon} size="sm" className="text-white" />
                     </TouchableOpacity>
                 </HStack>
-            </LinearGradient>
+            </GradientView>
         </Pressable>
     </AnimatedMotiView>
 };
@@ -329,13 +329,13 @@ const StaffSummaryView = ({ navigation }: any) => {
                     className="h-20 w-20 rounded-full overflow-hidden shadow-2xl shadow-cyan-500/50"
                     style={{ elevation: 10 }}
                 >
-                    <LinearGradient
+                    <GradientView
                         colors={['#0891b2', '#0e7490']}
                         // Ensure the gradient also has rounded-full
                         className="h-full w-full rounded-full items-center justify-center"
                     >
                         <Icon as={AddIcon} size="xl" className="text-cyan-400" style={{ width: 38, height: 38 }} />
-                    </LinearGradient>
+                    </GradientView>
                 </TouchableOpacity>
             </AnimatedMotiView>
         </Box >

@@ -23,13 +23,13 @@ import { API_BASE_URL_DEV_DMS } from '@/src/utils/environment';
 import LoadingScreen from '../common/LoadingScreen';
 import { getFileIconConfig } from '@/src/utils/common';
 import { VStack } from '@/src/components/common/GluestackUI';
-import LinearGradient from 'react-native-linear-gradient';
 import { AddIcon, Icon } from '@/src/components/common/IconUI';
 import { useAppToast } from '@/src/context/ToastContext';
 import { Screen } from 'react-native-screens';
 import { useAlert } from '@/src/context/AlertContext';
 import HeaderSession from '../common/HeaderSession';
 import AnimatedMotiView from '../component/AnimateView';
+import GradientView from '../component/GradientView';
 
 const DocumentSummary = () => {
     const navigation = useNavigation<any>();
@@ -376,13 +376,13 @@ const DocumentSummary = () => {
                     className="h-20 w-20 rounded-full overflow-hidden shadow-2xl shadow-cyan-500/50"
                     style={{ elevation: 10 }}
                 >
-                    <LinearGradient
+                    <GradientView
                         colors={['#26dda0ff', '#0a6d4fff']}
                         // Ensure the gradient also has rounded-full
                         className="h-full w-full rounded-full items-center justify-center"
                     >
                         <Icon as={AddIcon} size="xl" className="text-cyan-400" style={{ width: 38, height: 38 }} />
-                    </LinearGradient>
+                    </GradientView>
                 </TouchableOpacity>
             </AnimatedMotiView>}
             {loading && page === 1 && !refreshing && (

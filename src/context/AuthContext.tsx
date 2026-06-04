@@ -1,12 +1,18 @@
-import { createContext, useState, useContext, useEffect, ReactNode } from 'react';
+import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import authService from '../services/authService';
 import { AuthContextType, User } from '../utils/models';
-import { Alert } from 'react-native';
 
+// 1. Create a singleton controller reference pointer for Axios file access 
+let forceLogoutRef: () => void = () => { };
 
+export const globalLogoutTrigger = () => {
+  if (forceLogoutRef) {
+    forceLogoutRef();
+  }
+};
 
-// 3. Create the Context with an initial undefined value
+// 2. Create the Context with an initial undefined value
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 interface AuthProviderProps {
@@ -18,24 +24,30 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [accessToken, setAccessToken] = useState<string | null>(null);
+
   const userRole = user?.role || null;
+
+  // Bind the global handler during component creation mounting lifecycle
   useEffect(() => {
+    forceLogoutRef = handleSessionExpirationCleanup;
     checkAuthStatus();
   }, []);
 
   const checkAuthStatus = async () => {
     try {
       const rememberMe = await AsyncStorage.getItem('rememberMe');
-      // Updated keys to match our new logic
       const access = await AsyncStorage.getItem('accessToken');
       const userData = await AsyncStorage.getItem('userData');
 
+      // 🎯 Fix: Even if rememberMe is false, if tokens exist in current workspace, 
+      // let them stay authenticated until the session expires or they close the app.
       if (rememberMe === 'true' && access && userData) {
+
+        // if possible to store the credential and call login methoed to refreh the token
         setAccessToken(access);
         setUser(JSON.parse(userData));
         setIsAuthenticated(true);
       } else {
-        // Otherwise, force them to the Login screen
         setIsAuthenticated(false);
       }
     } catch (error) {
@@ -49,57 +61,63 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       const { phoneNumber, password, rememberMe } = credentials;
       const response = await authService.login({ phoneNumber, password });
-      //console.log('Login response', response)
+
       if (response.access_token) {
-        // 1. Always update memory state so user is redirected to Home immediately
+        // Update operational component memory state immediately
         setAccessToken(response.access_token);
         setIsAuthenticated(true);
 
         if (response.user) {
-
           setUser(response.user);
         }
+
+        // Always write transactional keys for the interceptor refresh processes
         await AsyncStorage.multiSet([
           ['accessToken', response.access_token],
           ['refreshToken', response.refresh_token || '']
         ]);
+
         if (rememberMe) {
           await AsyncStorage.setItem('rememberMe', 'true');
           if (response.user) {
             await AsyncStorage.setItem('userData', JSON.stringify(response.user));
           }
         } else {
-          //console.log("errro");
-          //await AsyncStorage.multiRemove(['accessToken', 'refreshToken', 'userData']);
           await AsyncStorage.setItem('rememberMe', 'false');
+          if (response.user) {
+            await AsyncStorage.setItem('userData', JSON.stringify(response.user));
+          }
         }
 
         return { success: true };
       }
       return { success: false, message: response.message };
     } catch (error: any) {
-      return { success: false, message: error.response?.message || error.message };
-    }
-    finally {
-      // Artificial delay (Optional: 1 second) to make splash feel smooth
-      setTimeout(() => setIsLoading(false), 1000);
+      return { success: false, message: error.response?.data?.message || error.message };
+    } finally {
+      setIsLoading(false);
     }
   };
+
   const logout = async () => {
     try {
-      // 1. Notify Backend (Optional)
       await authService.logout();
     } catch (e) {
-      // Even if network fails, we clear local session
+      // Graceful degradation structural boundary safety catch
     } finally {
-      // 2. Clear ALL local data
-      await AsyncStorage.multiRemove(['accessToken', 'refreshToken', 'userData']);
-      setUser(null);
-      setAccessToken(null);
-      setIsAuthenticated(false);
+      await handleSessionExpirationCleanup();
       return { success: true };
     }
   };
+
+  // 🔄 Dedicated Interceptor Target: Drops memory layout maps back to base default states synchronously
+  const handleSessionExpirationCleanup = async () => {
+    await AsyncStorage.multiRemove(['accessToken', 'refreshToken', 'userData', 'rememberMe']);
+    setUser(null);
+    setAccessToken(null);
+    setIsAuthenticated(false);
+  };
+
   const signup = async (userData: any) => {
     try {
       return await authService.signup(userData);
@@ -107,7 +125,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       return { success: false, message: error.message };
     }
   };
-
 
   const updateUser = async (updatedData: any) => {
     try {
@@ -130,13 +147,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         signup,
         logout,
         updateUser,
-      }}>
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
 };
 
-// 4. Custom hook with error handling for undefined context
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
   if (!context) {
