@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Dimensions, ActivityIndicator, Alert, Pressable } from 'react-native';
 import Pdf from 'react-native-pdf';
-import { VStack, HStack, Box, Text, Heading } from '@/src/components/common/GluestackUI';
+import { VStack, HStack, Box, Text, Heading } from '@/src/components/GluestackUI';
 import { Share as ShareIcon, ChevronLeft, Info } from 'lucide-react-native';
-import { Icon } from '@/src/components/common/IconUI';
+import { Icon } from '@/src/components/IconUI';
 
 interface DocumentViewerProps {
     route: {

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Animated, StyleSheet } from 'react-native';
-import { Box, VStack, HStack } from '@/src/components/common/GluestackUI';
+import { Box, VStack, HStack } from '@/src/components/GluestackUI';
 
 const SkeletonPulse = ({ className, style }: any) => {
     const opacity = useRef(new Animated.Value(0.3)).current;

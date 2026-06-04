@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, Animated, DimensionValue, Easing, Platform, Pressable, ScrollView, StatusBar, StyleSheet } from 'react-native';
 import {
     Building2, MapPin, User, Phone, Mail, Hash, Globe, CheckCircle2, X, Icon
-} from '@/src/components/common/IconUI';
+} from '@/src/components/IconUI';
 import {
     Modal, ModalBackdrop, ModalContent, ModalHeader, ModalBody, ModalFooter,
     VStack, HStack, Heading, Text, FormControl, FormControlLabel,
@@ -11,23 +11,22 @@ import {
     SelectBackdrop, SelectContent, SelectItem, Button, ButtonText, Divider,
     Box,
     ButtonSpinner
-} from '@/src/components/common/GluestackUI';
+} from '@/src/components/GluestackUI';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { AdminStackParamList } from '@/src/types/navigation';
 import { ChevronDown, ChevronLeft, Edit3, Navigation, Network, Plus, User2Icon } from 'lucide-react-native';
-import { AnimateError } from '../common/AnimateError';
 import { KeyboardAvoidingView, KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { Dropdown } from 'react-native-element-dropdown';
 import profileService from '@/src/services/profileService';
-import api from '@/src/api/api';
-import { SuccessOverlay } from '../common/SuccessOverlay';
-import FailedScreen from '../common/FailedScreen';
-import AnimatedFormRow from './AnimatedViewForRegistration';
-import LoadingScreen from '../common/LoadingScreen';
-import ChruchService from '@/src/services/ChruchService';
-import HeaderSession from '../common/HeaderSession';
-import FuturisticDropdown from '@/src/components/common/FuturisticDropdown';
+import FuturisticDropdown from '@/src/components/FuturisticDropdown';
 import { LookupContext } from '@/src/context/LookupContext';
+import ChruchService from '@/src/services/ChruchService';
+import LoadingScreen from '@/src/components/LoadingScreen';
+import HeaderSession from '@/src/components/HeaderSession';
+import AnimatedFormRow from './AnimatedViewForRegistration';
+import { AnimateError } from '@/src/components/AnimateError';
+import FailedScreen from '@/src/components/FailedScreen';
+import { SuccessOverlay } from '@/src/components/SuccessOverlay';
 type Props = {
     navigation: NativeStackNavigationProp<AdminStackParamList, 'ChurchManagement'>;
     route: any;

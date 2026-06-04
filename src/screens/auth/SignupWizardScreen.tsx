@@ -19,11 +19,10 @@ import {
   Textarea,
   TextareaInput,
   Switch
-} from '@/src/components/common/GluestackUI';
-import { Icon, ChevronLeftIcon, ChevronDownIcon, CheckIcon, SearchIcon, CalendarDays, UserCheck, User, Globe, ChevronDown, Users, Church, ShieldCheck, Phone, Mail, CheckCircle2, Check, Fingerprint, Building2, MapPin, Trash2, Baby, Heart, Ruler, BookOpen, School, GraduationCap, UserRound, Briefcase, Banknote, Building, Sparkles, X, Lightbulb } from '@/src/components/common/IconUI';
+} from '@/src/components/GluestackUI';
+import { Icon, ChevronLeftIcon, ChevronDownIcon, CheckIcon, SearchIcon, CalendarDays, UserCheck, User, Globe, ChevronDown, Users, Church, ShieldCheck, Phone, Mail, CheckCircle2, Check, Fingerprint, Building2, MapPin, Trash2, Baby, Heart, Ruler, BookOpen, School, GraduationCap, UserRound, Briefcase, Banknote, Building, Sparkles, X, Lightbulb } from '@/src/components/IconUI';
 import api from '@/src/api/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import SuccessScreen from '../common/SuccessScreen';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import profileService from '@/src/services/profileService';
@@ -33,16 +32,16 @@ import { Dropdown } from 'react-native-element-dropdown';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { useAlert } from '@/src/context/AlertContext';
 import { useAuth } from '@/src/context/AuthContext';
-import { AnimateError } from '../common/AnimateError';
 import { itemData } from '@/src/utils/qualification';
 import { API_BASE_URL_DEV_Profiles_Images, API_BASE_URL_DEV_Profiles_Thumbs } from '@/src/utils/environment';
 import { HEIGHT_DATA } from '@/src/utils/utils';
-import { UploadProgressModal } from '../common/UploadProgressModal';
-import FuturisticDropdown from '@/src/components/common/FuturisticDropdown';
+import FuturisticDropdown from '@/src/components/FuturisticDropdown';
 import { LookupContext } from '@/src/context/LookupContext';
 import { CameraIcon, CheckCircleIcon, ChurchIcon, Droplets, Flame, User2, UserIcon, Wind, ZapIcon } from 'lucide-react-native';
 import ChruchService from '@/src/services/ChruchService';
 import { launchImageLibrary } from 'react-native-image-picker';
+import { AnimateError } from '@/src/components/AnimateError';
+import { UploadProgressModal } from '@/src/components/UploadProgressModal';
 
 // --- DATA SOURCES ---
 

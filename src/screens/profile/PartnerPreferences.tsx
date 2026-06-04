@@ -1,4 +1,4 @@
-import { Box, ScrollView } from "@/src/components/common/GluestackUI";
+import { Box, ScrollView } from "@/src/components/GluestackUI";
 import { useContext, useEffect, useState } from "react";
 import EditPreferenceModal from "./home_sub_screen/EditPreferenceModal";
 import PartnerPreferencesView from "./PartnerPreferencesView";
@@ -8,7 +8,7 @@ import { useAppToast } from "@/src/context/ToastContext";
 import { useAuth } from "@/src/context/AuthContext";
 import { compact } from "lodash";
 import { RefreshControl, StatusBar } from "react-native";
-import HeaderSession from "../common/HeaderSession";
+import HeaderSession from "@/src/components/HeaderSession";
 
 const PartnerPreferences = ({ navigation }: any) => {
     const { user } = useAuth();

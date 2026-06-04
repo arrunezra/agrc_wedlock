@@ -19,13 +19,13 @@ import {
     Button,
     ButtonText,
     Spinner,
-} from '@/src/components/common/GluestackUI';
+} from '@/src/components/GluestackUI';
 import {
     AlertCircle, Info, X, Icon,
     CloseIcon,
-} from '@/src/components/common/IconUI';
+} from '@/src/components/IconUI';
 import { ShieldAlert } from 'lucide-react-native';
-import FuturisticDropdown from '@/src/components/common/FuturisticDropdown';
+import FuturisticDropdown from '@/src/components/FuturisticDropdown';
 import { useAppToast } from '@/src/context/ToastContext';
 
 interface ReportModalProps {

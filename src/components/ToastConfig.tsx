@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { CheckCircle2, AlertTriangle, XCircle, X, LucideIcon } from 'lucide-react-native';
-import GradientView from '../component/GradientView';
+import GradientView from '@/src/components/GradientView';
 
 // --- Types ---
 interface CustomToastProps {

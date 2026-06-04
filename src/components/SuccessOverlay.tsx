@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { Animated } from 'react-native';
-import { Box, Center, VStack, Text } from '@/src/components/common/GluestackUI';
+import GradientView from './GradientView';
 import LottieView from 'lottie-react-native';
-import GradientView from '../component/GradientView';
-
+import { Box, Center, VStack, Text } from './GluestackUI';
 interface SuccessOverlayProps {
     isVisible: boolean;
     message?: string;
@@ -37,9 +36,10 @@ export const SuccessOverlay = ({
 
     return (
         <Box className="absolute inset-0 z-[100] bg-white/50">
+
             <GradientView
                 colors={['#10b981', '#065f46', '#022c22']}
-                locations={[0, 0.6, 1]}
+                horizontal={true}
                 style={{ flex: 1 }}
             >
                 <Center className="flex-1 px-6">
@@ -49,7 +49,7 @@ export const SuccessOverlay = ({
                             {/* Animation Box */}
                             <Box className="w-64 h-64">
                                 <LottieView
-                                    source={require('../../assets/animations/done_success.json')}
+                                    source={require('@/src/assets/animations/done_success.json')}
                                     autoPlay
                                     loop={false}
                                     style={{ width: '100%', height: '100%' }}

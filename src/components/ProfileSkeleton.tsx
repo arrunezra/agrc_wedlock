@@ -1,6 +1,6 @@
+import { Divider, HStack, VStack } from '@/src/components/GluestackUI';
 import React, { useEffect, useRef } from 'react';
 import { Animated, Dimensions } from 'react-native';
-import { Box, VStack, HStack, Divider } from '@/src/components/common/GluestackUI';
 
 const { width } = Dimensions.get('window');
 

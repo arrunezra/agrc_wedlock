@@ -11,12 +11,12 @@ import {
     Input,
     Textarea,
     TextareaInput,
-} from '@/src/components/common/GluestackUI';
-import { Users, UserRound, UserSquare, Users2, MapPin, Briefcase, Globe, Landmark, ChevronLeftIcon, CloseIcon, Icon } from '@/src/components/common/IconUI';
-import FuturisticDropdown from '@/src/components/common/FuturisticDropdown';
+} from '@/src/components/GluestackUI';
+import { Users, UserRound, UserSquare, Users2, MapPin, Briefcase, Globe, Landmark, ChevronLeftIcon, CloseIcon, Icon } from '@/src/components/IconUI';
+import FuturisticDropdown from '@/src/components/FuturisticDropdown';
 import _, { findIndex, } from 'lodash';
 import profileService from '@/src/services/profileService';
-import { AnimateError } from '../../common/AnimateError';
+import { AnimateError } from '@/src/components/AnimateError';
 
 export const FamilyDetailsModal = ({ isOpen, onClose, lookups, content, onRefresh, showToast, user }: any) => {
     const [currentStep, setCurrentStep] = useState(1);

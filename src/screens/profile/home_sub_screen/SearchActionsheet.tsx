@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Actionsheet, ActionsheetBackdrop, ActionsheetContent, ActionsheetDragIndicator, ActionsheetDragIndicatorWrapper, Box, Button, ButtonText, Center, Divider, Heading, HStack, Input, InputField, Select, SelectInput, SelectTrigger, Text, VStack } from '@/src/components/common/GluestackUI';
+import { Actionsheet, ActionsheetBackdrop, ActionsheetContent, ActionsheetDragIndicator, ActionsheetDragIndicatorWrapper, Box, Button, ButtonText, Center, Divider, Heading, HStack, Input, InputField, Select, SelectInput, SelectTrigger, Text, VStack } from '@/src/components/GluestackUI';
 import { Keyboard, KeyboardAvoidingView, Platform, Pressable, ScrollView } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
-import { ChevronRight, Filter, Heart, Icon, MapPin, Search, Users2 } from '@/src/components/common/IconUI';
+import { ChevronRight, Filter, Heart, Icon, MapPin, Search, Users2 } from '@/src/components/IconUI';
 import { InputSlot } from '@/components/ui/input';
 
 export const SearchActionsheet = ({ isOpen, onClose, initialFilters, onApply }: any) => {
@@ -195,8 +195,8 @@ export const SearchActionsheet = ({ isOpen, onClose, initialFilters, onApply }: 
                                             <Pressable
                                                 onPress={() => updateForm('hasChildren', true)}
                                                 className={`px-5 py-2 rounded-[11px] ${formData.hasChildren === true
-                                                        ? 'bg-white shadow-sm shadow-slate-400'
-                                                        : 'bg-transparent'
+                                                    ? 'bg-white shadow-sm shadow-slate-400'
+                                                    : 'bg-transparent'
                                                     }`}
                                             >
                                                 <Text
@@ -211,8 +211,8 @@ export const SearchActionsheet = ({ isOpen, onClose, initialFilters, onApply }: 
                                             <Pressable
                                                 onPress={() => updateForm('hasChildren', false)}
                                                 className={`px-5 py-2 rounded-[11px] ${formData.hasChildren === false
-                                                        ? 'bg-white shadow-sm shadow-slate-400'
-                                                        : 'bg-transparent'
+                                                    ? 'bg-white shadow-sm shadow-slate-400'
+                                                    : 'bg-transparent'
                                                     }`}
                                             >
                                                 <Text

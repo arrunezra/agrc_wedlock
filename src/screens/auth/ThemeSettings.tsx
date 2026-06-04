@@ -1,6 +1,6 @@
- 
-import { useTheme,Button, ButtonText,Box,HStack } from '@/src/components/common/GluestackUI';
- 
+
+import { useTheme, Button, ButtonText, Box, HStack } from '@/src/components/GluestackUI';
+
 export const ThemeSettings = () => {
   const { mode, flavor, toggleMode, setFlavor } = useTheme();
 
@@ -13,7 +13,7 @@ export const ThemeSettings = () => {
 
       {/* Flavor Toggles */}
       <HStack className="gap-2">
-        <Button 
+        <Button
           action={flavor === 'blue' ? 'primary' : 'secondary'}
           onPress={() => setFlavor('blue')}
           className="flex-1"
@@ -21,7 +21,7 @@ export const ThemeSettings = () => {
           <ButtonText>Blue Theme</ButtonText>
         </Button>
 
-        <Button 
+        <Button
           action={flavor === 'green' ? 'primary' : 'secondary'}
           onPress={() => setFlavor('green')}
           className="flex-1"

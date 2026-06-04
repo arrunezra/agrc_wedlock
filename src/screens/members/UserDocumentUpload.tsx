@@ -5,7 +5,7 @@ import {
     FormControl,
     FormControlLabel,
     FormControlLabelText
-} from "../../components/common/GluestackUI";
+} from "@/src/components/GluestackUI";
 import {
     pick, types, isErrorWithCode, errorCodes, DocumentPickerResponse
 } from '@react-native-documents/picker';
@@ -22,12 +22,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '@/src/api/api';
 import { FileService } from '@/src/services/Fileservices';
 import { useAuth } from '@/src/context/AuthContext';
-import { Dropdown } from 'react-native-element-dropdown';
-import { AnimateError } from '../common/AnimateError';
-import { Icon } from '@/src/components/common/IconUI';
+import { Icon } from '@/src/components/IconUI';
 import { useNavigation } from '@react-navigation/native';
 import { useAppToast } from '@/src/context/ToastContext';
-import HeaderSession from '../common/HeaderSession';
+import HeaderSession from '@/src/components/HeaderSession';
 
 const UserDocumentUpload = () => {
     // State Management

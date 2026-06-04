@@ -1,19 +1,19 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { FlatList, Pressable, RefreshControl, StatusBar } from 'react-native';
 
-import { Box, HStack, Text, Center, Spinner, VStack, Button, ButtonText, Avatar, AvatarImage } from '@/src/components/common/GluestackUI';
+import { Box, HStack, Text, Center, Spinner, VStack, Button, ButtonText, Avatar, AvatarImage } from '@/src/components/GluestackUI';
 import profileService from '@/src/services/profileService';
 import { ProfileCard } from '../profile/ProfileCard';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import { Icon } from '@/src/components/common/IconUI';
+import { Icon } from '@/src/components/IconUI';
 import { Heart, HeartIcon, Star } from 'lucide-react-native';
 import { StarIcon } from '@/components/ui/icon';
-import NotFoundScreen from '../common/NotFoundScreen';
+import NotFoundScreen from '@/src/components/NotFoundScreen';
 import { ScrollView } from 'react-native-gesture-handler';
 import { getExtension } from '@/src/utils/common';
-import HeaderSession from '../common/HeaderSession';
+import HeaderSession from '@/src/components/HeaderSession';
 import { CaptureProtection } from 'react-native-capture-protection';
-import GradientView from '../component/GradientView';
+import GradientView from '@/src/components/GradientView';
 
 const FavoritesScreen = () => {
     // 1. Add a safety check for navigation

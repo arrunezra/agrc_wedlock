@@ -13,19 +13,19 @@ import {
     SelectBackdrop,
     SelectContent,
     SelectItem
-} from '@/src/components/common/GluestackUI';
+} from '@/src/components/GluestackUI';
 import api from '@/src/api/api';
 import { CloseIcon, Icon } from '@/components/ui/icon';
-import { Accessibility, Briefcase, Calendar, Droplets, Heart, Info, Ruler, Trash2, User, Users, X } from '@/src/components/common/IconUI';
+import { Accessibility, Briefcase, Calendar, Droplets, Heart, Info, Ruler, Trash2, User, Users, X } from '@/src/components/IconUI';
 import { InputIcon, InputSlot } from '@/components/ui/input';
 import { Dropdown } from 'react-native-element-dropdown';
 import { BLOOD_GROUPS, HEIGHT_DATA, MARITAL_STATUS } from '@/src/utils/utils';
 import { LookupContext } from '@/src/context/LookupContext';
 import _ from 'lodash';
-import { AnimateError } from '../../common/AnimateError';
 import profileService from '@/src/services/profileService';
 import { useAppToast } from '@/src/context/ToastContext';
-import FuturisticDropdown from '@/src/components/common/FuturisticDropdown';
+import FuturisticDropdown from '@/src/components/FuturisticDropdown';
+import { AnimateError } from '@/src/components/AnimateError';
 
 
 const EditBasicsModalScreen = ({ isOpen, onClose, user, content, lookups, onRefresh, showToast }: any) => {

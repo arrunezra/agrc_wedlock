@@ -10,7 +10,7 @@ const SplashScreen = () => {
             <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
 
             <ImageBackground
-                source={require('../../assets/images/bgimage.png')}
+                source={require('../assets/images/bgimage.png')}
                 style={styles.backgroundImage}
                 resizeMode="cover"
             >
@@ -18,7 +18,7 @@ const SplashScreen = () => {
 
                 <View style={styles.logoContainer}>
                     <FastImage
-                        source={require('../../assets/logo/splace_screen.jpg')}
+                        source={require('../assets/logo/splace_screen.jpg')}
                         style={{ width: '100%', height: '100%' }}
                         resizeMode={FastImage.resizeMode.contain}
                     />

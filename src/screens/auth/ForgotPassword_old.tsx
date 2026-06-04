@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Alert } from 'react-native';
 import api from '@/src/api/api';
 import authService from '@/src/services/authService';
-import { Box, VStack, Input, InputField, Button, ButtonText, Text, Center } from '@/src/components/common/GluestackUI'; 
+import { Box, VStack, Input, InputField, Button, ButtonText, Text, Center } from '@/src/components/GluestackUI';
 
 export default function ForgotPasswordScreen({ navigation }: any) {
   const [email, setEmail] = useState('');

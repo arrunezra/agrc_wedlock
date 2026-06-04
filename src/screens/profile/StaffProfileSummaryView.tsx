@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { FlatList, RefreshControl, Pressable, TextInput, TouchableOpacity, Animated, StatusBar } from 'react-native';
-import { Box, HStack, VStack, Text, Heading, Spinner, Center, Input, InputField, InputIcon, InputSlot } from '@/src/components/common/GluestackUI';
+import { Box, HStack, VStack, Text, Heading, Spinner, Center, Input, InputField, InputIcon, InputSlot } from '@/src/components/GluestackUI';
 import { useNavigation } from '@react-navigation/native';
 import FastImage from '@d11/react-native-fast-image';
 import { ChevronRight, MapPin, Check, Search, X, Settings2, XIcon, SearchIcon } from 'lucide-react-native';
 import api from '@/src/api/api';
-import { Icon } from '@/src/components/common/IconUI';
+import { Icon } from '@/src/components/IconUI';
 import { getExtension } from '@/src/utils/common';
-import HeaderSession from '../common/HeaderSession';
-import AnimatedMotiView from '../component/AnimateView';
+import HeaderSession from '@/src/components/HeaderSession';
+import AnimatedMotiView from '@/src/components/AnimateView';
 
 const StaffProfileSummaryView = () => {
     const navigation = useNavigation<any>();

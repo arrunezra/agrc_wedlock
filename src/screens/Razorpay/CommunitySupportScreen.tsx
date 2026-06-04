@@ -1,19 +1,17 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { TouchableHighlight, Text, Alert, View, ActivityIndicator, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import RazorpayCheckout from 'react-native-razorpay';
-import LoadingScreen from '../common/SuccessScreen';
 import razorpayServices from '@/src/services/RazorpayServices';
 import { BarChart3, CheckCircle2, ChevronLeft, Heart, Info, MessageSquare, ShieldCheck, Zap } from 'lucide-react-native';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { SuccessOverlay } from '../common/SuccessOverlay';
-import { Screen } from 'react-native-screens';
+import { SuccessOverlay } from '@/src/components//SuccessOverlay';
 import { useAppToast } from '@/src/context/ToastContext';
 import { rezor_test_key } from '@/src/utils/environment';
 import { LookupContext } from '@/src/context/LookupContext';
-import { Box, Card, HStack, VStack } from '../component/GluestackUI';
+import { Box, Card, HStack, VStack } from '@/src/components/GluestackUI';
 import { useAuth } from '@/src/context/AuthContext';
-import GradientView from '../component/GradientView';
+import GradientView from '@/src/components/GradientView';
 const CommunitySupportScreen = ({ route, navigation }: any) => {
     const { totalAmount, customerName, userid, email, phoneNo } = route.params;
     const { showToast } = useAppToast();

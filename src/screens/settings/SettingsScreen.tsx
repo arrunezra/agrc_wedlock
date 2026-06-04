@@ -2,14 +2,14 @@ import React from 'react';
 import { Pressable, ScrollView, StatusBar, TouchableOpacity } from 'react-native';
 //import { Box, VStack, HStack, Text, Heading, Icon, Pressable, Divider, ChevronRightIcon } from '@/components/ui';
 import { User, Lock, Bell, Shield, Trash2, Eye, Calendar, Ban, Heart, Sparkles, LogOut, Info } from 'lucide-react-native';
-import { Box, VStack, HStack, Text, Divider, Heading } from '@/src/components/common/GluestackUI';
-import { ChevronRightIcon, Icon } from '@/src/components/common/IconUI';
+import { Box, VStack, HStack, Text, Divider, Heading } from '@/src/components/GluestackUI';
+import { ChevronRightIcon, Icon } from '@/src/components/IconUI';
 import { useAuth } from '@/src/context/AuthContext';
 import profileService from '@/src/services/profileService';
 import { useAppToast } from '@/src/context/ToastContext';
 import { useAlert } from '@/src/context/AlertContext';
-import HeaderSession from '../common/HeaderSession';
-import GradientView from '../component/GradientView';
+import HeaderSession from '@/src/components/HeaderSession';
+import GradientView from '@/src/components/GradientView';
 
 export default function SettingsScreen({ navigation }: any) {
 

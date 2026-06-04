@@ -21,7 +21,7 @@ import {
     SelectContent,
     SelectBackdrop,
     SelectItem
-} from "@/src/components/common/GluestackUI";
+} from "@/src/components/GluestackUI";
 import { CheckIcon, ChevronDownIcon, CircleIcon, CloseIcon, Icon, SearchIcon } from '@/components/ui/icon';
 import { Slider } from '@miblanchard/react-native-slider';
 import { Check, ShieldCheckIcon } from 'lucide-react-native';

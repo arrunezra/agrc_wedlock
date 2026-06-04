@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { Crown, HeartHandshake, ShieldCheck } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import GradientView from '../component/GradientView';
+import GradientView from '@/src/components/GradientView';
 
 const { width } = Dimensions.get('window');
 

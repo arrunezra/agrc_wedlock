@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image } from 'react-native'; // Added for profile picture rendering
 import { DrawerContentScrollView } from '@react-navigation/drawer';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '@/src/context/AuthContext';
 import { Box } from '@/components/ui/box';
 import { VStack } from '@/components/ui/vstack';
 import { HStack } from '@/components/ui/hstack';

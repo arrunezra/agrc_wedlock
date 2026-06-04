@@ -2,8 +2,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { useAuth } from '../context/AuthContext';
 import AuthNavigator from './AuthNavigator';
 import { RoleBasedNavigator } from './RoleBasedNavigator';
-import SplashScreen from '../components/common/SplashScreen';
 import { useEffect, useState } from 'react';
+import SplashScreen from '@/src/components/SplashScreen';
 
 export default function AppNavigator() {
   const { isLoading, isAuthenticated, userRole, user, logout } = useAuth();

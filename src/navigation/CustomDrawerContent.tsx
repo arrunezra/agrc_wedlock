@@ -1,5 +1,5 @@
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
-import { Box, VStack, HStack, Avatar, AvatarImage, Text, Divider, AvatarFallbackText, Center, Heading } from '@/src/components/common/GluestackUI';
+import { Box, VStack, HStack, Avatar, AvatarImage, Text, Divider, AvatarFallbackText, Center, Heading } from '@/src/components/GluestackUI';
 import { Alert, Image, ImageBackground, Platform, Pressable, TouchableOpacity } from 'react-native';
 import { Icon } from '@/components/ui/icon';
 import { Camera, CheckIcon, ChevronRight, LogOut, Settings } from 'lucide-react-native';
@@ -8,7 +8,7 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import { getCurrentYear, getExtension } from '../utils/common';
 import { LookupContext } from '../context/LookupContext';
 import { useAuth } from '../context/AuthContext';
-import GradientView from '../screens/component/GradientView';
+import GradientView from '@/src/components/GradientView';
 
 export default function CustomDrawerContent(props: any) {
     const { state, userRole, navigation, logout } = props;

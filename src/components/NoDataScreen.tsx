@@ -4,10 +4,10 @@ import {
     Center,
     Text,
     VStack
-} from '@/src/components/common/GluestackUI';
+} from '@/src/components/GluestackUI';
 import LottieView from 'lottie-react-native';
 import { StyleSheet } from 'react-native';
-import AnimatedMotiView from '../component/AnimateView';
+import AnimatedMotiView from '@/src/components/AnimateView';
 
 
 export default function NoDataScreen() {
@@ -28,7 +28,7 @@ export default function NoDataScreen() {
 
                             {/* Lottie Animation - No box, just centered focus */}
                             <LottieView
-                                source={require('../../assets/lottieview/no_data_found.json')}
+                                source={require('@/src/assets/lottieview/no_data_found.json')}
                                 autoPlay
                                 loop={true}
                                 // Slightly larger for better visual weight since it's now alone

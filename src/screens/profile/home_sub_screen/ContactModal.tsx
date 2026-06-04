@@ -3,11 +3,11 @@ import { InputIcon, InputSlot } from '@/components/ui/input';
 import {
     Box, Button, ButtonText, FormControl, FormControlLabel, FormControlLabelText, Heading,
     HStack, Input, InputField, Modal, ModalBackdrop, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, Spinner, Text, VStack
-} from '@/src/components/common/GluestackUI';
-import { Mail, Phone, ShieldCheck } from '@/src/components/common/IconUI';
+} from '@/src/components/GluestackUI';
+import { Mail, Phone, ShieldCheck } from '@/src/components/IconUI';
 import React, { useRef } from 'react';
 import { ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
-import { AnimateError } from '../../common/AnimateError';
+import { AnimateError } from '@/src/components/AnimateError';
 
 
 

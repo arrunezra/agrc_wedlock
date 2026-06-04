@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { FlatList, Pressable } from 'react-native';
-import { Box, HStack, VStack, Heading, Text, } from '@/src/components/common/GluestackUI';
+import { Box, HStack, VStack, Heading, Text, } from '@/src/components/GluestackUI';
 import MatchCard from './MatchCard';
 import { ChevronRightIcon, Icon } from '@/components/ui/icon';
 

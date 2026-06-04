@@ -1,14 +1,15 @@
 import React, { useCallback, useRef } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { HeartIcon, HomeIcon, Icon, LockIcon, MessageCircleIcon } from "../components/common/IconUI";
 import AdminDashboard from "../screens/Admin/AdminDashboard";
 import ProfileSummary from "../screens/profile/ProfileSummary";
 import StaffDashboard from "../screens/staff/StaffDashboard";
 import StaffRegistration from "../screens/staff/StaffRegistration";
 import StaffDetailsScreen from "../screens/staff/StaffDetailScreen";
 import ChurchRegistrationScreen from "../screens/Church/ChurchRegistrationScreen";
-import { Box, Button, Center, Heading, Spinner, Text, VStack } from "../components/common/GluestackUI";
+import { Box, Button, Center, Heading, Spinner, Text, VStack } from "@/src/components/GluestackUI";
+
+import { HomeIcon, HeartIcon, MessageCircleIcon, Icon, LockIcon } from "@/src/components/IconUI"
 import ProfileHomeScreen from "../screens/profile/ProfileHomeScreen";
 import MatchesScreen from "../screens/profile/MatchesScreen";
 import ViewStaffinforamtion from "../screens/staff/ViewStaffinforamtion";
@@ -32,7 +33,6 @@ import SettingsScreen from "../screens/settings/SettingsScreen";
 import ContactPrivacyScreen from "../screens/settings/privacy/PrivacyScreen";
 import SummryListViewScreen from "../screens/profile/dashboard/SummryListViewScreen";
 import DocumentSummary from "../screens/members/DocumentSummary";
-import DocumentViewer from "../screens/common/DocumentViewer";
 import StaffInboxScreen from "../screens/staff/StaffInboxScreen";
 import StaffDocumentSummary from "../screens/staff/StaffDocumentSummary";
 import StaffProfileSummaryView from "../screens/profile/StaffProfileSummaryView";
@@ -42,6 +42,7 @@ import ContributeHistoryScreen from "../screens/Contribute/ContributeHistoryScre
 import ContributionScreen from "../screens/Contribute/ContributionScreen";
 import CommunitySupportScreen from "../screens/Razorpay/CommunitySupportScreen";
 import ContributionSuccessScreen from "../screens/Contribute/ContributionSuccessScreen";
+import DocumentViewer from "@/src/components/DocumentViewer";
 
 
 const Stack = createNativeStackNavigator();

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import {
     Box, VStack, HStack, Text, Button, ButtonText, Heading, Avatar, AvatarFallbackText,
     AvatarImage
-} from '@/src/components/common/GluestackUI';
+} from '@/src/components/GluestackUI';
 import { User, UserMinus } from "lucide-react-native";
 import { Alert, FlatList, Pressable, RefreshControl, ScrollView, StatusBar } from 'react-native';
 import profileService from '@/src/services/profileService';
@@ -10,10 +10,10 @@ import { useAuth } from '@/src/context/AuthContext';
 import { getExtension } from '@/src/utils/common';
 import { useAlert } from '@/src/context/AlertContext';
 import { useAppToast } from '@/src/context/ToastContext';
-import NotFoundScreen from '../common/NotFoundScreen';
+import NotFoundScreen from '@/src/components/NotFoundScreen';
 import { useNavigation } from '@react-navigation/native';
-import HeaderSession from '../common/HeaderSession';
-import GradientView from '../component/GradientView';
+import HeaderSession from '@/src/components/HeaderSession';
+import GradientView from '@/src/components/GradientView';
 
 const BlockedUsersScreen = () => {
     const navigation = useNavigation<any>();

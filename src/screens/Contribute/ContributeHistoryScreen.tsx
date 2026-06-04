@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useMemo, useCallback, Activity, use } from 'react';
 import { View, TouchableOpacity, FlatList, ActivityIndicator, Platform, StatusBar as RNStatusBar, Pressable } from 'react-native';
-import { Box, VStack, HStack, Text, Heading, useToast, Toast, ToastTitle } from '@/src/components/common/GluestackUI'
+import { Box, VStack, HStack, Text, Heading, useToast, Toast, ToastTitle } from '@/src/components/GluestackUI'
 import { Calendar, Filter, ChevronDown, Landmark, RefreshCw, ArrowRight, ChurchIcon, Search, X, HeartIcon } from 'lucide-react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { Icon } from '@/src/components/common/IconUI';
-import HeaderSession from '../common/HeaderSession';
-import FuturisticDropdown from '@/src/components/common/FuturisticDropdown';
+import { Icon } from '@/src/components/IconUI';
+import HeaderSession from '@/src/components/HeaderSession';
+import FuturisticDropdown from '@/src/components/FuturisticDropdown';
 import AdminServices from '@/src/services/AdminServices';
 import { useAuth } from '@/src/context/AuthContext';
 import ChruchService from '@/src/services/ChruchService';
-import AnimatedMotiView from '../component/AnimateView';
-import GradientView from '../component/GradientView';
+import AnimatedMotiView from '@/src/components/AnimateView';
+import GradientView from '@/src/components/GradientView';
 // --- CONFIG PALETTE ---
 const REVENUE_PALETTE = ['#087a46ff', '#1b5945ff']; // Deep slate sleek theme
 const LIMIT = 20;

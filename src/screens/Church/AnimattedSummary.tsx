@@ -1,5 +1,5 @@
 import { HStack } from "@/components/ui/hstack";
-import { Box, VStack } from "@/src/components/common/GluestackUI";
+import { Box, VStack } from "@/src/components/GluestackUI";
 import { useEffect, useRef } from "react";
 import { Animated } from "react-native";
 

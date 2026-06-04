@@ -21,9 +21,9 @@ import {
     ButtonText,
     Spinner,
     ScrollView,
-} from '@/src/components/common/GluestackUI';
+} from '@/src/components/GluestackUI';
 import { Icon } from '@/components/ui/icon';
-import { Check, MapPin, Navigation, Users2, X } from '@/src/components/common/IconUI';
+import { Check, MapPin, Navigation, Users2, X } from '@/src/components/IconUI';
 
 const { height } = Dimensions.get('window');
 

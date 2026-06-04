@@ -1,5 +1,10 @@
 import React, { useRef, useState } from 'react';
 import { ScrollView, Image, Animated, KeyboardAvoidingView, Platform } from 'react-native';
+
+import { Mail, Phone, Lock, Eye, EyeOff, CheckCircle2, Icon, ShieldCheck, Check } from '@/src/components/IconUI';
+import { CommonActions } from '@react-navigation/native';
+import { SuccessOverlay } from '@/src/components/SuccessOverlay';
+import { useAuth } from '@/src/context/AuthContext';
 import {
   Center, Box, VStack, Text,
   FormControl, FormControlLabel, FormControlLabelText,
@@ -7,11 +12,7 @@ import {
   Button, ButtonText, FormControlError, FormControlErrorText,
   InputSlot,
   HStack
-} from '@/src/components/common/GluestackUI';
-import { Mail, Phone, Lock, Eye, EyeOff, CheckCircle2, Icon, ShieldCheck, Check } from '@/src/components/common/IconUI';
-import { CommonActions } from '@react-navigation/native';
-import { SuccessOverlay } from '../common/SuccessOverlay';
-import { useAuth } from '@/src/context/AuthContext';
+} from '@/src/components/GluestackUI';
 
 const SetPasswordScreen = ({ navigation, route }: any) => {
   const { userid, mobile, email: userEmail, name } = route.params;
@@ -140,7 +141,7 @@ const SetPasswordScreen = ({ navigation, route }: any) => {
                 <Box className="relative mb-6">
                   <Box className="absolute -inset-4 bg-blue-100 rounded-full opacity-50 blur-xl" />
                   <Image
-                    source={require('../../assets/images/aglogo.png')}
+                    source={require('@/src/assets/images/aglogo.png')}
                     alt="App Logo"
                     className="h-24 w-24"
                     resizeMode="contain"

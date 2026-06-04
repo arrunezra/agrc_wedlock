@@ -1,8 +1,8 @@
-import { Box, HStack, VStack } from '@/src/components/common/GluestackUI';
+import { Box, HStack, VStack } from '@/src/components/GluestackUI';
 import React from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
-import AnimatedMotiView from '../component/AnimateView';
-import GradientView from '../component/GradientView';
+import AnimatedMotiView from '@/src/components/AnimateView';
+import GradientView from '@/src/components/GradientView';
 const DashboardSkeleton = () => (
     <VStack space="md">
         {[1, 2, 3].map((i) => (

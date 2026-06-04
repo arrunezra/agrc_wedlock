@@ -1,19 +1,19 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { FlatList, ActivityIndicator, ScrollView, Pressable, KeyboardAvoidingView, Platform, TouchableOpacity, View, StyleSheet, Dimensions, StatusBar } from 'react-native';
-import { Box, Spinner, Center, HStack, Text } from '@/src/components/common/GluestackUI';
+import { Box, Spinner, Center, HStack, Text } from '@/src/components/GluestackUI';
 import { ProfileCard } from './ProfileCard';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { profileService } from '@/src/services/profileService';
-import NotFoundScreen from '../common/NotFoundScreen';
-import { SkeletonItem } from '../common/SkeletonItem';
+import NotFoundScreen from '@/src/components/NotFoundScreen';
+import { SkeletonItem } from '@/src/components/SkeletonItem';
 import { SearchActionsheet } from './home_sub_screen/SearchActionsheet';
-import { ProfileCardSkeleton } from '../common/ProfileCardSkeleton';
+import { ProfileCardSkeleton } from '@/src/components/ProfileCardSkeleton';
 import { useAuth } from '@/src/context/AuthContext';
 import { useAppToast } from '@/src/context/ToastContext';
 import { CaptureProtection } from 'react-native-capture-protection';
 import { useIsFocused } from '@react-navigation/native'; // Add this import
 import _ from 'lodash';
-import HeaderSession from '../common/HeaderSession';
+import HeaderSession from '@/src/components/HeaderSession';
 import ContributionScreen from '../Contribute/ContributionScreen';
 const MatchesScreen = () => {
 

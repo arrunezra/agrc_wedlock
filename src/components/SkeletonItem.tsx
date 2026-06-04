@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Animated } from 'react-native';
-import { Box, HStack, VStack, Center } from '@/src/components/common/GluestackUI';
+import { Box, HStack, VStack, Center } from '@/src/components/GluestackUI';
 
 export const SkeletonItem = () => {
     const pulseAnim = useRef(new Animated.Value(0.4)).current;

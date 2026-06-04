@@ -7,7 +7,7 @@ import {
     ModalBody, ModalFooter, Heading, Text, VStack, HStack, Box,
     FormControl, FormControlLabel, FormControlLabelText, Button, ButtonText,
     Input, InputField
-} from '@/src/components/common/GluestackUI';
+} from '@/src/components/GluestackUI';
 import { Icon } from '@/components/ui/icon';
 
 const { height } = Dimensions.get('window');

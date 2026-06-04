@@ -1,15 +1,13 @@
 import { CloseIcon, Icon } from '@/components/ui/icon';
-import FuturisticDropdown from '@/src/components/common/FuturisticDropdown';
-import { Box, Button, ButtonText, FormControl, FormControlError, FormControlErrorText, FormControlLabel, FormControlLabelText, Heading, HStack, Modal, ModalBackdrop, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, Spinner, Text, VStack } from '@/src/components/common/GluestackUI';
-import { Check, Church, Languages, MapPin, MoonStar, Network, Users, Users2 } from '@/src/components/common/IconUI';
+import FuturisticDropdown from '@/src/components/FuturisticDropdown';
+import { Box, Button, ButtonText, FormControl, FormControlError, FormControlErrorText, FormControlLabel, FormControlLabelText, Heading, HStack, Modal, ModalBackdrop, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, Spinner, Text, VStack } from '@/src/components/GluestackUI';
+import { Check, Church, Languages, MapPin, MoonStar, Network, Users, Users2 } from '@/src/components/IconUI';
 import _ from 'lodash';
 import React, { useState } from 'react';
 import { ScrollView, TouchableOpacity, StyleSheet, Dimensions, View } from 'react-native';
 
-import { Dropdown } from 'react-native-element-dropdown';
-import { AnimateError } from '../../common/AnimateError';
-import { useAppToast } from '@/src/context/ToastContext';
 import profileService from '@/src/services/profileService';
+import { AnimateError } from '@/src/components/AnimateError';
 
 const { height } = Dimensions.get('window');
 const { width: SCREEN_WIDTH } = Dimensions.get('window');

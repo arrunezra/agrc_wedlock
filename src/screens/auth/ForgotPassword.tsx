@@ -8,12 +8,13 @@ import {
     FormControlError, FormControlErrorText,
     HStack,
     Image,
-} from '@/src/components/common/GluestackUI';
-import { Lock, Eye, EyeOff, ShieldCheck, CheckCircle2, Icon, User, Mail } from '@/src/components/common/IconUI';
-import { SuccessOverlay } from '../common/SuccessOverlay';
-import FailedScreen from '../common/FailedScreen';
+} from '@/src/components/GluestackUI';
+import { Lock, Eye, EyeOff, ShieldCheck, CheckCircle2, Icon, User, Mail } from '@/src/components/IconUI';
+
 import authService from '@/src/services/authService';
 import { CommonActions } from '@react-navigation/native';
+import FailedScreen from '@/src/components/FailedScreen';
+import { SuccessOverlay } from '@/src/components/SuccessOverlay';
 
 const ForgotPassword = ({ navigation, route }: any) => {
     // Assuming 'identifier' is passed via route params (e.g., "user@email.com")
@@ -88,7 +89,7 @@ const ForgotPassword = ({ navigation, route }: any) => {
                         {/* Section 1: Logo & Header */}
                         <VStack className="items-center mb-8" space="md">
                             <Image
-                                source={require('../../assets/images/aglogo.png')}
+                                source={require('@/src/assets/images/aglogo.png')}
                                 className="h-20 w-20"
                                 alt="App Logo"
                                 resizeMode="contain"

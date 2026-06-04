@@ -118,7 +118,7 @@ const HeaderSession = ({
           {showLogo ? (
             <Box className="w-10 h-10 rounded-xl bg-white/90 items-center justify-center p-1 border border-white/20 mr-3">
               <FastImage
-                source={require('../../assets/icons/without_name.png')}
+                source={require('@/src/assets/icons/without_name.png')}
                 style={{ width: 56, height: 56, borderRadius: 32 }}
                 resizeMode={FastImage.resizeMode.cover}
               />

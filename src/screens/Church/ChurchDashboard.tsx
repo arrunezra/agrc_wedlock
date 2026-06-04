@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Animated, FlatList, Linking, RefreshControl, StatusBar, TouchableOpacity } from 'react-native';
-import { Box, VStack, HStack, Text, Heading, Spinner, Divider, Center, ButtonText, Button, Avatar, AvatarFallbackText, AvatarImage } from '@/src/components/common/GluestackUI';
+import { Box, VStack, HStack, Text, Heading, Spinner, Divider, Center, ButtonText, Button, Avatar, AvatarFallbackText, AvatarImage } from '@/src/components/GluestackUI';
 import api from '@/src/api/api';
-import { Icon, Globe, MapPin } from '@/src/components/common/IconUI';
+import { Icon, Globe, MapPin } from '@/src/components/IconUI';
 import { ChevronRight, Church, Edit3, Phone, ShieldCheck, User2Icon } from 'lucide-react-native';
 import AnimatedListItem, { ChurchSkeleton } from './AnimattedSummary';
-import HeaderSession from '../common/HeaderSession';
+import HeaderSession from '@/src/components/HeaderSession';
 import { dateFormat } from '@/src/utils/validators';
 
 export default function ChurchDashboard({ navigation }: any) {

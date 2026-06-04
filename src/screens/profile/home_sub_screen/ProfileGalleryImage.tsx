@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Animated, StyleSheet, Dimensions, Pressable } from 'react-native';
-import { Box, HStack, Spinner, Text, } from '@/src/components/common/GluestackUI';
+import { Box, HStack, Spinner, Text, } from '@/src/components/GluestackUI';
 import FastImage from '@d11/react-native-fast-image';
 import { API_BASE_URL_DEV_Profiles_Images } from '@/src/utils/environment';
 import { CheckCircleIcon, StarIcon, TrashIcon } from 'lucide-react-native';

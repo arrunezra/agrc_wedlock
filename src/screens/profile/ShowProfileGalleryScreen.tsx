@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Alert, Animated, Dimensions, Pressable, RefreshControl, ScrollView, StatusBar, StyleSheet, Vibration, View } from 'react-native';
-import { Box, VStack, HStack, Text, Heading, Center, Modal } from '@/src/components/common/GluestackUI';
+import { Box, VStack, HStack, Text, Heading, Center, Modal } from '@/src/components/GluestackUI';
 import { CheckCircleIcon, TrashIcon, CameraIcon, AlertCircleIcon, StarIcon, ShieldCloseIcon } from 'lucide-react-native';
 import FastImage from '@d11/react-native-fast-image';
-import { Icon } from '@/src/components/common/IconUI';
+import { Icon } from '@/src/components/IconUI';
 import profileService from '@/src/services/profileService';
 import { useAuth } from '@/src/context/AuthContext';
 import { useProfileUpload } from '@/src/hooks/useProfileUpload';
@@ -15,9 +15,9 @@ import { User } from '@/src/utils/models';
 import { useAppToast } from '@/src/context/ToastContext';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useAlert } from '@/src/context/AlertContext';
-import { CustomAlertConfig, GlobalAlertProps } from '../common/GlobalAlert';
-import HeaderSession from '../common/HeaderSession';
-import { UploadProgressModal } from '../common/UploadProgressModal';
+import { CustomAlertConfig, GlobalAlertProps } from '@/src/components/GlobalAlert';
+import HeaderSession from '@/src/components/HeaderSession';
+import { UploadProgressModal } from '@/src/components/UploadProgressModal';
 
 const { width } = Dimensions.get('window');
 const COLUMN_WIDTH = (width - 48) / 2;

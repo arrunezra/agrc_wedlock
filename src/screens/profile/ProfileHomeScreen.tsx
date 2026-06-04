@@ -2,10 +2,10 @@ import { useAuth } from '@/src/context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
 import UserTopProfile from './home_sub_screen/UserTopProfile';
 import SectionHorizontalList from './home_sub_screen/SectionHorizontalList';
-import { Box } from '@/src/components/common/GluestackUI';
 import { FlatList, StatusBar } from 'react-native';
 import { HOME_DATA } from '@/src/utils/constants';
-import HeaderSession from '../common/HeaderSession';
+import { Box } from '@/src/components/GluestackUI';
+import HeaderSession from '@/src/components/HeaderSession';
 
 const ProfileHomeScreen = () => {
     const { user } = useAuth();

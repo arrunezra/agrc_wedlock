@@ -1,16 +1,16 @@
 import { View, Text, RefreshControl, TouchableOpacity, Pressable, Animated, FlatList, ActivityIndicator, StatusBar } from 'react-native'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { Box, Heading, HStack, Input, InputField, InputSlot, VStack } from '@/src/components/common/GluestackUI';
-import { Icon, Users } from '@/src/components/common/IconUI';
+import { Box, Heading, HStack, Input, InputField, InputSlot, VStack } from '@/src/components/GluestackUI';
+import { Icon, Users } from '@/src/components/IconUI';
 import { Check, ChevronRight, MapPin, Phone, UserX, XIcon } from 'lucide-react-native';
 import { getExtension } from '@/src/utils/common';
 import FastImage from '@d11/react-native-fast-image';
 import StaffService from '@/src/services/StaffService';
 import { SearchIcon } from '@/components/ui/icon';
-import NotFoundScreen from '../common/NotFoundScreen';
-import HeaderSession from '../common/HeaderSession';
-import AnimatedMotiView from '../component/AnimateView';
-import GradientView from '../component/GradientView';
+import NotFoundScreen from '@/src/components/NotFoundScreen';
+import HeaderSession from '@/src/components/HeaderSession';
+import AnimatedMotiView from '@/src/components/AnimateView';
+import GradientView from '@/src/components/GradientView';
 
 const StaffInboxScreen = ({ navigation }: any) => {
     const [profiles, setProfiles] = useState<any[]>([]);

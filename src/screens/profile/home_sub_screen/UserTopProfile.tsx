@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { Box, VStack, HStack, Text, Heading, Avatar, AvatarImage, AvatarFallbackText, Center } from '@/src/components/common/GluestackUI';
+import { Box, VStack, HStack, Text, Heading, Avatar, AvatarImage, AvatarFallbackText, Center } from '@/src/components/GluestackUI';
 import { Pressable, TouchableOpacity, View } from 'react-native';
 import { AddIcon, CheckIcon, EditIcon, Icon, StarIcon } from '@/components/ui/icon';
 import { getExtension } from '@/src/utils/common';
@@ -8,7 +8,7 @@ import profileService from '@/src/services/profileService';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { LookupContext } from '@/src/context/LookupContext';
 import { useAppToast } from '@/src/context/ToastContext';
-import GradientView from '../../component/GradientView';
+import GradientView from '@/src/components/GradientView';
 
 const UserTopProfile = ({ user, onEdit, onAddPhoto, onContribution }: any) => {
     const navigation = useNavigation<any>();

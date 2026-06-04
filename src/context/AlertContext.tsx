@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import GlobalAlert, { CustomAlertConfig, GlobalAlertProps } from '../screens/common/GlobalAlert';
+import GlobalAlert, { CustomAlertConfig } from '@/src/components/GlobalAlert';
 
 
 interface AlertContextType {

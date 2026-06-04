@@ -8,10 +8,10 @@ import {
     HStack,
     Button,
     ButtonText,
-} from '@/src/components/common/GluestackUI';
-import { CheckIcon, Eye, EyeOff, Icon } from '@/src/components/common/IconUI';
+} from '@/src/components/GluestackUI';
+import { CheckIcon, Eye, EyeOff, Icon } from '@/src/components/IconUI';
 import { ArrowLeftIcon } from '@/components/ui/icon';
-import HeaderSession from '../common/HeaderSession';
+import HeaderSession from '@/src/components/HeaderSession';
 
 export default function PrivacyPolicyScreen() {
     const navigation = useNavigation();

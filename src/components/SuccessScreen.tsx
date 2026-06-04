@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { Animated, Easing } from 'react-native';
 import LottieView from 'lottie-react-native';
-import { Box, Center, HStack, Text, VStack } from '@/src/components/common/GluestackUI';
+import { Box, Center, HStack, Text, VStack } from '@/src/components/GluestackUI';
 
 export default function SuccessScreen() {
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -24,7 +24,7 @@ export default function SuccessScreen() {
             <Box className="relative items-center justify-center">
               <Box className="bg-background-50 p-5 rounded-full shadow-sm border border-outline-50">
                 <LottieView
-                  source={require('../../assets/animations/success.json')}
+                  source={require('@/src/assets/animations/success.json')}
                   autoPlay
                   loop={false}
                   style={{ width: 40, height: 40 }}

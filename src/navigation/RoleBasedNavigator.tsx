@@ -1,11 +1,8 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import ProfileHomeScreen from '../screens/profile/ProfileHomeScreen';
-import MatchesScreen from '../screens/profile/MatchesScreen';
-import InboxScreen from '../screens/profile/InboxScreen';
 import React from 'react';
 import CustomDrawerContent from './CustomDrawerContent';
-import { HeartIcon, HomeIcon, Icon, MessageCircleIcon } from '../components/common/IconUI';
+import { HeartIcon, HomeIcon, Icon, MessageCircleIcon } from '@/src/components/IconUI';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProfileDetailScreen from '../screens/profile/ProfileDetailScreen';
 import DynamicStackRouter, { ROLE_DRAWER_CONFIG } from './DynamicStackRouter';

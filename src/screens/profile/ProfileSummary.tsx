@@ -1,16 +1,16 @@
 import { View, Text, RefreshControl, TouchableOpacity, Pressable, StatusBar } from 'react-native'
 import React, { useCallback, useEffect, useState } from 'react'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
-import { Box, Heading, HStack, Image, VStack } from '@/src/components/common/GluestackUI';
-import { Icon, UserCheck, Users, CheckCircle } from '@/src/components/common/IconUI';
+import { Box, Heading, HStack, Image, VStack } from '@/src/components/GluestackUI';
+import { Icon, UserCheck, Users, CheckCircle } from '@/src/components/IconUI';
 import { AlertCircle, ArrowUpRight, Check, ChevronRight, MapPin, Phone, UserX } from 'lucide-react-native';
 import DashboardSkeleton from '../staff/DashboardSkeleton';
 import profileService from '@/src/services/profileService';
 import { getExtension } from '@/src/utils/common';
 import FastImage from '@d11/react-native-fast-image';
-import HeaderSession from '../common/HeaderSession';
-import AnimatedMotiView from '../component/AnimateView';
-import GradientView from '../component/GradientView';
+import HeaderSession from '@/src/components/HeaderSession';
+import AnimatedMotiView from '@/src/components/AnimateView';
+import GradientView from '@/src/components/GradientView';
 
 const ProfileSummary = ({ navigation }: any) => {
     const [data, setData] = useState<any>(null);

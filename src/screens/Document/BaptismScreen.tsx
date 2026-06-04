@@ -1,15 +1,15 @@
 import { View, Text, RefreshControl, TouchableOpacity, Pressable, FlatList, ActivityIndicator, Animated, StatusBar } from 'react-native'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
-import { Box, Heading, HStack, Input, InputField, InputSlot, VStack } from '@/src/components/common/GluestackUI';
-import { Icon, UserCheck, Users, CheckCircle } from '@/src/components/common/IconUI';
+import { Box, Heading, HStack, Input, InputField, InputSlot, VStack } from '@/src/components/GluestackUI';
+import { Icon, UserCheck, Users, CheckCircle } from '@/src/components/IconUI';
 import { AlertCircle, Check, ChevronRight, MapPin, Phone, SearchIcon, Settings2, UserX, XIcon } from 'lucide-react-native';
 import { getExtension } from '@/src/utils/common';
 import FastImage from '@d11/react-native-fast-image';
 import StaffService from '@/src/services/StaffService';
-import NotFoundScreen from '../common/NotFoundScreen';
-import HeaderSession from '../common/HeaderSession';
-import AnimatedMotiView from '../component/AnimateView';
+import NotFoundScreen from '@/src/components/NotFoundScreen';
+import HeaderSession from '@/src/components/HeaderSession';
+import AnimatedMotiView from '@/src/components/AnimateView';
 
 const BaptismScreen = ({ navigation }: any) => {
     const [profiles, setProfiles] = useState<any[]>([]);

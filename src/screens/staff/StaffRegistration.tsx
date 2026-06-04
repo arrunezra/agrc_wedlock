@@ -9,12 +9,11 @@ import {
     FormControlLabelText,
     FormControlLabel,
     Switch
-} from '@/src/components/common/GluestackUI';
+} from '@/src/components/GluestackUI';
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import DateTimePicker from '@react-native-community/datetimepicker'; // Used as the engine
-import { Calendar, ChevronRight, Check, Hash, Briefcase, Building2, Phone, Mail, MapPin, Save, Navigation } from '@/src/components/common/IconUI';
+import { Calendar, ChevronRight, Check, Hash, Briefcase, Building2, Phone, Mail, MapPin, Save, Navigation } from '@/src/components/IconUI';
 import { Icon } from '@/components/ui/icon';
-import { AnimateError } from '../common/AnimateError';
 import api from '@/src/api/api';
 import profileService from '@/src/services/profileService';
 import { Dropdown } from 'react-native-element-dropdown';
@@ -25,13 +24,14 @@ import { LookupContext } from '@/src/context/LookupContext';
 import ChruchService from '@/src/services/ChruchService';
 import _, { cloneDeep } from 'lodash';
 import StaffService from '@/src/services/StaffService';
-import { SuccessOverlay } from '../common/SuccessOverlay';
-import { StatusAlert } from '../common/StatusAlert';
-import FailedScreen from '../common/FailedScreen';
-import FuturisticDropdown from '@/src/components/common/FuturisticDropdown';
-import HeaderSession from '../common/HeaderSession';
 import { useAppToast } from '@/src/context/ToastContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { AnimateError } from '@/src/components/AnimateError';
+import HeaderSession from '@/src/components/HeaderSession';
+import FuturisticDropdown from '@/src/components/FuturisticDropdown';
+import { StatusAlert } from '@/src/components/StatusAlert';
+import FailedScreen from '@/src/components/FailedScreen';
+import { SuccessOverlay } from '@/src/components/SuccessOverlay';
 
 const StaffRegistration = ({ navigation, route }: any) => {
     const { id, isEdit } = route.params || {};

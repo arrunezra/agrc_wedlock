@@ -5,7 +5,7 @@ import {
     Modal, ModalBackdrop, ModalContent, ModalHeader, ModalCloseButton,
     ModalBody, ModalFooter, Heading, Text, VStack, HStack, Box,
     Button, ButtonText
-} from '@/src/components/common/GluestackUI';
+} from '@/src/components/GluestackUI';
 import { Icon } from '@/components/ui/icon';
 import profileService from '@/src/services/profileService';
 

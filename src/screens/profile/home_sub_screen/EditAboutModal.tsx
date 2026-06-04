@@ -7,13 +7,13 @@ import {
     ModalCloseButton,
     ModalBody,
     ModalFooter
-} from '@/src/components/common/GluestackUI';
+} from '@/src/components/GluestackUI';
 import api from '@/src/api/api';
 import { Alert, ScrollView, TouchableOpacity } from 'react-native';
 import { ToastDescription } from '@/components/ui/toast';
 import { ArrowLeftIcon, CloseIcon, Icon } from '@/components/ui/icon';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Lightbulb, Sparkles, X } from '@/src/components/common/IconUI';
+import { Lightbulb, Sparkles, X } from '@/src/components/IconUI';
 import { useAppToast } from '@/src/context/ToastContext';
 import profileService from '@/src/services/profileService';
 

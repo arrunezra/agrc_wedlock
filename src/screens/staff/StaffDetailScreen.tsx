@@ -5,12 +5,11 @@ import {
   Box, Button, ButtonText,
   Heading,
   FormControl
-} from '@/src/components/common/GluestackUI';
+} from '@/src/components/GluestackUI';
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import DateTimePicker from '@react-native-community/datetimepicker'; // Used as the engine
 import { Calendar, ChevronRight, Check, Hash, Briefcase, Building2, Phone, Mail, MapPin, Save } from 'lucide-react-native';
 import { Icon } from '@/components/ui/icon';
-import { AnimateError } from '../common/AnimateError';
 
 const StaffDetailsScreen = () => {
   const [formData, setFormData] = useState({

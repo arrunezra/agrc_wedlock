@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { Box } from '@/components/ui/box';
 import { Text } from '@/components/ui/text';
 import { VStack } from '@/components/ui/vstack';
@@ -12,8 +12,8 @@ import { Image } from '@/components/ui/image';
 import { Alert } from 'react-native';
 import api from '@/src/api/api';
 import authService from '@/src/services/authService';
- 
-export default function SignupScreen({ navigation }:any) {
+
+export default function SignupScreen({ navigation }: any) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,39 +22,39 @@ export default function SignupScreen({ navigation }:any) {
   const [loading, setLoading] = useState(false);
 
   const validateForm = () => {
-    const newErrors:any = {};
-    
+    const newErrors: any = {};
+
     if (!name) {
       newErrors.name = 'Name is required';
     }
-    
+
     if (!email) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       newErrors.email = 'Email is invalid';
     }
-    
+
     if (!password) {
       newErrors.password = 'Password is required';
     } else if (password.length < 6) {
       newErrors.password = 'Password must be at least 6 characters';
     }
-    
+
     if (password !== confirmPassword) {
       newErrors.confirmPassword = 'Passwords do not match';
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSignup = async () => {
     if (!validateForm()) return;
-    
+
     setLoading(true);
     try {
-      const response = await authService.signup( {
-        phoneNumber:name,
+      const response = await authService.signup({
+        phoneNumber: name,
         email,
         password,
       });
@@ -64,7 +64,7 @@ export default function SignupScreen({ navigation }:any) {
       //   email,
       //   password,
       // });
-      
+
       if (response.success) {
         Alert.alert(
           'Success',
@@ -74,7 +74,7 @@ export default function SignupScreen({ navigation }:any) {
       } else {
         Alert.alert('Error', response.message || 'Registration failed');
       }
-    } catch (error:any) {
+    } catch (error: any) {
       console.error('Signup error:', error);
       Alert.alert(
         'Error',
@@ -89,11 +89,11 @@ export default function SignupScreen({ navigation }:any) {
     <ScrollView className="flex-1 bg-background-0">
       <Center className="flex-1 px-4 py-8">
         <Box className="w-full max-w-[384px]">
-          
+
           {/* Header */}
           <Box className="items-center mb-10">
             <Image
-              source={require('../../assets/images/aglogo.png')}
+              source={require('@/src/assets/images/aglogo.png')}
               alt="App Logo"
               className="h-32 w-32 mb-4" // Use tailwind for sizing
             />
@@ -108,7 +108,7 @@ export default function SignupScreen({ navigation }:any) {
           {/* Signup Form */}
           {/* space="lg" -> className="gap-4" */}
           <VStack className="gap-4">
-            
+
             {/* Name Input */}
             <FormControl isInvalid={!!errors.name}>
               <FormControlLabel className="mb-1">

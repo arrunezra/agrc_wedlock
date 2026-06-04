@@ -8,8 +8,8 @@ import {
     FormControlError, FormControlErrorText,
     HStack,
     Image,
-} from '@/src/components/common/GluestackUI';
-import { Lock, Eye, EyeOff, ShieldCheck, CheckCircle2, Icon, User } from '@/src/components/common/IconUI';
+} from '@/src/components/GluestackUI';
+import { Lock, Eye, EyeOff, ShieldCheck, CheckCircle2, Icon, User } from '@/src/components/IconUI';
 import { useAuth } from '@/src/context/AuthContext';
 
 const UpdatePassword = ({ navigation, route }: any) => {
@@ -51,7 +51,7 @@ const UpdatePassword = ({ navigation, route }: any) => {
                     {/* Section 1: Logo & Header */}
                     <VStack className="items-center mb-8" space="md">
                         <Image
-                            source={require('../../assets/images/aglogo.png')}
+                            source={require('@/src/assets/images/aglogo.png')}
                             className="h-20 w-20"
                             alt="App Logo"
                             resizeMode="contain"

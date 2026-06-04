@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Alert, Dimensions, Image, Pressable, StyleSheet, TouchableOpacity } from 'react-native';
 import FastImage from "@d11/react-native-fast-image";
 
-import { Box, VStack, HStack, Heading, Text, Button, ButtonIcon } from '@/src/components/common/GluestackUI';
-import { Briefcase, Heart, Icon, MapPin } from '@/src/components/common/IconUI';
+import { Box, VStack, HStack, Heading, Text, Button, ButtonIcon } from '@/src/components/GluestackUI';
+import { Briefcase, Heart, Icon, MapPin } from '@/src/components/IconUI';
 import profileService from '@/src/services/profileService';
 import { API_BASE_URL_DEV_Profiles_Images, } from '@/src/utils/environment';
 import LottieView from 'lottie-react-native';
@@ -13,8 +13,8 @@ import { useFocusEffect } from '@react-navigation/native';
 import _, { constant } from 'lodash';
 import { useAlert } from '@/src/context/AlertContext';
 import { useIsFocused } from '@react-navigation/native'; // Add this import
-import AnimatedMotiView from '../component/AnimateView';
-import GradientView from '../component/GradientView';
+import AnimatedMotiView from '@/src/components/AnimateView';
+import GradientView from '@/src/components/GradientView';
 export const ProfileCard = ({ profile, onPress, user, showToast, onActionComplete, comingFrom, reload }: any) => {
   const { showAlert, hideAlert } = useAlert();
   const isFocused = useIsFocused();
@@ -229,7 +229,7 @@ export const ProfileCard = ({ profile, onPress, user, showToast, onActionComplet
         ) : (
           <Box className="flex-1 justify-center items-center bg-slate-100">
             <LottieView
-              source={require('../../assets/animations/default_profile.json')}
+              source={require('@/src/assets/animations/default_profile.json')}
               autoPlay
               loop
               style={{ width: '70%', height: '70%' }}

@@ -12,9 +12,9 @@ import {
     ProgressFilledTrack,
     Heading,
     Center,
-} from '@/src/components/common/GluestackUI';
-import { BlurView } from '@react-native-community/blur';
+} from './GluestackUI';
 import LottieView from 'lottie-react-native';
+import GlassBlur from './GlassBlur';
 
 interface UploadProgressModalProps {
     isOpen: boolean;
@@ -31,17 +31,21 @@ export const UploadProgressModal = ({ isOpen, uploadProgress }: UploadProgressMo
                     <Box className="w-[85%] h-[280px] rounded-[40px] overflow-hidden border border-white/20">
 
                         {/* Native Blur Layer */}
-                        <BlurView
-                            style={StyleSheet.absoluteFill}
-                            blurType="dark"
-                            blurAmount={20}
-                            reducedTransparencyFallbackColor="black"
-                        />
+
+                        <GlassBlur
+                            blurAmount={15}
+                            overlayColor="rgba(255, 255, 255, 0.1)"
+                            className="w-80 p-6 rounded-2xl border border-white/20 shadow-xl"
+                        >
+                            {/* 💎 Place your UI content here */}
+                            <Text className="text-white text-lg font-bold">blur Amount</Text>
+                            <Text className="text-white text-2xl font-black"> </Text>
+                        </GlassBlur>
 
                         {/* 1. Lottie Animation - Absolute Positioned at top */}
                         <Box className="absolute top-2 self-center w-32 h-32">
                             <LottieView
-                                source={require('../../assets/animations/uploading.json')}
+                                source={require('@/src/assets/animations/uploading.json')}
                                 autoPlay
                                 loop={true} // Changed to true for "Uploading" state
                                 style={{ width: '100%', height: '100%' }}

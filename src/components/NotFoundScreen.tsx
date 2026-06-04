@@ -1,6 +1,6 @@
 import React from 'react';
 import LottieView from 'lottie-react-native';
-import { Box, VStack, Heading, Text, Button, ButtonText } from '@/src/components/common/GluestackUI';
+import { Box, VStack, Heading, Text, Button, ButtonText } from '@/src/components/GluestackUI';
 
 interface NotFoundProps {
     title?: string;
@@ -21,7 +21,7 @@ export default function NotFoundScreen({
                 {/* Lottie Animation - Use a 'not found' or 'empty' json */}
                 <Box className="w-64 h-64">
                     <LottieView
-                        source={require('../../assets/animations/not-found.json')}
+                        source={require('@/src/assets/animations/not-found.json')}
                         autoPlay
                         loop
                         style={{ width: '100%', height: '100%' }}

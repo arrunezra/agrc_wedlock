@@ -1,15 +1,15 @@
-import { Avatar, AvatarFallbackText, AvatarImage, Box, Heading, HStack, Link, LinkText, VStack } from "@/src/components/common/GluestackUI";
-import { AddIcon, Icon, UserCheck } from "@/src/components/common/IconUI";
+import { Avatar, AvatarFallbackText, AvatarImage, Box, Heading, HStack, Link, LinkText, VStack } from "@/src/components/GluestackUI";
+import { AddIcon, Icon, UserCheck } from "@/src/components/IconUI";
 import StaffService from "@/src/services/StaffService";
 import { Activity, ChevronRight, Edit2, Edit3Icon, Phone, PhoneIcon, Plus, PlusIcon, Users, UserX } from "lucide-react-native";
 import { useCallback, useEffect, useState } from "react";
 import { Alert, Linking, Pressable, RefreshControl, StatusBar, Text, TouchableOpacity, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
-import { StatusAlert } from "../common/StatusAlert";
+import { StatusAlert } from "@/src/components/StatusAlert";
 import DashboardSkeleton from "./DashboardSkeleton";
-import HeaderSession from "../common/HeaderSession";
-import AnimatedMotiView from "../component/AnimateView";
-import GradientView from "../component/GradientView";
+import HeaderSession from "@/src/components/HeaderSession";
+import AnimatedMotiView from "@/src/components/AnimateView";
+import GradientView from "@/src/components/GradientView";
 
 const StaffDashboard = ({ navigation }: any) => {
     const [data, setData] = useState<any>(null);

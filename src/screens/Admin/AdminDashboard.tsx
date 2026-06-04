@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Dimensions, Pressable, RefreshControl, ScrollView, StatusBar, TouchableOpacity, View } from 'react-native';
-import { Box, VStack, HStack, Text, Heading, Spinner, useToast } from '@/src/components/common/GluestackUI';
+import { Box, VStack, HStack, Text, Heading, Spinner, useToast } from '@/src/components/GluestackUI';
 import {
     Users,
     Church as ChurchIcon,
@@ -12,13 +12,13 @@ import {
     ArrowUpRight,
     HeartIcon
 } from 'lucide-react-native';
-import { Icon } from '@/src/components/common/IconUI';
-import HeaderSession from '../common/HeaderSession';
+import { Icon } from '@/src/components/IconUI';
+import HeaderSession from '@/src/components/HeaderSession';
 import AdminServices from '@/src/services/AdminServices';
 import { CHURCH_COLORS, formatCurrency, getCurrentDate, getCurrentMonthYear, getCurrentYear, getDetailedFY, getFinancialYear } from '@/src/utils/common';
 import { useAuth } from '@/src/context/AuthContext';
-import AnimatedMotiView from '../component/AnimateView';
-import GradientView from '../component/GradientView';
+import AnimatedMotiView from '@/src/components/AnimateView';
+import GradientView from '@/src/components/GradientView';
 
 const { width } = Dimensions.get('window');
 

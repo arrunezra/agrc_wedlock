@@ -1,27 +1,27 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollView, Pressable, LayoutAnimation, Dimensions, FlatList, Modal, Alert, View, StyleSheet, Share, StatusBar } from 'react-native';
-import { Box, VStack, HStack, Heading, Modal as ModalGUI, Text, BadgeText, Divider, Button, ButtonText, Avatar, AvatarFallbackText, AvatarImage, Actionsheet, ActionsheetBackdrop, ActionsheetDragIndicatorWrapper, ActionsheetDragIndicator, ActionsheetContent, ActionsheetItem, ActionsheetIcon, ActionsheetItemText, Switch, ModalContent, ModalBackdrop, } from '@/src/components/common/GluestackUI';
-import { ArrowLeftRightIcon, Badge, BanIcon, BriefcaseIcon, BuildingIcon, CameraIcon, CrownIcon, FlagIcon, GraduationCapIcon, HeartIcon, HomeIcon, Icon, MapPinIcon, MoreVerticalIcon, SchoolIcon, UserIcon, UsersIcon, UtensilsIcon } from '@/src/components/common/IconUI';
+import { Box, VStack, HStack, Heading, Modal as ModalGUI, Text, BadgeText, Divider, Button, ButtonText, Avatar, AvatarFallbackText, AvatarImage, Actionsheet, ActionsheetBackdrop, ActionsheetDragIndicatorWrapper, ActionsheetDragIndicator, ActionsheetContent, ActionsheetItem, ActionsheetIcon, ActionsheetItemText, Switch, ModalContent, ModalBackdrop, } from '@/src/components/GluestackUI';
+import { ArrowLeftRightIcon, Badge, BanIcon, BriefcaseIcon, BuildingIcon, CameraIcon, CrownIcon, FlagIcon, GraduationCapIcon, HeartIcon, HomeIcon, Icon, MapPinIcon, MoreVerticalIcon, SchoolIcon, UserIcon, UsersIcon, UtensilsIcon } from '@/src/components/IconUI';
 import FastImage from "@d11/react-native-fast-image";
 import { CheckCircleIcon, ChevronDownIcon, LockIcon, MailIcon, PhoneIcon, CheckIcon, CloseIcon, ArrowUpIcon, AddIcon, ChevronUpIcon, ShareIcon, } from '@/components/ui/icon';
 import Gallery from 'react-native-awesome-gallery';
 import profileService from '@/src/services/profileService';
-import { ProfileSkeleton } from '@/src/components/common/ProfileSkeleton';
-import NotFoundScreen from '../common/NotFoundScreen';
+import { ProfileSkeleton } from '@/src/components/ProfileSkeleton';
+import NotFoundScreen from '@/src/components/NotFoundScreen';
 import { BanknoteIcon, Calendar, Check, MapPin, User, X, XIcon, ZapIcon } from 'lucide-react-native';
 import { useAuth } from '@/src/context/AuthContext';
-import LoadingScreen from '../common/SuccessScreen';
+import LoadingScreen from '@/src/components/SuccessScreen';
 import { getExtension } from '@/src/utils/common';
 import { useAppToast } from '@/src/context/ToastContext';
 import { useAlert } from '@/src/context/AlertContext';
 import LottieView from 'lottie-react-native';
 import ReportProfileModal from './home_sub_screen/ReportProfileModal';
 import { useNavigation } from '@react-navigation/native';
-import HeaderSession from '../common/HeaderSession';
+import HeaderSession from '@/src/components/HeaderSession';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { CaptureProtection } from 'react-native-capture-protection';
-import AnimatedMotiView from '../component/AnimateView';
-import GradientView from '../component/GradientView';
+import AnimatedMotiView from '@/src/components/AnimateView';
+import GradientView from '@/src/components/GradientView';
 
 export default function ProfileDetailScreen({ route }: any) {
     const { user } = useAuth();
@@ -502,7 +502,7 @@ export default function ProfileDetailScreen({ route }: any) {
                             (
                                 <Box className="flex-1 justify-center items-center bg-slate-100">
                                     <LottieView
-                                        source={require('../../assets/animations/default_profile.json')}
+                                        source={require('@/src/assets/animations/default_profile.json')}
                                         autoPlay
                                         loop
                                         style={{ width: '70%', height: '70%' }}

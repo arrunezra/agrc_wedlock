@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, ScrollView, StatusBar, Dimensions, Platform, Alert } from 'react-native';
-import { Box, VStack, HStack, Text, Avatar, AvatarImage, Center } from '@/src/components/common/GluestackUI';
+import { Box, VStack, HStack, Text, Avatar, AvatarImage, Center } from '@/src/components/GluestackUI';
 import { Camera, Upload, Check, Trash2, Image as ImageIcon } from 'lucide-react-native';
-import { Icon } from '@/src/components/common/IconUI';
 import api from '@/src/api/api';
 import { cleanupImage, handleImageCompression } from '@/src/utils/ImageService';
 import { useAuth } from '@/src/context/AuthContext';
 import { useAlert } from '@/src/context/AlertContext';
 import { useAppToast } from '@/src/context/ToastContext';
-import HeaderSession from '../common/HeaderSession';
+import HeaderSession from '@/src/components/HeaderSession';
 import { User } from '@/src/utils/models';
 import { getExtension } from '@/src/utils/common';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import AnimatedMotiView from '../component/AnimateView';
-import GradientView from '../component/GradientView';
+import AnimatedMotiView from '@/src/components/AnimateView';
+import GradientView from '@/src/components/GradientView';
+import { Icon } from '@/src/components/IconUI';
 
 export const ProfileUploadScreen = ({ navigation, onUploadComplete }: any) => {
     const { user, updateUser } = useAuth();

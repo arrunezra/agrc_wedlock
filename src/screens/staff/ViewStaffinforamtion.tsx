@@ -1,18 +1,18 @@
-import { Avatar, AvatarFallbackText, AvatarImage, Badge, Box, Button, ButtonText, Center, Heading, HStack, VStack } from '@/src/components/common/GluestackUI';
-import { Hash, Icon, Phone, User } from '@/src/components/common/IconUI';
+import { Avatar, AvatarFallbackText, AvatarImage, Badge, Box, Button, ButtonText, Center, Heading, HStack, VStack } from '@/src/components/GluestackUI';
 import StaffService from '@/src/services/StaffService';
 import { ChevronRight, Church, Edit3, Edit3Icon, Hexagon, Home, Mail, MapPin, Navigation, Smartphone, UserCheck } from 'lucide-react-native';
 import React, { useCallback, useEffect, useState } from 'react'
 import { View, Text, TouchableOpacity, Linking, StatusBar } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
-import LoadingScreen from '../common/LoadingScreen';
-import NotFoundScreen from '../common/NotFoundScreen';
 import { useAuth } from '@/src/context/AuthContext';
 import { useFocusEffect } from '@react-navigation/native';
 import { getExtension, getFullName } from '@/src/utils/common';
-import HeaderSession from '../common/HeaderSession';
-import AnimatedMotiView from '../component/AnimateView';
-import GradientView from '../component/GradientView';
+import AnimatedMotiView from '@/src/components/AnimateView';
+import { Hash, Icon, Phone, User } from '@/src/components/IconUI';
+import HeaderSession from '@/src/components/HeaderSession';
+import NotFoundScreen from '@/src/components/NotFoundScreen';
+import LoadingScreen from '@/src/components/LoadingScreen';
+import GradientView from '@/src/components/GradientView';
 const InfoRow = ({ label, value, icon: IconComponent, color = "#0891b2", isMultiline = false }: any) => (
     <HStack className="items-center gap-5 py-2">
         {/* Icon with soft tinted background */}

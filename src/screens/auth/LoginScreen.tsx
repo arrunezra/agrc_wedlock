@@ -4,12 +4,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useKeyboardAnimation } from 'react-native-keyboard-controller';
 
 // New Imports (Points to your local UI components) 
-import { Image, Link, LinkText, ButtonSpinner, Center, ScrollView, Box, VStack, Input, InputField, Button, ButtonText, Text, FormControl, FormControlError, FormControlErrorText, FormControlLabel, FormControlLabelText, HStack, Checkbox, CheckboxIndicator, CheckboxIcon, CheckboxLabel, InputSlot, InputIcon } from '@/src/components/common/GluestackUI';
+import { Image, Link, LinkText, ButtonSpinner, Center, ScrollView, Box, VStack, Input, InputField, Button, ButtonText, Text, FormControl, FormControlError, FormControlErrorText, FormControlLabel, FormControlLabelText, HStack, Checkbox, CheckboxIndicator, CheckboxIcon, CheckboxLabel, InputSlot, InputIcon } from '@/src/components/GluestackUI';
 
 import { useAuth } from '@/src/context/AuthContext';
-import { CheckIcon, Eye, EyeOff } from '@/src/components/common/IconUI';
-import { AnimateError } from '../common/AnimateError';
-import GradientView from '../component/GradientView';
+import { CheckIcon, Eye, EyeOff } from '@/src/components/IconUI';
+import GradientView from '@/src/components/GradientView';
+import { AnimateError } from '@/src/components/AnimateError';
 
 export default function LoginScreen({ navigation }: any) {
   const { progress } = useKeyboardAnimation();
@@ -68,7 +68,7 @@ export default function LoginScreen({ navigation }: any) {
       } else {
         setErrors((pre: any) => ({
           ...pre,
-          password: "Invalid phone number password"
+          password: "Incorrect login credentials. Please try again."
         }));
       }
     } catch (error: any) {
@@ -109,7 +109,7 @@ export default function LoginScreen({ navigation }: any) {
                 {/* Logo Section */}
                 <Box className="items-center mb-8 mt-4">
                   <Image
-                    source={require('../../assets/logo/logo_small_fullname.png')}
+                    source={require('@/src/assets/logo/logo_small_fullname.png')}
                     alt="Assemblies of God Logo"
                     className="mb-4 h-32 w-32"
                     resizeMode="contain"

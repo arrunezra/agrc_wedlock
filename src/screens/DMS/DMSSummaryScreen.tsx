@@ -18,7 +18,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '@/src/api/api';
 import { API_BASE_URL_DEV_DMS } from '@/src/utils/environment';
 import { useAuth } from '@/src/context/AuthContext';
-import LoadingScreen from '../common/LoadingScreen';
+import LoadingScreen from '@/src/components/LoadingScreen';
 import { getFileIconConfig } from '@/src/utils/common';
 
 

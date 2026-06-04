@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { ScrollView, StatusBar } from 'react-native';
 import {
     Box, VStack, HStack, Text, Heading, Switch, Divider
-} from '@/src/components/common/GluestackUI';
-import { Eye, Calendar, ShieldCheck, Lock, Fingerprint, Info, Icon } from '@/src/components/common/IconUI';
+} from '@/src/components/GluestackUI';
+import { Eye, Calendar, ShieldCheck, Lock, Fingerprint, Info, Icon } from '@/src/components/IconUI';
 import profileService from '@/src/services/profileService';
 import { useAppToast } from '@/src/context/ToastContext';
 import { useAlert } from '@/src/context/AlertContext';
 import { useAuth } from '@/src/context/AuthContext';
 import { User } from '@/src/utils/models';
-import HeaderSession from '../../common/HeaderSession';
-import GradientView from '../../component/GradientView';
+import HeaderSession from '@/src/components/HeaderSession';
+import GradientView from '@/src/components/GradientView';
 
 export default function ContactPrivacyScreen({ navigation }: any) {
     const { showToast } = useAppToast();

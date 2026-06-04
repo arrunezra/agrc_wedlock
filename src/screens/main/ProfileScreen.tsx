@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { Alert } from 'react-native';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '@/src/context/AuthContext';
 import { User } from '@/src/utils/models';
 
 import { ScrollView } from '@/components/ui/scroll-view';

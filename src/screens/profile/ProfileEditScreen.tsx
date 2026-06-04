@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Alert, Dimensions, Platform, Pressable, RefreshControl, ScrollView, StatusBar, StyleSheet, TouchableOpacity } from 'react-native';
-import { Box, Heading, Input, InputField, Button, ButtonText, Spinner, useToast, Toast, ToastTitle, Center, Avatar, AvatarImage, Text, HStack, VStack, Modal, ModalBackdrop, ModalContent, Progress, ProgressFilledTrack } from '@/src/components/common/GluestackUI';
+import { Box, Heading, Input, InputField, Button, ButtonText, Spinner, useToast, Toast, ToastTitle, Center, Avatar, AvatarImage, Text, HStack, VStack, Modal, ModalBackdrop, ModalContent, Progress, ProgressFilledTrack } from '@/src/components/GluestackUI';
 import api from '@/src/api/api';
 import { launchImageLibrary } from 'react-native-image-picker';
-import { Accessibility, Activity, Baby, Banknote, Briefcase, Calendar, CameraIcon, Check, CheckCircle2, CheckIcon, ChevronDown, ChevronDownIcon, ChevronLeftIcon, ChevronUp, ChevronUpIcon, Coffee, Droplets, EditIcon, Globe, GraduationCap, Heart, Icon, Info, Languages, Mail, MapPin, MessageSquareQuote, MoonStar, Network, Phone, Ruler, Scale, School, ShieldCheck, Sparkles, User, UserRound, Users, Users2, UserSquare } from '@/src/components/common/IconUI';
+import { Accessibility, Activity, Baby, Banknote, Briefcase, Calendar, CameraIcon, Check, CheckCircle2, CheckIcon, ChevronDown, ChevronDownIcon, ChevronLeftIcon, ChevronUp, ChevronUpIcon, Coffee, Droplets, EditIcon, Globe, GraduationCap, Heart, Icon, Info, Languages, Mail, MapPin, MessageSquareQuote, MoonStar, Network, Phone, Ruler, Scale, School, ShieldCheck, Sparkles, User, UserRound, Users, Users2, UserSquare } from '@/src/components/IconUI';
 import FastImage from '@d11/react-native-fast-image';
 import { useAuth } from '@/src/context/AuthContext';
 import LottieView from 'lottie-react-native';
@@ -18,16 +18,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API_BASE_URL_DEV_Profiles_Images } from '@/src/utils/environment';
 import { compressWithSkia } from '@/src/utils/compressWithSkia';
 import { BlurView } from '@react-native-community/blur';
-import { UploadProgressModal } from '../common/UploadProgressModal';
+import { UploadProgressModal } from '@/src/components/UploadProgressModal';
 import profileService from '@/src/services/profileService';
-import { ProfileSkeleton } from '@/src/components/common/ProfileSkeleton';
+import { ProfileSkeleton } from '@/src/components/ProfileSkeleton';
 import { LookupContext } from '@/src/context/LookupContext';
 import { useAppToast } from '@/src/context/ToastContext';
-import NoDataScreen from '../common/NoDataScreen';
+import NoDataScreen from '@/src/components/NoDataScreen';
 import { Plus } from 'lucide-react-native';
 import { getExtension } from '@/src/utils/common';
-import HeaderSession from '../common/HeaderSession';
-import GradientView from '../component/GradientView';
+import HeaderSession from '@/src/components/HeaderSession';
+import GradientView from '@/src/components/GradientView';
 
 
 export default function ProfileEditScreen({ navigation, route }: any) {
@@ -473,7 +473,7 @@ export default function ProfileEditScreen({ navigation, route }: any) {
                     // Case 2: No image / Verification Pending
                     <Box className="flex-1 justify-center items-center bg-white-800">
                       <LottieView
-                        source={require('../../assets/animations/default_profile.json')}
+                        source={require('@/src/assets/animations/default_profile.json')}
                         autoPlay
                         loop
                         style={{ width: '60%', height: '60%' }}

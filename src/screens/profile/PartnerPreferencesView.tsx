@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { RefreshControl, ScrollView, TouchableOpacity } from 'react-native';
 import {
     VStack, HStack, Text, Box, Heading, Center
-} from '@/src/components/common/GluestackUI';
+} from '@/src/components/GluestackUI';
 import {
     Calendar, Ruler, Users, Baby,
     Book, Globe, MapPin,

@@ -5,7 +5,7 @@ import {
     Box, Button, ButtonText, Modal, ModalBackdrop,
     ModalContent, Heading, HStack,
     VStack
-} from '@/src/components/common/GluestackUI';
+} from './GluestackUI';
 
 export default function StaffImageCropView({ imageUri, onConfirm, onCancel }: any) {
 

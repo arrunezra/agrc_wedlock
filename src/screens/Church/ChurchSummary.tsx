@@ -12,9 +12,9 @@ import {
     AvatarImage,
     Divider,
     InputSlot
-} from '@/src/components/common/GluestackUI';
+} from '@/src/components/GluestackUI';
 import api from '@/src/api/api';
-import { AddIcon, Building2, CheckCircle2, Globe, Hash, Icon, Mail, MapPin, Phone, SearchIcon, Trash2, User } from '@/src/components/common/IconUI';
+import { AddIcon, Building2, CheckCircle2, Globe, Hash, Icon, Mail, MapPin, Phone, SearchIcon, Trash2, User } from '@/src/components/IconUI';
 const denominations = ["Baptist", "Catholic", "Pentecostal", "Methodist", "Anglican"];
 const statuses = ["Active", "Inactive", "Merged", "Closed"];
 import { AdminStackParamList } from '@/src/types/navigation';
@@ -23,7 +23,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import AnimatedListItem, { ChurchSkeleton } from './AnimattedSummary';
 import { Edit3, Settings2, XIcon } from 'lucide-react-native';
 import { ChruchService } from '@/src/services/ChruchService';
-import HeaderSession from '../common/HeaderSession';
+import HeaderSession from '@/src/components/HeaderSession';
 import { launchImageLibrary } from 'react-native-image-picker';
 type Props = NativeStackScreenProps<AdminStackParamList, 'ChurchSummary'>;
 export default function ChurchSummary({ route, navigation }: any) {

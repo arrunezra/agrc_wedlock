@@ -5,13 +5,13 @@ import {
     ModalBody, ModalFooter, Heading, Text, VStack, HStack, Box,
     FormControl, FormControlLabel, FormControlLabelText,
     Button, ButtonText, Spinner, Input, InputField
-} from '@/src/components/common/GluestackUI';
+} from '@/src/components/GluestackUI';
 import { Dropdown } from 'react-native-element-dropdown';
-import { GraduationCap, School, Briefcase, Building2, Banknote, UserCog, Icon, ChevronLeftIcon, CloseIcon } from '@/src/components/common/IconUI';
-import FuturisticDropdown from '@/src/components/common/FuturisticDropdown';
-import { AnimateError } from '../../common/AnimateError';
+import { GraduationCap, School, Briefcase, Building2, Banknote, UserCog, Icon, ChevronLeftIcon, CloseIcon } from '@/src/components/IconUI';
+import FuturisticDropdown from '@/src/components/FuturisticDropdown';
 import profileService from '@/src/services/profileService';
 import _ from 'lodash';
+import { AnimateError } from '@/src/components/AnimateError';
 
 export const EducationDetailsModal = ({ isOpen, onClose, formData, updateForm, lookups, onRefresh, showToast, qualification, user }: any) => {
     const [currentStep, setCurrentStep] = useState(1);

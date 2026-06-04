@@ -21,12 +21,12 @@ import { useNavigation } from '@react-navigation/native'; // Added navigation
 import api from '@/src/api/api';
 import { API_BASE_URL_DEV_DMS } from '@/src/utils/environment';
 import { getFileIconConfig } from '@/src/utils/common';
-import { VStack } from '@/src/components/common/GluestackUI';
+import { VStack } from '@/src/components/GluestackUI';
 import { useAppToast } from '@/src/context/ToastContext';
-import LoadingScreen from '@/src/screens/common/LoadingScreen';
-import NotFoundScreen from '../common/NotFoundScreen';
+import LoadingScreen from '@/src/components/LoadingScreen';
+import NotFoundScreen from '@/src/components/NotFoundScreen';
 import { useAlert } from '@/src/context/AlertContext';
-import HeaderSession from '../common/HeaderSession';
+import HeaderSession from '@/src/components/HeaderSession';
 
 const StaffDocumentSummary = ({ route }: any) => {
     const { profile_id } = route.params;

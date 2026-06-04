@@ -6,10 +6,10 @@ import {
     FormControl, FormControlLabel, FormControlLabelText, Button, ButtonText,
     Input, InputField, ScrollView, Select, SelectTrigger, SelectInput,
     SelectPortal, SelectBackdrop, SelectContent, SelectItem
-} from '@/src/components/common/GluestackUI';
+} from '@/src/components/GluestackUI';
 import { TouchableOpacity } from 'react-native';
 import { Icon, } from '@/components/ui/icon';
-import { Heart, Ruler, Trash2, X } from '@/src/components/common/IconUI';
+import { Heart, Ruler, Trash2, X } from '@/src/components/IconUI';
 
 const EditFamilyModal = ({
     isOpen,

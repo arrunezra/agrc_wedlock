@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { FlatList, ActivityIndicator } from 'react-native';
-import { Box, Spinner, Center } from '@/src/components/common/GluestackUI';
+import { Box, Spinner, Center } from '@/src/components/GluestackUI';
 import api from '@/src/api/api';
 import { ProfileCard } from './ProfileCard';
 import { useNavigation } from '@react-navigation/native';
 import { profileService } from '@/src/services/profileService';
 import LottieView from 'lottie-react-native';
-import NotFoundScreen from '../common/NotFoundScreen';
-import FailedScreen from '../common/FailedScreen';
-import { SkeletonItem } from '../common/SkeletonItem';
+import NotFoundScreen from '@/src/components/NotFoundScreen';
+import FailedScreen from '@/src/components/FailedScreen';
+import { SkeletonItem } from '@/src/components/SkeletonItem';
 import { useAuth } from '@/src/context/AuthContext';
 
 export default function HomeScreen() {

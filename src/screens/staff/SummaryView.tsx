@@ -7,19 +7,19 @@ import {
     Avatar,
     AvatarFallbackText,
     AvatarImage,
-} from '@/src/components/common/GluestackUI';
-import { Icon, PhoneIcon, AddIcon } from '@/src/components/common/IconUI';
+} from '@/src/components/GluestackUI';
+import { Icon, PhoneIcon, AddIcon } from '@/src/components/IconUI';
 
 import FastImage from "@d11/react-native-fast-image";
 import { Edit3Icon, SearchIcon, Settings2, XCircle, XIcon } from "lucide-react-native";
 import { useEffect, useMemo, useRef, useState } from "react";
 import StaffService from "@/src/services/StaffService";
 import { StaffSummarySkeleton } from "./DashboardSkeleton";
-import HeaderSession from "../common/HeaderSession";
+import HeaderSession from "@/src/components/HeaderSession";
 import { getExtension } from "@/src/utils/common";
 import { useAuth } from "@/src/context/AuthContext";
-import AnimatedMotiView from "../component/AnimateView";
-import GradientView from "../component/GradientView";
+import AnimatedMotiView from "@/src/components/AnimateView";
+import GradientView from "@/src/components/GradientView";
 const StaffItem = ({ item, index, navigation, user }: any) => {
     const [profile, setProfile] = useState<any>("");
     //console.log('item', item);

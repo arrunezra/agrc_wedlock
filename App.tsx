@@ -23,11 +23,9 @@ import { AlertProvider } from './src/context/AlertContext';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { LookupProvider } from './src/context/LookupContext';
 import Toast from 'react-native-toast-message';
-import { toastConfig } from './src/screens/common/ToastConfig';
 import { AppToastProvider } from './src/context/ToastContext';
-import RazorpayCheckout from 'react-native-razorpay';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import SplashScreen from './src/components/common/SplashScreen';
+import SplashScreen from './src/components/SplashScreen';
+import { toastConfig } from './src/components/ToastConfig';
 function App() {
 
   const [isAllPermissionGranted, setIsAllPermissionGranted] = useState(false);

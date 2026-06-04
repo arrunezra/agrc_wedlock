@@ -1,5 +1,5 @@
 import { CheckIcon, Icon, StarIcon } from "@/components/ui/icon";
-import { Box, Heading, HStack, Text, VStack } from "@/src/components/common/GluestackUI";
+import { Box, Heading, HStack, Text, VStack } from "@/src/components/GluestackUI";
 import FastImage from "@d11/react-native-fast-image";
 import { memo } from "react";
 import { Pressable } from "react-native";

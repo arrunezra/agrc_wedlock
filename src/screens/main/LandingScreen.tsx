@@ -9,9 +9,9 @@ import { Card } from '@/components/ui/card';
 import { Divider } from '@/components/ui/divider';
 import { Button, ButtonText } from '@/components/ui/button';
 import { Avatar, AvatarFallbackText } from '@/components/ui/avatar';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '@/src/context/AuthContext';
 
-export default function LandingScreen({ navigation }:any) {
+export default function LandingScreen({ navigation }: any) {
   const { user } = useAuth();
 
   const stats = [
@@ -20,11 +20,11 @@ export default function LandingScreen({ navigation }:any) {
     { label: 'On Leave', value: '3', color: '$warning' },
     { label: 'Tasks', value: '12', color: '$info' },
   ];
-const quickActions = [
-  { label: 'Add Staff', route: 'Staff' }, // Works: 'Staff' is in the Drawer
-  { label: 'My Interests', route: 'Interests' }, // Works: 'Interests' is a Tab
-  { label: 'Profile Access', route: 'ProfileAccess' }, // Works: 'ProfileAccess' is a Tab
-];
+  const quickActions = [
+    { label: 'Add Staff', route: 'Staff' }, // Works: 'Staff' is in the Drawer
+    { label: 'My Interests', route: 'Interests' }, // Works: 'Interests' is a Tab
+    { label: 'Profile Access', route: 'ProfileAccess' }, // Works: 'ProfileAccess' is a Tab
+  ];
   // const quickActions = [
   //   { label: 'Add Staff', route: 'Staff', icon: 'user-plus' },
   //   { label: 'Schedule', route: 'Schedule', icon: 'calendar' },
@@ -35,7 +35,7 @@ const quickActions = [
   return (
     <ScrollView className="flex-1 bg-background-0">
       <Box className="px-4 py-6">
-        
+
         {/* Welcome Section */}
         <VStack className="gap-1 mb-6">
           <Text className="text-lg text-typography-500">
@@ -50,9 +50,9 @@ const quickActions = [
         <ScrollView horizontal showsHorizontalScrollIndicator={false} className="mb-6">
           <HStack className="gap-4">
             {stats.map((stat: any, index: number) => (
-              <Card 
-                key={index} 
-                variant="elevated" 
+              <Card
+                key={index}
+                variant="elevated"
                 className="p-4 min-w-[160px] items-center justify-center"
               >
                 <VStack className="gap-1 items-center">

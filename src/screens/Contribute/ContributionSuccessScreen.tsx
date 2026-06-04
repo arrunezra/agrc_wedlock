@@ -12,7 +12,7 @@ import {
     Button,
     ButtonText,
     Center
-} from '@/src/components/common/GluestackUI';
+} from '@/src/components/GluestackUI';
 
 // Custom Lucide/Icon Imports
 import {

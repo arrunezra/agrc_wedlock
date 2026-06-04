@@ -20,16 +20,16 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native'; // Add
 
 import api from '@/src/api/api';
 import { API_BASE_URL_DEV_DMS } from '@/src/utils/environment';
-import LoadingScreen from '../common/LoadingScreen';
+import LoadingScreen from '@/src/components/LoadingScreen';
 import { getFileIconConfig } from '@/src/utils/common';
-import { VStack } from '@/src/components/common/GluestackUI';
-import { AddIcon, Icon } from '@/src/components/common/IconUI';
+import { VStack } from '@/src/components/GluestackUI';
+import { AddIcon, Icon } from '@/src/components/IconUI';
 import { useAppToast } from '@/src/context/ToastContext';
 import { Screen } from 'react-native-screens';
 import { useAlert } from '@/src/context/AlertContext';
-import HeaderSession from '../common/HeaderSession';
-import AnimatedMotiView from '../component/AnimateView';
-import GradientView from '../component/GradientView';
+import HeaderSession from '@/src/components/HeaderSession';
+import AnimatedMotiView from '@/src/components/AnimateView';
+import GradientView from '@/src/components/GradientView';
 
 const DocumentSummary = () => {
     const navigation = useNavigation<any>();
