@@ -99,13 +99,13 @@ const MatchesScreen = () => {
     useFocusEffect(
         useCallback(() => {
             // Security logic
-            //CaptureProtection.prevent({ screenshot: true, record: true, appSwitcher: true });
+            CaptureProtection.prevent({ screenshot: true, record: true, appSwitcher: true });
 
             // Fetch fresh data immediately on focus
             fetchProfiles(1, true);
 
             return () => {
-                // CaptureProtection.allow();
+                CaptureProtection.allow();
                 // Cleanup: Cancel any ongoing fetch when leaving the screen
                 if (abortControllerRef.current) {
                     abortControllerRef.current.abort();
