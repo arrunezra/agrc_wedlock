@@ -31,6 +31,8 @@ const MatchesScreen = () => {
     const [selectedFilter, setSelectedFilter] = useState('New');
     const [showFilters, setShowFilters] = useState(false); // Fix for More Match click
     const [isContributed, setIsContributed] = useState(false);
+    const [landing, setLanding] = useState('waiting');
+
     const [filters, setFilters] = useState({
         gender: '',
         marital_status: '',
@@ -84,9 +86,12 @@ const MatchesScreen = () => {
         } catch (error: any) {
             if (error.name === 'AbortError' || error.message === 'canceled') return;
             console.error("Fetch Error:", error);
+            setLanding('Error')
+
         } finally {
             setLoading(false);
             setRefreshing(false);
+            setLanding('Landed')
         }
     };
 
@@ -94,13 +99,13 @@ const MatchesScreen = () => {
     useFocusEffect(
         useCallback(() => {
             // Security logic
-            CaptureProtection.prevent({ screenshot: true, record: true, appSwitcher: true });
+            //CaptureProtection.prevent({ screenshot: true, record: true, appSwitcher: true });
 
             // Fetch fresh data immediately on focus
             fetchProfiles(1, true);
 
             return () => {
-                CaptureProtection.allow();
+                // CaptureProtection.allow();
                 // Cleanup: Cancel any ongoing fetch when leaving the screen
                 if (abortControllerRef.current) {
                     abortControllerRef.current.abort();
@@ -154,7 +159,7 @@ const MatchesScreen = () => {
                 data={profiles}
                 keyExtractor={(item, index) => `${item.id}-${index}`}
                 renderItem={({ item }) => (
-                    <Box className="px-4">
+                    <Box  >
                         <ProfileCard
                             user={user}
                             profile={item}
@@ -194,7 +199,7 @@ const MatchesScreen = () => {
             />
 
             {isContributed ?
-                <Box className="flex-1 bg-background-50">
+                <Box className="flex-1 bg-background-50 gap-2">
                     {/* 1. Header / Tabs (Height determined by content) */}
                     <Box className="pt-4 bg-white border-b border-outline-50">
                         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -233,20 +238,23 @@ const MatchesScreen = () => {
                 loading ? <Box className="px-4 py-2">
                     <ProfileCardSkeleton />
                 </Box> :
-                    <ContributionScreen onPay={() => {
-                        let cont = contributionAmount ?? 0;
-                        if (cont == 0) {
-                            showToast("Service Unavailable", "Check your admin", "error");
+
+                    landing === "Landed" && <ContributionScreen onPay={
+                        () => {
+                            let cont = contributionAmount ?? 0;
+                            if (cont == 0) {
+                                showToast("Service Unavailable", "Check your admin", "error");
+                            }
+                            else {
+                                navigation.navigate('CommunitySupport', {
+                                    totalAmount: cont,
+                                    customerName: user?.firstName,
+                                    email: user?.email,
+                                    phoneNo: user?.phone,
+                                    userid: user?.profile_id
+                                })
+                            }
                         }
-                        else
-                            navigation.navigate('CommunitySupport', {
-                                totalAmount: cont,
-                                customerName: user?.firstName,
-                                email: user?.email,
-                                phoneNo: user?.phone,
-                                userid: user?.profile_id
-                            })
-                    }
                     }
                         values={{
                             totalAmount: contributionAmount ?? 0,

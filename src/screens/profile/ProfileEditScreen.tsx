@@ -454,56 +454,63 @@ export default function ProfileEditScreen({ navigation, route }: any) {
           <>
             <Box>
               {/* 1. HERO IMAGE SECTION (Matches ProfileDetailScreen) handlePickImage */}
-              <Box className="h-[400px] w-full bg-white-900 relative overflow-hidden">
+              <Box className="h-[400px] w-full bg-slate-900 relative overflow-hidden">
+
+                {/* 1. Core Profile Image / Animation Container */}
+
+                {profilePicUrl && profilePicUrl !== 'fake' ? (
+                  // Case 1: Image exists
+                  <FastImage
+                    source={{
+                      uri: profilePicUrl,
+                      priority: FastImage.priority.high
+                    }}
+                    style={StyleSheet.absoluteFill}
+                    resizeMode="cover"
+                  />
+                ) : (
+                  // Case 2: No image / Verification Pending
+                  <Box className="w-full h-full justify-center items-center bg-slate-800">
+                    <LottieView
+                      source={require('@/src/assets/animations/default_profile.json')}
+                      autoPlay
+                      loop
+                      style={{ width: '60%', height: '60%' }}
+                    />
+
+                    {!is_verified_profile && (
+                      // Adjusted position index container so it sits cleanly above text elements
+                      <Box className="absolute bottom-24 bg-black/50 px-4 py-1.5 rounded-full border border-white/10 z-10">
+                        <Text className="text-white font-semibold text-xs uppercase tracking-wider">Verification Pending</Text>
+                      </Box>
+                    )}
+                  </Box>
+                )}
+
+
+                {/* 2. 🎯 FIXED GRADIENT: Inset mask stretches 100% full height to remove hard edge lines */}
+                <GradientView
+                  horizontal={false}
+                  colors={[
+                    'rgba(0,0,0,0.3)', // Subtle dark vignette top overlay for icon readability
+                    'transparent',      // Clear visibility zone over the subject center
+                    'rgba(0,0,0,0.5)',  // Smooth feather darkening step
+                    'rgba(0,0,0,0.95)'  // Deep rich base grounding for overlay texts
+                  ]}
+                  locations={[0, 0.25, 0.65, 1]}
+                  style={StyleSheet.absoluteFill}
+                  className="z-5 pointer-events-none" // pointer-events-none ensures it doesn't block the Pressable underneath
+                />
+
+                {/* 3. Floating Camera Icon Layer (Placed OUTSIDE the Pressable with z-10 for perfect tap isolation) */}
+
                 <Pressable
                   onPress={() => navigation.navigate('ShowProfileGallery')}
-                  className="flex-1"
+                  className="absolute top-14 right-6 z-10 bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-white/20 shadow-xl active:scale-95"
                 >
-                  {profilePicUrl && profilePicUrl != 'fake' ? (
-                    // Case 1: Image exists
-                    <FastImage
-                      source={{
-                        uri: profilePicUrl,
-                        priority: FastImage.priority.high
-                      }}
-                      style={StyleSheet.absoluteFill}
-                      resizeMode="cover"
-                    />
-                  ) : (
-                    // Case 2: No image / Verification Pending
-                    <Box className="flex-1 justify-center items-center bg-white-800">
-                      <LottieView
-                        source={require('@/src/assets/animations/default_profile.json')}
-                        autoPlay
-                        loop
-                        style={{ width: '60%', height: '60%' }}
-                      />
-                      {!is_verified_profile && <Box className="absolute bottom-32 bg-black/40 px-4 py-1 rounded-full border border-white/10">
-                        <Text className="text-white font-medium text-sm">Verification Pending</Text>
-                      </Box>
-                      }
-                    </Box>
-                  )}
-
-                  {/* Camera Icon - Floating Glass Effect */}
-                  <Box className="absolute top-14 right-6 z-30 bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-white/20 shadow-xl">
-                    <Icon as={CameraIcon} className="text-white" size="xl" />
-                  </Box>
+                  <Icon as={CameraIcon} className="text-white" size="xl" />
                 </Pressable>
 
-                {/* Back Button - Floating Glass Effect */}
-                {/* <TouchableOpacity
-                  onPress={() => navigation.goBack()}
-                  className="absolute top-14 left-6 z-30 bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-white/20 shadow-xl"
-                >
-                  <Icon as={ChevronLeftIcon} className="text-white" size="xl" />
-                </TouchableOpacity> */}
-
-                {/* Bottom Gradient - Deeper and smoother for 2026 aesthetics */}
-                <GradientView
-                  colors={['transparent', 'rgba(0,0,0,0.1)', 'rgba(0,0,0,0.8)', '#000']}
-                  style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 140 }}
-                />
               </Box>
               {/* End Hero Image Section */}
 
@@ -527,6 +534,7 @@ export default function ProfileEditScreen({ navigation, route }: any) {
               <GradientCard
                 title="Personality & Expectations"
                 onEdit={() => setIsAboutModalVisible(true)}
+                h
               >
                 <Box className="relative">
                   <Text

@@ -26,6 +26,7 @@ import { CheckIcon, ChevronDownIcon, CircleIcon, CloseIcon, Icon, SearchIcon } f
 import { Slider } from '@miblanchard/react-native-slider';
 import { Check, ShieldCheckIcon } from 'lucide-react-native';
 import { Radio, RadioIcon, RadioIndicator } from '@/components/ui/radio';
+import { Alert } from 'react-native';
 
 const EditPreferenceModal = ({ isOpen, onClose, fieldType, currentData, onSave, lookups }: any) => {
     //console.log('lookups', lookups)
@@ -146,64 +147,35 @@ const EditPreferenceModal = ({ isOpen, onClose, fieldType, currentData, onSave, 
         onSave(updatedData);
         onClose();
     };
-    // const handleCheckBoxToggle = (value: string) => {
-    //     if (value === 'all') {
-    //         setTempValue([]); // Empty array represents "Open to All"
-    //         return;
-    //     }
 
-    //     let newList = [...tempValue];
-    //     if (newList.includes(value)) {
-    //         newList = newList.filter(i => i !== value);
-    //     } else {
-    //         newList.push(value);
-    //     }
-    //     setTempValue(newList);
-    // };
     const handleCheckBoxToggle = (value: string) => {
         setTempValue((prev: any) => {
-            const currentSelected = Array.isArray(prev) ? prev : [];
+            // 1. Force state into an array container instance
+            const currentSelected = Array.isArray(prev) ? [...prev] : [];
 
-            // 1. User clicked "Open to All"
+            // 2. Clicked "Open to All": Clear all specific selections and only hold 'all'
             if (value === 'all' || value === 'Open to All') {
-                // Clear everything and only keep 'all' (or return [] for empty)
                 return ['all'];
             }
 
-            // 2. User clicked a specific item (e.g., 'vmt')
-            let updatedList;
-            if (currentSelected.includes(value)) {
-                // Uncheck: Remove the item
-                updatedList = currentSelected.filter((item: string) => item !== value);
+            // 3. Clicked a specific option (e.g., 'Never Married')
+            let updatedList: string[];
+
+            // Remove 'all' instantly since a specific option was tapped
+            const cleanChoices = currentSelected.filter(item => item !== 'all' && item !== 'Open to All');
+
+            if (cleanChoices.includes(value)) {
+                // Uncheck: Item was already selected, filter it out
+                updatedList = cleanChoices.filter((item: string) => item !== value);
             } else {
-                // Check: Add the item AND remove 'all' if it was there
-                updatedList = [...currentSelected.filter(item => item !== 'all'), value];
+                // Check: Add new selection into the tracking map array
+                updatedList = [...cleanChoices, value];
             }
 
-            // 3. Final Check: If the list is now empty, default it back to 'all'
+            // 4. If everything is unselected, fall back to automatically turning 'all' back on
             return updatedList.length === 0 ? ['all'] : updatedList;
         });
     };
-    // const handleCheckBoxToggle = (value: string) => {
-    //     console.log('handleCheckBoxToggle', value)
-
-    //     setTempValue((prev: any) => {
-    //         // Ensure prev is an array to avoid .includes or .filter crashes
-    //         const currentSelected = Array.isArray(prev) ? prev : [];
-    //         if (value === 'all') {
-    //             // If user clicks "Open to All", clear everything else
-    //             return [];
-    //         }
-
-    //         // If user selects a specific item:
-    //         if (currentSelected.includes(value)) {
-    //             // 1. If it's already there, remove it (Uncheck)
-    //             return currentSelected.filter((item: string) => item !== value);
-    //         } else {
-    //             return [...currentSelected, value];
-    //         }
-    //     });
-    // };
 
     const renderAgeSlider = () => (
         <VStack space="xl" className="py-4">
@@ -310,10 +282,16 @@ const EditPreferenceModal = ({ isOpen, onClose, fieldType, currentData, onSave, 
         );
     }
     const renderMaritalStatus = () => {
-        const isOpenToAll = !tempValue || tempValue.length === 0 || (tempValue.length === 1 && tempValue[0] === 'all');
+        const currentArray = Array.isArray(tempValue) ? tempValue : [];
+
+        // A master flag stating whether the selection defaults to "Open to All"
+        const isOpenToAll = currentArray.length === 0 ||
+            currentArray.includes('all') ||
+            currentArray.includes('Open to All');
+
         return (
             <VStack space="lg" className="py-2">
-                {/* Top Badge/Selection Display */}
+                {/* Top Status Indicator Badge */}
                 <Box className="flex-row flex-wrap gap-2 mb-2">
                     <Box className={`px-4 py-1.5 rounded-full border ${isOpenToAll ? 'bg-cyan-50 border-cyan-500' : 'bg-slate-50 border-slate-200'}`}>
                         <Text size="xs" className={isOpenToAll ? 'text-cyan-600 font-bold' : 'text-slate-500'}>
@@ -325,13 +303,13 @@ const EditPreferenceModal = ({ isOpen, onClose, fieldType, currentData, onSave, 
                 <Text size="sm" className="text-slate-400 font-bold mb-2">Preferences</Text>
 
                 <VStack space="xl">
-                    {/* Open to All Checkbox */}
+                    {/* 🎯 FIXED: Removed 'isReadOnly' so changes pass through on tap instantly */}
                     <Checkbox
                         value="all"
                         isChecked={isOpenToAll}
                         onChange={() => handleCheckBoxToggle('all')}
                         size="lg"
-                        aria-label="all"
+                        aria-label="Open to All master filter option"
                     >
                         <CheckboxIndicator className="rounded-md border-slate-300 data-[checked=true]:bg-cyan-600 data-[checked=true]:border-cyan-600">
                             <CheckboxIcon as={Check} className="text-white" />
@@ -339,21 +317,27 @@ const EditPreferenceModal = ({ isOpen, onClose, fieldType, currentData, onSave, 
                         <CheckboxLabel className="ml-3 text-slate-700 font-medium">Open to All</CheckboxLabel>
                     </Checkbox>
 
-                    {lookups?.marital_status.map((opt: any, index: number) => (
-                        <Checkbox
-                            key={index}
-                            value={opt.value}
-                            isChecked={tempValue?.includes(opt.value)}
-                            onChange={() => handleCheckBoxToggle(opt.value)}
-                            size="lg"
-                            aria-label={opt.label}
-                        >
-                            <CheckboxIndicator className="rounded-md border-slate-300 data-[checked=true]:bg-cyan-600 data-[checked=true]:border-cyan-600">
-                                <CheckboxIcon as={Check} className="text-white" />
-                            </CheckboxIndicator>
-                            <CheckboxLabel className="ml-3 text-slate-700 font-medium">{opt.label}</CheckboxLabel>
-                        </Checkbox>
-                    ))}
+                    {/* Child Selection Elements Mapping Array */}
+                    {lookups?.marital_status?.map((opt: any, index: number) => {
+                        // If master 'Open to All' is checked, turn off specific item checked flags
+                        const isItemChecked = !isOpenToAll && currentArray.includes(opt.value);
+
+                        return (
+                            <Checkbox
+                                key={index}
+                                value={opt.value}
+                                isChecked={isItemChecked}
+                                onChange={() => handleCheckBoxToggle(opt.value)}
+                                size="lg"
+                                aria-label={opt.label}
+                            >
+                                <CheckboxIndicator className="rounded-md border-slate-300 data-[checked=true]:bg-cyan-600 data-[checked=true]:border-cyan-600">
+                                    <CheckboxIcon as={Check} className="text-white" />
+                                </CheckboxIndicator>
+                                <CheckboxLabel className="ml-3 text-slate-700 font-medium">{opt.label}</CheckboxLabel>
+                            </Checkbox>
+                        );
+                    })}
                 </VStack>
             </VStack>
         );
@@ -378,7 +362,7 @@ const EditPreferenceModal = ({ isOpen, onClose, fieldType, currentData, onSave, 
         );
     };
     const renderCommunity = () => {
-        const isOpenToAll = !tempValue || tempValue.length === 0 || (tempValue.length === 1 && tempValue[0] === 'all');
+        const isOpenToAll = !tempValue || tempValue.length === 0 || (tempValue.length === 1 && (tempValue[0] === 'all' || tempValue[0] === 'Open to All'));
 
         return (
             <VStack space="md" className="flex-1">
@@ -591,8 +575,7 @@ const EditPreferenceModal = ({ isOpen, onClose, fieldType, currentData, onSave, 
     };
 
     const renderCountry = (type: string) => {
-        //const isOpenToAll = tempValue?.length === 0;
-        const isOpenToAll = !tempValue || tempValue.length === 0 || (tempValue.length === 1 && tempValue[0] === 'all');
+        const isOpenToAll = !tempValue || tempValue.length === 0 || (tempValue.length === 1 && (tempValue[0] === 'all' || tempValue[0] === 'Open to All'));
 
         var colloction = [];
         if (type === 'country') colloction = lookups?.country;

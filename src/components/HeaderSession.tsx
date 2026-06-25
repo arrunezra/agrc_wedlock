@@ -6,6 +6,7 @@ import { Box, Heading, HStack, VStack } from './GluestackUI';
 import { Icon } from './IconUI';
 import AnimatedMotiView from './AnimateView';
 import GradientView from './GradientView';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface HeaderProps {
   title: string;
@@ -88,8 +89,7 @@ const HeaderSession = ({
   };
 
   const RightIcon = getRightIcon();
-  const STATUS_BAR_HEIGHT = getStatusBarHeight();
-
+  const insets = useSafeAreaInsets();
   // Determine theme text color (dark text for white theme, white text for others)
   const isWhiteTheme =
     theme === 'white' || theme === 'glass' || theme === 'mint';
@@ -104,7 +104,7 @@ const HeaderSession = ({
         colors={palettes[theme]}
         horizontal={true} // 🌅 Replaces start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
         style={{
-          paddingTop: STATUS_BAR_HEIGHT + 10,
+          paddingTop: insets.top + 10,
           paddingBottom: 20,
           elevation: 15,
           shadowColor: shadowColor,

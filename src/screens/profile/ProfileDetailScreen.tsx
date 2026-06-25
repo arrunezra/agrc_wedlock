@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { ScrollView, Pressable, LayoutAnimation, Dimensions, FlatList, Modal, Alert, View, StyleSheet, Share, StatusBar } from 'react-native';
+import { ScrollView, Pressable, LayoutAnimation, Dimensions, FlatList, Modal, Alert, View, StyleSheet, Share, StatusBar, TouchableOpacity } from 'react-native';
 import { Box, VStack, HStack, Heading, Modal as ModalGUI, Text, BadgeText, Divider, Button, ButtonText, Avatar, AvatarFallbackText, AvatarImage, Actionsheet, ActionsheetBackdrop, ActionsheetDragIndicatorWrapper, ActionsheetDragIndicator, ActionsheetContent, ActionsheetItem, ActionsheetIcon, ActionsheetItemText, Switch, ModalContent, ModalBackdrop, } from '@/src/components/GluestackUI';
 import { ArrowLeftRightIcon, Badge, BanIcon, BriefcaseIcon, BuildingIcon, CameraIcon, CrownIcon, FlagIcon, GraduationCapIcon, HeartIcon, HomeIcon, Icon, MapPinIcon, MoreVerticalIcon, SchoolIcon, UserIcon, UsersIcon, UtensilsIcon } from '@/src/components/IconUI';
 import FastImage from "@d11/react-native-fast-image";
@@ -8,7 +8,7 @@ import Gallery from 'react-native-awesome-gallery';
 import profileService from '@/src/services/profileService';
 import { ProfileSkeleton } from '@/src/components/ProfileSkeleton';
 import NotFoundScreen from '@/src/components/NotFoundScreen';
-import { BanknoteIcon, Calendar, Check, MapPin, User, X, XIcon, ZapIcon } from 'lucide-react-native';
+import { BanknoteIcon, Calendar, Check, Heart, MapPin, User, X, XIcon, ZapIcon } from 'lucide-react-native';
 import { useAuth } from '@/src/context/AuthContext';
 import LoadingScreen from '@/src/components/SuccessScreen';
 import { getExtension } from '@/src/utils/common';
@@ -469,37 +469,18 @@ export default function ProfileDetailScreen({ route }: any) {
                     onRightPress={() => navigation.openDrawer()} // If using React Navigation Drawer
                 />
                 <ScrollView className="flex-1 bg-background-50">
-                    {/* 1. Hero Section */}
+                    {/* 1. Hero Section Container */}
+                    <Box className="relative h-[450px] w-full overflow-hidden bg-slate-100">
 
-                    <Box className="relative h-[450px]">
-                        {/* 1. Main Carousel  If enable this carousel then remove the below FastImage
-                        2. If enable this carousel then remove the below FastImage becose this is for single image
-                        3. also LinearGradient is not allowed for carousel (z-index issue) 
-                    */}
-                        {/* <FlatList
-                        data={images}
-                        horizontal
-                        pagingEnabled
-                        showsHorizontalScrollIndicator={false}
-                        onScroll={handleScroll}
-                        scrollEventThrottle={16}
-                        keyExtractor={(item) => item.id}
-                        renderItem={({ item, index }) => (
-                            <FastImage
-                                source={{ uri: item.uri }}
-                                style={{ width: windowWidth, height: 450 }}
-                                resizeMode="cover"
-                            />
-                        )}
-                    /> */}
-                        {data?.file_name ?
-                            <FastImage
-                                source={{ uri: getExtension(data?.file_name, 'url') }}
-                                style={{ width: windowWidth, height: 450 }}
-                                resizeMode="cover"
-                            />
-                            :
-                            (
+                        {/* Background Profile Image Component */}
+                        <Box className="absolute inset-0 w-full h-full z-0">
+                            {data?.file_name ? (
+                                <FastImage
+                                    source={{ uri: getExtension(data?.file_name, 'url') }}
+                                    style={{ width: '100%', height: '100%' }}
+                                    resizeMode="cover"
+                                />
+                            ) : (
                                 <Box className="flex-1 justify-center items-center bg-slate-100">
                                     <LottieView
                                         source={require('@/src/assets/animations/default_profile.json')}
@@ -509,54 +490,62 @@ export default function ProfileDetailScreen({ route }: any) {
                                     />
                                 </Box>
                             )}
+                        </Box>
 
-
-                        {/* 2. TOP OVERLAY: Photo Count & Menu */}
-
-
-                        {user?.role === 'member' && <VStack className="absolute top-4 right-4 items-center gap-3 z-20">
-                            {/* Now wrapped in Pressable to trigger the gallery */}
-                            <Pressable
-                                onPress={() => openGallery(activeIndex)}
-                                hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-                            >
-                                <AnimatedMotiView
-                                    key={activeIndex}
-                                    preset="pulse"
-                                    duration={1800} // Exactly matches your original 1800ms timeline loop
-                                    className="absolute h-14 w-14 rounded-full bg-[#22c55e]/50"
-                                >
-
-
-                                    <Icon as={CameraIcon} color="white" size="xs" />
-                                    <Text className="text-white text-[10px] font-bold">
-                                        {activeIndex + 1} / {data?.images.length}
-                                    </Text>
-                                </AnimatedMotiView>
-
-                            </Pressable>
-
-                            <Pressable
-                                className="bg-black/40 p-2 rounded-full active:bg-black/60"
-                                onPress={() => setShowActionsheet(true)}
-                            >
-                                <Icon as={MoreVerticalIcon} size="md" color="white" />
-                            </Pressable>
-                        </VStack>
-                        }
-                        {/* 3. GRADIENT OVERLAY (The Shadow) */}
-                        {/* We use 4 stops to make the transition from image to text seamless */}
+                        {/* 2. 🎯 FIXED GRADIENT: Full screen canvas coverage removes middle-screen cut lines */}
                         <GradientView
-                            colors={['transparent', 'rgba(0,0,0,0.2)', 'rgba(0,0,0,0.6)', 'rgba(0,0,0,0.9)']}
-                            locations={[0, 0.4, 0.7, 1]}
-                            style={{
-                                position: 'absolute',
-                                bottom: 0,
-                                left: 0,
-                                right: 0,
-                                height: 280, // High enough to cover all text fields
-                            }}
-                        />
+                            horizontal={false}
+                            colors={[
+                                'rgba(0,0,0,0.25)', // Subtle shadow gradient vignette behind your action buttons
+                                'rgba(0,0,0,0.0)',  // Perfect clarity window over the user's face
+                                'rgba(0,0,0,0.4)',  // Gentle transition zone
+                                'rgba(0,0,0,0.85)'  // Dark baseline support layer for contrasting titles/text
+                            ]}
+                            locations={[0, 0.25, 0.6, 1]}
+                            className="flex-1 absolute inset-0 z-5 justify-end px-6 pb-6"
+                        >
+                            {/* Profile identity text layouts go here down the road */}
+                        </GradientView>
+
+                        {/* 3. TOP ACTION OVERLAYS (Elevated with z-10 priority layers) */}
+                        {user?.role === 'member' && (
+                            <VStack className="absolute top-4 right-4 items-center gap-4 z-10">
+
+                                {/* Camera Counter Action Layer */}
+                                <Pressable
+                                    onPress={() => openGallery(activeIndex)}
+                                    hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+                                    className="items-center justify-center h-14 w-14"
+                                >
+                                    {/* 🎯 FIXED PULSE: The background flashes, but the text & icon stay perfectly stable inside */}
+
+                                    {/* Foreground Counter Controls Container */}
+                                    {data?.file_name ? <VStack className="items-center justify-center z-20 ">
+                                        <Icon as={CameraIcon} color="white" size="xs" />
+                                        <Text className="text-white text-[10px] font-black mt-0.5 tracking-tighter">
+                                            {activeIndex + 1}/{data?.images?.length || 1}
+                                        </Text>
+                                    </VStack>
+                                        :
+                                        <Pressable
+                                            className="bg-black/30 p-2.5 rounded-full active:bg-black/60 border border-white/10 backdrop-blur-md shadow-md"
+                                            onPress={() => setShowActionsheet(true)}
+                                        >
+                                            <Icon as={MoreVerticalIcon} size="md" color="white" />
+                                        </Pressable>
+                                    }
+                                </Pressable>
+
+                                {/* Vertical Context Management Menu Dot Triggers */}
+                                {!!data?.file_name && <Pressable
+                                    className="bg-black/30 p-2.5 rounded-full active:bg-black/60 border border-white/10 backdrop-blur-md shadow-md"
+                                    onPress={() => setShowActionsheet(true)}
+                                >
+                                    <Icon as={MoreVerticalIcon} size="md" color="white" />
+                                </Pressable>}
+
+                            </VStack>
+                        )}
 
 
                         {/* 4. BOTTOM CONTENT OVERLAY */}
@@ -611,20 +600,25 @@ export default function ProfileDetailScreen({ route }: any) {
 
                                     {/* Floating Like Button */}
                                     {user?.role === 'member' && <Pressable onPress={handleLike}>
-                                        <AnimatedMotiView
-                                            preset="springUp"
-                                            initialBackgroundColor="rgba(0,0,0,0.5)"
-                                            animateBackgroundColor="#ef4444"
-                                            initialScale={0.9}
-                                            initialTranslateY={20}
-                                        >
-                                            <Icon
-                                                as={HeartIcon}
-                                                color="white"
-                                                fill={isLiked ? "white" : "none"}
-                                                size="xl"
-                                            />
-                                        </AnimatedMotiView>
+                                        <TouchableOpacity onPress={handleLike} activeOpacity={0.9}>
+                                            <AnimatedMotiView
+                                                isLiked={isLiked}
+                                                damping={15}
+                                                stiffness={150}
+                                                initialBackgroundColor="rgba(0,0,0,0.35)"
+                                                animateBackgroundColor="#ef4444"
+                                                className="h-12 w-12 rounded-full items-center justify-center border border-white/20 shadow-2xl"
+                                            >
+                                                <Icon
+                                                    as={Heart}
+                                                    className="text-white"
+                                                    style={{
+                                                        fill: isLiked ? 'white' : 'transparent',
+                                                    }}
+                                                    size="md"
+                                                />
+                                            </AnimatedMotiView>
+                                        </TouchableOpacity>
                                     </Pressable>
                                     }
                                 </HStack>
@@ -714,6 +708,7 @@ export default function ProfileDetailScreen({ route }: any) {
                                         right: 0,
                                         height: 30, // Height of the fade effect
                                     }}
+                                    horizontal={false}
                                 />
                             )}
                         </Box>
@@ -1262,28 +1257,6 @@ export default function ProfileDetailScreen({ route }: any) {
                             </ActionsheetDragIndicatorWrapper>
 
                             <VStack className="w-full" space="xs">
-                                {/* 1. Header Share Section - Centered Icon & Text */}
-                                {/* <VStack className="items-center py-6 border-b border-outline-50">
-                                <Pressable
-                                    className="items-center justify-center mb-2"
-                                    onPress={
-                                        async () => {
-                                        try {
-                                            const shareUrl = `https://agrcdev.jeasuns.com/agrcdev/php/profile/get_profile_details_by_id.php?id=${profile_id}&action=view`;
-
-                                            await Share.share({
-                                                message: `Check out ${data?.full_name}'s profile on our Matrimony App!\n\nView Profile: ${shareUrl}`,
-                                            });
-                                        } catch (error: any) {
-                                            Alert.alert(error.message);
-                                        }
-                                    }}
-                                >
-                                    <Icon as={ShareIcon} size="xl" className="text-typography-900" />
-                                    <Text className="text-typography-700 font-medium mt-2 text-lg">Share</Text>
-                                </Pressable>
-                            </VStack> */}
-
                                 {/* 2. Menu Items Section */}
                                 <VStack className="px-4 py-2" space="sm">
 

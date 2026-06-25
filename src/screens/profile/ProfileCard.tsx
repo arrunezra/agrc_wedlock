@@ -211,133 +211,52 @@ export const ProfileCard = ({ profile, onPress, user, showToast, onActionComplet
   const ui = getStatusUI();
 
   return (
-    <TouchableOpacity onPress={onPress} activeOpacity={0.95} className="mx-2 mb-8">
+    <TouchableOpacity onPress={onPress} activeOpacity={0.95} className="mx-4 mb-8">
       <Box
         style={{ height: CARD_HEIGHT }}
-        className="w-full rounded-[40px] overflow-hidden shadow-2xl bg-background-100 border border-white/20"
+        className="w-full rounded-[40px] overflow-hidden shadow-2xl bg-slate-100 border border-white/10"
       >
-        {/* 1. Background Image */}
-        {profile.file_name ? (
-          <FastImage
-            source={{
-              uri: `${API_BASE_URL_DEV_Profiles_Images}/${profile.file_name}`,
-              priority: FastImage.priority.high,
-            }}
-            style={{ width: '100%', height: '100%' }}
-            resizeMode="cover"
-          />
-        ) : (
-          <Box className="flex-1 justify-center items-center bg-slate-100">
-            <LottieView
-              source={require('@/src/assets/animations/default_profile.json')}
-              autoPlay
-              loop
-              style={{ width: '70%', height: '70%' }}
+        {/* 1. Background Image Layer */}
+        <Box className="absolute inset-0 w-full h-full z-0">
+          {profile.file_name ? (
+            <FastImage
+              source={{
+                uri: `${API_BASE_URL_DEV_Profiles_Images}/${profile.file_name}`,
+                priority: FastImage.priority.high,
+              }}
+              style={{ width: '100%', height: '100%' }}
+              resizeMode="cover"
             />
-          </Box>
-        )}
-
-        {/* 2. Top Action Bar */}
-        {!cardComingFrom ? <HStack className="absolute top-2 left-6 right-6 justify-between items-center">
-          {/* CASE 1: They sent YOU a request -> Show Accept/Reject */}
-          {received === 'Pending' && !sent && (
-            <HStack space="md" className="items-center">
-              <TouchableOpacity
-                onPress={() => sendConnectRequst('Rejected')}
-                className="bg-slate-200/90 p-3 rounded-full border border-white/20 shadow-sm"
-              >
-                <Icon as={X} size="xs" className="text-slate-800" />
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                onPress={() => sendConnectRequst('Accepted')}
-                className="bg-indigo-600 px-5 py-2.5 rounded-full flex-row items-center gap-2 shadow-lg border border-indigo-400"
-              >
-                <Icon as={Check} size="xs" className="text-white" />
-                <Text className="text-white text-[11px] font-bold uppercase">Accept</Text>
-              </TouchableOpacity>
-            </HStack>
-          )}
-
-          {/* CASE 2: No incoming request -> Show standard Connect/Requested/Connected button */}
-          {!(received === 'Pending' && !sent) && (
-            <TouchableOpacity
-              onPress={() => sendConnectRequst('send_request')}
-              activeOpacity={0.8}
-              disabled={ui.disabled}
-            >
-              <Box
-                className={`${ui.color} rounded-full flex-row items-center justify-center border border-white/20 ${ui.showLabel ? 'px-5 py-2.5' : 'p-3' // Use equal padding for a circular icon-only look
-                  }`}
-              >
-                <Icon as={ui.icon} size="xs" className="text-white" />
-                {/* Conditionally render the Text Label */}
-                {ui.showLabel && (
-                  <Text className="text-white text-[11px] font-bold uppercase tracking-[1px] ml-2">
-                    {ui.text}
-                  </Text>
-                )}
-              </Box>
-            </TouchableOpacity>
-          )}
-          {isLiked && !cardComingFrom ?
-            <Button
-              onPress={handleLike}
-              // Increased background opacity for better visibility without blur
-              className={`h-14 w-14 mt-2 rounded-full p-0 shadow-2xl border border-white/30 bg-error-500
-              }`}
-            >
-
-              <AnimatedMotiView
-                //  preset="springUp" // no neeed
-
-                isLiked={isLiked}
-                damping={15}
-                stiffness={150}
-                initialBackgroundColor="rgba(0,0,0,0.5)"
-                animateBackgroundColor="#ef4444"
-                className="p-4 rounded-full shadow-2xl mb-2 border border-white/20"
-              >
-
-                <Icon
-                  as={HeartIcon}
-                  color="white"
-                  fill={isLiked ? "white" : "none"}
-                  size="xl"
-                />
-              </AnimatedMotiView>
-
-            </Button>
-
-
-
-            : <Button
-              onPress={handleLike}
-              // Increased background opacity for better visibility without blur
-              className={`h-14 w-14 mt-2 rounded-full p-0 shadow-2xl border border-white/30 bg-black/40
-              }`}
-            >
-              <Icon
-                as={Heart}
-                size="lg"
-                className='text-white'
+          ) : (
+            <Box className="flex-1 justify-center items-center bg-slate-100">
+              <LottieView
+                source={require('@/src/assets/animations/default_profile.json')}
+                autoPlay
+                loop
+                style={{ width: '70%', height: '70%' }}
               />
-            </Button>
-          }
-        </HStack>
-          : null}
+            </Box>
+          )}
+        </Box>
 
-        {/* 3. Information Scrim */}
+        {/* 2. 🎯 FIXED GRADIENT: Stretches 100% full height to remove the harsh cutoff line */}
         <GradientView
-          // Deepened the gradient stops to compensate for the lack of blur
-          colors={['transparent', 'rgba(0,0,0,0.1)', 'rgba(0,0,0,0.7)', 'rgba(0,0,0,0.98)']}
-          locations={[0, 0.3, 0.6, 1]}
-          className="absolute bottom-0 left-0 right-0 h-[65%] justify-end p-7"
+          horizontal={false}
+          colors={[
+            'rgba(0,0,0,0.05)', // Subtle vignette tint at the top for badge readability
+            'rgba(0,0,0,0.0)',  // Completely transparent clear zone over the profile face/center
+            'rgba(0,0,0,0.4)',  // Gradual darkening starts below the midway point
+            'rgba(0,0,0,0.85)', // Deep shadow to cradle the profile name layout texts
+            'rgba(0,0,0,0.98)'  // Solid mask wrapping the base profile metadata capsules
+          ]}
+          locations={[0, 0.25, 0.5, 0.75, 1]}
+          className="flex-1 absolute inset-0 justify-end px-6 pb-8 pt-4 z-5"
         >
+          {/* 3. Text & Details Layout Content Stack */}
           <VStack space="md">
             <VStack space="xs">
-              <HStack className="items-center gap-2">
-                <Heading className="text-white text-4xl font-black tracking-tight">
+              <HStack className="items-center gap-2 flex-wrap">
+                <Heading className="text-white text-3xl font-black tracking-tight">
                   {profile.full_name}, {profile?.age}
                 </Heading>
                 {profile?.IsVerified === 1 && (
@@ -345,47 +264,95 @@ export const ProfileCard = ({ profile, onPress, user, showToast, onActionComplet
                 )}
               </HStack>
 
-              <HStack className="items-center gap-2">
-                {/* Status Dot with Glow */}
-                <Box className="h-2.5 w-2.5 rounded-full bg-green-500 border border-white/20" />
-                <Text className="text-white/80 text-sm font-medium">Recently Active</Text>
+              <HStack className="items-center gap-1.5 mt-0.5">
+                <Box className="h-2 w-2 rounded-full bg-green-500 shadow-sm" />
+                <Text className="text-white/80 text-xs font-semibold tracking-wider uppercase">Recently Active</Text>
               </HStack>
             </VStack>
 
-            {/* Profile Details */}
-            <Text className="text-white/90 text-[16px] font-medium leading-6">
+            {/* Profile Subtitle Meta Text */}
+            <Text className="text-white/90 text-[15px] font-medium leading-5">
               {formatHeight(profile?.height)}
               {formatHeight(profile?.height) && profile?.sub_community_name ? `  •  ${profile.sub_community_name}` : ''}
-              {/* {profile?.religion_name ? `  •  ${profile.religion_name}` : ''} */}
               {profile?.work_with_name ? `  •  ${profile.work_with_name}` : ''}
-
-              {/* {formatHeight(profile?.height)} {formatHeight(profile?.height) && profile?.sub_community_name && (
-                <>  •  {profile?.sub_community_name}</>
-              )}
-
-              {profile?.community && profile?.work_details && (
-                <>  •  {profile?.work_details}</>
-              )} */}
             </Text>
 
-            {/* Info Pills using alpha colors */}
-            <HStack space="sm" className="flex-wrap gap-2">
-              <Box className="bg-white/20 px-3 py-2 rounded-xl border border-white/10 flex-row items-center gap-2">
+            {/* Location Pill Container Box */}
+            <HStack space="sm" className="flex-wrap items-center">
+              <Box className="bg-white/15 px-3 py-1.5 rounded-xl border border-white/10 flex-row items-center gap-1.5">
                 <Icon as={MapPin} size="xs" className="text-cyan-300" />
-                <Text className="text-white text-xs font-bold">{profile.city_name} , {profile?.state_name}</Text>
+                <Text className="text-white text-xs font-bold">
+                  {profile.city_name}, {profile?.state_name}
+                </Text>
               </Box>
-
-
-
-              {/* {user?.role === 'member' && (
-                <Box className="bg-indigo-600/40 px-3 py-2 rounded-xl border border-indigo-400/30 flex-row items-center gap-2">
-                  <Icon as={UsersIcon} size="xs" className="text-indigo-300" />
-                  <Text className="text-indigo-100 text-xs font-bold">Great Match</Text>
-                </Box>
-              )} */}
             </HStack>
           </VStack>
         </GradientView>
+
+        {/* 4. Top Action Floating Overlay Controls (Placed outside/above the Gradient scrim for layout isolation) */}
+        {!cardComingFrom && (
+          <HStack className="absolute top-5 left-5 right-5 justify-between items-center z-10">
+            {/* CASE 1: Incoming pending matching criteria request states */}
+            {received === 'Pending' && !sent ? (
+              <HStack space="md" className="items-center">
+                <TouchableOpacity
+                  onPress={() => sendConnectRequst('Rejected')}
+                  className="bg-black/30 p-3 rounded-full border border-white/20 backdrop-blur-md"
+                >
+                  <Icon as={X} size="xs" className="text-white" />
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={() => sendConnectRequst('Accepted')}
+                  className="bg-indigo-600 px-5 py-2.5 rounded-full flex-row items-center gap-2 shadow-lg border border-indigo-400"
+                >
+                  <Icon as={Check} size="xs" className="text-white" />
+                  <Text className="text-white text-[11px] font-bold uppercase tracking-wider">Accept</Text>
+                </TouchableOpacity>
+              </HStack>
+            ) : (
+              /* CASE 2: Default profile connection pipeline buttons */
+              <TouchableOpacity
+                onPress={() => sendConnectRequst('send_request')}
+                activeOpacity={0.8}
+                disabled={ui.disabled}
+              >
+                <Box
+                  className={`${ui.color} rounded-full flex-row items-center justify-center border border-white/10 ${ui.showLabel ? 'px-5 py-2.5' : 'p-3'
+                    }`}
+                >
+                  <Icon as={ui.icon} size="xs" className="text-white" />
+                  {ui.showLabel && (
+                    <Text className="text-white text-[11px] font-bold uppercase tracking-wider ml-2">
+                      {ui.text}
+                    </Text>
+                  )}
+                </Box>
+              </TouchableOpacity>
+            )}
+
+            {/* Stateful Profile Like Heart Layout Button Action */}
+            <TouchableOpacity onPress={handleLike} activeOpacity={0.9}>
+              <AnimatedMotiView
+                isLiked={isLiked}
+                damping={15}
+                stiffness={150}
+                initialBackgroundColor="rgba(0,0,0,0.35)"
+                animateBackgroundColor="#ef4444"
+                className="h-12 w-12 rounded-full items-center justify-center border border-white/20 shadow-2xl"
+              >
+                <Icon
+                  as={Heart}
+                  className="text-white"
+                  style={{
+                    fill: isLiked ? 'white' : 'transparent',
+                  }}
+                  size="md"
+                />
+              </AnimatedMotiView>
+            </TouchableOpacity>
+          </HStack>
+        )}
       </Box>
     </TouchableOpacity>
   );

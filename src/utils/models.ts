@@ -34,4 +34,5 @@ export interface AuthContextType {
   login: (credentials: any) => Promise<{ success: boolean; message?: any }>;
   signup: (userData: any) => Promise<{ success: boolean; message?: any }>;
   logout: () => Promise<{ success: boolean; message?: any }>;
+  checkAuthStatus: () => Promise<void>;
 }

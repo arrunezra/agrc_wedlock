@@ -1,9 +1,10 @@
 import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import authService from '../services/authService';
+import axios from 'axios'; // 🚀 Used for direct isolated network handshakes
+import { API_BASE_URL_DEV } from '../utils/environment';
 import { AuthContextType, User } from '../utils/models';
 
-// 1. Create a singleton controller reference pointer for Axios file access 
 let forceLogoutRef: () => void = () => { };
 
 export const globalLogoutTrigger = () => {
@@ -12,7 +13,6 @@ export const globalLogoutTrigger = () => {
   }
 };
 
-// 2. Create the Context with an initial undefined value
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 interface AuthProviderProps {
@@ -27,7 +27,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const userRole = user?.role || null;
 
-  // Bind the global handler during component creation mounting lifecycle
   useEffect(() => {
     forceLogoutRef = handleSessionExpirationCleanup;
     checkAuthStatus();
@@ -38,22 +37,66 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const rememberMe = await AsyncStorage.getItem('rememberMe');
       const access = await AsyncStorage.getItem('accessToken');
       const userData = await AsyncStorage.getItem('userData');
+      const refreshToken = await AsyncStorage.getItem('refreshToken');
 
-      // 🎯 Fix: Even if rememberMe is false, if tokens exist in current workspace, 
-      // let them stay authenticated until the session expires or they close the app.
+      // Check if Remember Me is active and we have locally cached sessions
       if (rememberMe === 'true' && access && userData) {
 
-        // if possible to store the credential and call login methoed to refreh the token
+        // Pre-populate memory states instantly to minimize layout shifts
         setAccessToken(access);
         setUser(JSON.parse(userData));
-        setIsAuthenticated(true);
-      } else {
-        setIsAuthenticated(false);
+
+        try {
+          if (!refreshToken) throw new Error("No refresh token stored natively");
+
+          console.log("🔄 Validating/Refreshing session via isolated channel on startup...");
+
+          // 🎯 FIXED: Changed 'api.post' to standard 'axios.post' with explicit URL template matching.
+          // This stops the boot cycle from accidentally waking up the api.ts network error overlay loop.
+          const res = await axios.post(`${API_BASE_URL_DEV}/helpers/refresh.php`, {
+            refresh_token: refreshToken
+          }, {
+            timeout: 7000 // Quick cutoff for boot validation checks
+          });
+
+          if (res.data?.access_token) {
+            const newAccessToken = res.data.access_token;
+
+            // Commit fresh access credentials to storage layers
+            await AsyncStorage.setItem('accessToken', newAccessToken);
+
+            // Synchronize state layers cleanly
+            setAccessToken(newAccessToken);
+            setIsAuthenticated(true);
+            console.log("✅ Session restored successfully via Refresh Token.");
+            return;
+          }
+        } catch (refreshError: any) {
+          console.warn("⚠️ Startup validation failed. Token dead or Server Unreachable:", refreshError?.message);
+
+          // 🛑 CRITICAL RESILIENCE TRAP: If the server explicitly rejects the credentials (400/401),
+          // it means the session is truly dead. Clear everything and force them out.
+          if (refreshError.response?.status === 401 || refreshError.response?.status === 400) {
+            console.log("❌ Token explicitly rejected by server. Cleaning up session...");
+            await handleSessionExpirationCleanup();
+            return;
+          }
+
+          // 📡 NETWORK OFFLINE FALLBACK: If the server is offline or the request timed out,
+          // do NOT log them out! Let them use the app with their cached 'userData'.
+          console.log("📡 Server unreachable on boot. Falling back to cached offline profile context.");
+          setIsAuthenticated(true);
+          return;
+        }
       }
+
+      // Default fallback if rememberMe is false or missing essential layout payload sets
+      setIsAuthenticated(false);
     } catch (error) {
-      console.error('Auth status check error:', error);
+      console.error('Global Auth status check error:', error);
+      setIsAuthenticated(false);
     } finally {
-      setIsLoading(false);
+      setIsLoading(false); // Cleanly close splash layout visibility structures
     }
   };
 
@@ -63,7 +106,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const response = await authService.login({ phoneNumber, password });
 
       if (response.access_token) {
-        // Update operational component memory state immediately
         setAccessToken(response.access_token);
         setIsAuthenticated(true);
 
@@ -71,7 +113,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           setUser(response.user);
         }
 
-        // Always write transactional keys for the interceptor refresh processes
         await AsyncStorage.multiSet([
           ['accessToken', response.access_token],
           ['refreshToken', response.refresh_token || '']
@@ -79,14 +120,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
         if (rememberMe) {
           await AsyncStorage.setItem('rememberMe', 'true');
-          if (response.user) {
-            await AsyncStorage.setItem('userData', JSON.stringify(response.user));
-          }
         } else {
           await AsyncStorage.setItem('rememberMe', 'false');
-          if (response.user) {
-            await AsyncStorage.setItem('userData', JSON.stringify(response.user));
-          }
+        }
+
+        if (response.user) {
+          await AsyncStorage.setItem('userData', JSON.stringify(response.user));
         }
 
         return { success: true };
@@ -103,14 +142,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       await authService.logout();
     } catch (e) {
-      // Graceful degradation structural boundary safety catch
+      // Graceful degradation structural catch
     } finally {
       await handleSessionExpirationCleanup();
       return { success: true };
     }
   };
 
-  // 🔄 Dedicated Interceptor Target: Drops memory layout maps back to base default states synchronously
   const handleSessionExpirationCleanup = async () => {
     await AsyncStorage.multiRemove(['accessToken', 'refreshToken', 'userData', 'rememberMe']);
     setUser(null);
@@ -147,6 +185,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         signup,
         logout,
         updateUser,
+        checkAuthStatus
       }}
     >
       {children}

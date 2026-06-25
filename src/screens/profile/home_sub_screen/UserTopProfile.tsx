@@ -14,6 +14,7 @@ const UserTopProfile = ({ user, onEdit, onAddPhoto, onContribution }: any) => {
     const navigation = useNavigation<any>();
     const { lookups } = useContext(LookupContext);
     const { showToast } = useAppToast();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const [profiles, setProfiles] = useState<string>('');
     // Initialize with safe default values so rendering doesn't crash or read undefined variables
@@ -39,6 +40,7 @@ const UserTopProfile = ({ user, onEdit, onAddPhoto, onContribution }: any) => {
         if (!user?.profile_id) return; // Prevent calling if profile_id hasn't mounted yet
 
         try {
+            setIsLoading(true)
             const response = await profileService.fetchSummaryDetails({
                 profile_id: user?.profile_id,
                 role: 'Profile',
@@ -56,7 +58,11 @@ const UserTopProfile = ({ user, onEdit, onAddPhoto, onContribution }: any) => {
                 }
                 setSummary(items);
             }
+            setIsLoading(false)
+
         } catch (error) {
+            setIsLoading(false)
+
             console.error("Summary Fetch Error:", error);
         }
     }, [user?.profile_id]);
@@ -134,7 +140,7 @@ const UserTopProfile = ({ user, onEdit, onAddPhoto, onContribution }: any) => {
                     </View>
                 </TouchableOpacity>
 
-                {summary?.isContributed === false && (
+                {!isLoading && summary?.isContributed === false && (
                     <TouchableOpacity
                         onPress={() => onContribution(summary?.contributionAmount ?? 0)}
                         activeOpacity={0.9}
